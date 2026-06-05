@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU/EEA MiCA Register Monitor</title>
+<style>
+:root { --bg:#f8f9fa; --card:#fff; --text:#1a1a2e; --muted:#6b7280; --border:#e5e7eb; --accent:#6366f1; }
+@media (prefers-color-scheme:dark) { :root { --bg:#0f0f17; --card:#1c1c27; --text:#e4e4e7; --muted:#9ca3af; --border:#2e2e3a; } }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.wrap { max-width:900px; margin:0 auto; padding:32px 16px 60px; }
+.hero { text-align:center; margin-bottom:28px; }
+.hero h1 { font-size:22px; font-weight:700; }
+.hero .sub { color:var(--muted); font-size:13px; margin-top:4px; }
+.badge { display:inline-block; padding:3px 14px; border-radius:99px; font-size:11px; font-weight:700; background:var(--accent); color:#fff; margin-bottom:10px; }
+.stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:20px; overflow:hidden; }
+.stat { text-align:center; padding:18px 8px; border-right:1px solid var(--border); }
+.stat:last-child { border-right:none; }
+.stat-val { font-size:28px; font-weight:700; }
+.stat-lbl { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:16px; overflow:hidden; }
+.card-head { padding:16px 20px 8px; }
+.card-head h2 { font-size:15px; font-weight:600; }
+.card-head p { font-size:12px; color:var(--muted); font-style:italic; }
+.card-body { padding:8px 20px 20px; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { text-align:left; padding:8px 10px; font-weight:500; color:var(--muted); border-bottom:2px solid var(--border); font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+td { padding:8px 10px; border-bottom:1px solid var(--border); }
+.footer { text-align:center; font-size:11px; color:var(--muted); padding:24px 0; }
+.source { display:inline-block; margin-top:16px; padding:8px 20px; border:1px solid var(--border); border-radius:8px; color:var(--accent); text-decoration:none; font-size:13px; }
+.source:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <span class="badge">🇪🇺 MiCA Register</span>
+  <h1>EU/EEA CASP Authorisation Monitor</h1>
+  <p class="sub">Data from ESMA Interim MiCA Register · Last updated 2026-06-05</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val">211</div><div class="stat-lbl">Authorised CASPs</div></div>
+  <div class="stat"><div class="stat-val">39</div><div class="stat-lbl">EMT Issuers</div></div>
+  <div class="stat"><div class="stat-val">149</div><div class="stat-lbl">Non-Compliant</div></div>
+  <div class="stat"><div class="stat-val">23</div><div class="stat-lbl">EEA Countries</div></div>
+</div>
+
+<div class="card">
+  <div class="card-head"><h2>CASPs by Country</h2><p>Authorised crypto-asset service providers across the EEA</p></div>
+  <div class="card-body">
+    <table>
+      <thead><tr><th>Country</th><th style="text-align:right">CASPs</th><th>Share</th><th style="text-align:right">%</th></tr></thead>
+      <tbody><tr>
+<td style="font-weight:500">Germany</td>
+<td style="text-align:right;font-weight:600">55</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:78%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">26%</td>
+</tr><tr>
+<td style="font-weight:500">Netherlands</td>
+<td style="text-align:right;font-weight:600">25</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:36%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">12%</td>
+</tr><tr>
+<td style="font-weight:500">France</td>
+<td style="text-align:right;font-weight:600">19</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:27%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">9%</td>
+</tr><tr>
+<td style="font-weight:500">Malta</td>
+<td style="text-align:right;font-weight:600">15</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:21%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">7%</td>
+</tr><tr>
+<td style="font-weight:500">Ireland</td>
+<td style="text-align:right;font-weight:600">12</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:18%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">6%</td>
+</tr><tr>
+<td style="font-weight:500">Cyprus</td>
+<td style="text-align:right;font-weight:600">11</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:15%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">5%</td>
+</tr><tr>
+<td style="font-weight:500">Austria</td>
+<td style="text-align:right;font-weight:600">9</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:12%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">4%</td>
+</tr><tr>
+<td style="font-weight:500">Czech Republic</td>
+<td style="text-align:right;font-weight:600">7</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:9%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">3%</td>
+</tr><tr>
+<td style="font-weight:500">Spain</td>
+<td style="text-align:right;font-weight:600">7</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:9%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">3%</td>
+</tr><tr>
+<td style="font-weight:500">Luxembourg</td>
+<td style="text-align:right;font-weight:600">7</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:9%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">3%</td>
+</tr><tr>
+<td style="font-weight:500">Liechtenstein</td>
+<td style="text-align:right;font-weight:600">6</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:9%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">3%</td>
+</tr><tr>
+<td style="font-weight:500">Lithuania</td>
+<td style="text-align:right;font-weight:600">6</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:9%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">3%</td>
+</tr><tr>
+<td style="font-weight:500">Slovakia</td>
+<td style="text-align:right;font-weight:600">6</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:9%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">3%</td>
+</tr><tr>
+<td style="font-weight:500">Finland</td>
+<td style="text-align:right;font-weight:600">5</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:6%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">2%</td>
+</tr><tr>
+<td style="font-weight:500">Denmark</td>
+<td style="text-align:right;font-weight:600">4</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:6%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">2%</td>
+</tr><tr>
+<td style="font-weight:500">Latvia</td>
+<td style="text-align:right;font-weight:600">4</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:6%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">2%</td>
+</tr><tr>
+<td style="font-weight:500">Croatia</td>
+<td style="text-align:right;font-weight:600">3</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:3%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">1%</td>
+</tr><tr>
+<td style="font-weight:500">Slovenia</td>
+<td style="text-align:right;font-weight:600">3</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:3%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">1%</td>
+</tr><tr>
+<td style="font-weight:500">Bulgaria</td>
+<td style="text-align:right;font-weight:600">2</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:3%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">1%</td>
+</tr><tr>
+<td style="font-weight:500">Estonia</td>
+<td style="text-align:right;font-weight:600">2</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:3%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">1%</td>
+</tr><tr>
+<td style="font-weight:500">Belgium</td>
+<td style="text-align:right;font-weight:600">1</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:0%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">0%</td>
+</tr><tr>
+<td style="font-weight:500">Italy</td>
+<td style="text-align:right;font-weight:600">1</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:0%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">0%</td>
+</tr><tr>
+<td style="font-weight:500">Sweden</td>
+<td style="text-align:right;font-weight:600">1</td>
+<td><div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden"><div style="background:var(--accent);height:100%;width:0%;border-radius:4px"></div></div></td>
+<td style="text-align:right;color:var(--muted)">0%</td>
+</tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><h2>Recent Authorisations</h2><p>Newest entities added to the register</p></div>
+  <div class="card-body">
+    <table>
+      <thead><tr><th>Entity</th><th>Country</th><th>Date</th><th>Type</th></tr></thead>
+      <tbody><tr>
+<td>Bitpanda GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">09/04/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Bybit EU GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">28/05/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Cryptonow GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">15/10/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>AMINA (Austria) AG</td>
+<td>Austria</td>
+<td style="color:var(--muted)">29/10/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>FIOR Digital GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">27/11/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>KuCoin EU Exchange GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">27/11/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>DADAT Krypto GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">16/12/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Coinfinity GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">19/12/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Validvent Technology GmbH</td>
+<td>Austria</td>
+<td style="color:var(--muted)">15/04/2026</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>KBC Bank NV</td>
+<td>Belgium</td>
+<td style="color:var(--muted)"></td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Alaric Securities OOD</td>
+<td>Bulgaria</td>
+<td style="color:var(--muted)">22/12/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Belayer ООD</td>
+<td>Bulgaria</td>
+<td style="color:var(--muted)">28/04/2026</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>eToro (Europe) Ltd</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">16/01/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>COLLECT & EXCHANGE CY LTD</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">22/09/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Trading 212 Markets Ltd</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">22/09/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Stratos Europe Ltd</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">14/10/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>Revolut Digital Assets (Europe) Ltd</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">20/10/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>TEROXX DIGITAL ASSET LTD</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">13/10/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>CAPITAL VAULT LTD</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">01/12/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr><tr>
+<td>PELICAN EXCHANGE EUROPE (CY) LTD</td>
+<td>Cyprus</td>
+<td style="color:var(--muted)">22/12/2025</td>
+<td style="color:var(--muted)">CASPS</td>
+</tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center">
+  <a class="source" href="https://www.esma.europa.eu/publications-and-data/registers-and-databases" target="_blank">ESMA Source Data ↗</a>
+</div>
+
+<div class="footer">Chainalysis Policy Team · MiCA Register Monitor · Auto-updated</div>
+
+</div>
+</body>
+</html>
