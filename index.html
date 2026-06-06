@@ -34,6 +34,7 @@ table{border-collapse:collapse;width:100%}
 .card{background:var(--card);color:var(--card-foreground);border-radius:.75rem;padding:1rem;
   box-shadow:0 0 0 1px color-mix(in srgb,var(--foreground) 10%,transparent)}
 .card>*+*{margin-top:.75rem}
+.kpi{display:flex;flex-direction:column}
 .flex{display:flex}.flex-col{flex-direction:column}.items-center{align-items:center}
 .items-start{align-items:flex-start}.justify-between{justify-content:space-between}
 .gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.flex-wrap{flex-wrap:wrap}.flex-1{flex:1}
@@ -111,12 +112,12 @@ table{border-collapse:collapse;width:100%}
 
   <!-- KPIs -->
   <div class="grid grid-3">
-    <div class="card flex-col"><span class="text-xs font-medium text-muted uppercase tracking-tight">Authorised CASPs</span><span class="text-2xl font-bold mt-1">211</span><span class="text-xs text-muted">+2 withdrawn</span></div>
-    <div class="card flex-col"><span class="text-xs font-medium text-muted uppercase tracking-tight">EMT Issuers</span><span class="text-2xl font-bold mt-1">39</span><span class="text-xs text-muted">Title IV</span></div>
-    <div class="card flex-col"><span class="text-xs font-medium text-muted uppercase tracking-tight">This Quarter</span><span class="text-2xl font-bold mt-1 text-primary" id="kpi-q">—</span><span class="text-xs text-muted" id="kpi-ql">loading…</span></div>
-    <div class="card flex-col"><span class="text-xs font-medium text-muted uppercase tracking-tight">Countries</span><span class="text-2xl font-bold mt-1">23</span><span class="text-xs text-muted">of 30 EEA states</span></div>
-    <div class="card flex-col"><span class="text-xs font-medium text-muted uppercase tracking-tight">Non-Compliant</span><span class="text-2xl font-bold text-destructive mt-1">149</span><span class="text-xs text-muted">98% Italian (CONSOB)</span></div>
-    <div class="card flex-col"><span class="text-xs font-medium text-muted uppercase tracking-tight">EEA Coverage</span><span class="text-2xl font-bold mt-1">77%</span><span class="text-xs text-muted mt-1" id="kpi-miss">No CASPs yet: Greece, Hungary, Iceland, Norway, Poland, Portugal, Romania</span></div>
+    <div class="card kpi"><span class="text-xs font-medium text-muted uppercase tracking-tight">Authorised CASPs</span><span class="text-2xl font-bold mt-1">211</span><span class="text-xs text-muted">+2 withdrawn</span></div>
+    <div class="card kpi"><span class="text-xs font-medium text-muted uppercase tracking-tight">EMT Issuers</span><span class="text-2xl font-bold mt-1">39</span><span class="text-xs text-muted">Title IV</span></div>
+    <div class="card kpi"><span class="text-xs font-medium text-muted uppercase tracking-tight">This Quarter</span><span class="text-2xl font-bold mt-1 text-primary" id="kpi-q">—</span><span class="text-xs text-muted" id="kpi-ql">loading…</span></div>
+    <div class="card kpi"><span class="text-xs font-medium text-muted uppercase tracking-tight">Countries</span><span class="text-2xl font-bold mt-1">23</span><span class="text-xs text-muted">of 30 EEA states</span></div>
+    <div class="card kpi"><span class="text-xs font-medium text-muted uppercase tracking-tight">Non-Compliant</span><span class="text-2xl font-bold text-destructive mt-1">149</span><span class="text-xs text-muted">98% Italian (CONSOB)</span></div>
+    <div class="card kpi"><span class="text-xs font-medium text-muted uppercase tracking-tight">EEA Coverage</span><span class="text-2xl font-bold mt-1">77%</span><span class="text-xs text-muted mt-1" id="kpi-miss">No CASPs yet: Greece, Hungary, Iceland, Norway, Poland, Portugal, Romania</span></div>
   </div>
 
   <!-- Quarterly -->
