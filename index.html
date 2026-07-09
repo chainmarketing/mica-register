@@ -336,11 +336,6 @@ function getQ(sk){if(!sk||sk==='9999-99-99')return null;const[y,m]=sk.split('-')
 function setCountryFilter(co){document.getElementById('ccf').value=co;fC();scrollToId('sec-casps')}
 function setServiceFilter(svc){document.getElementById('csf').value=svc;fC();scrollToId('sec-casps')}
 
-// KPI: this quarter
-!function(){const n=new Date,qs=`${n.getFullYear()}-${String(Math.floor(n.getMonth()/3)*3+1).padStart(2,'0')}-01`;
-const tq=D.filter(c=>c.sk>=qs&&!c.wd);document.getElementById('kpi-q-val').textContent=tq.length+' new';
-document.getElementById('kpi-q-label').textContent=`Q${Math.ceil((n.getMonth()+1)/3)} ${n.getFullYear()} so far`}();
-
 // Recent / What Changed
 let rN=8;function renderR(){const cut="2026-07-09".slice(0,4)+"-"+String(Math.max(1,parseInt("2026-07-09".slice(5,7))-2)).padStart(2,'0')+"-01";
 const r=D.filter(c=>c.sk>=cut&&!c.wd).sort((a,b)=>b.sk.localeCompare(a.sk));
