@@ -178,10 +178,11 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
 
 <!-- What Changed -->
   <div class="card" id="sec-changes">
-    <div class="flex justify-between items-center"><h2 class="text-lg font-semibold">What Changed</h2><span class="pill pill-blue" id="rBadge"></span></div>
-    <p class="text-xs text-muted">New authorisations added to the ESMA register in the last 60 days (since early May 2026).</p>
-    <div class="grid g2" id="rCards"></div>
-    <div id="rMore"></div>
+    <div class="section-toggle" onclick="toggleSection('changes')"><span class="chevron">▼</span><h2 class="text-lg font-semibold">What Changed</h2><span class="pill pill-blue" id="rBadge" style="margin-left:.5rem"></span><span class="text-xs text-muted" style="margin-left:.5rem">New authorisations in the last 60 days</span></div>
+    <div class="collapsible collapsed" id="changes-section">
+      <div class="grid g2" id="rCards" style="padding-top:.5rem"></div>
+      <div id="rMore"></div>
+    </div>
   </div>
 
   <!-- ═══ REGISTER LANDSCAPE ═══ -->
