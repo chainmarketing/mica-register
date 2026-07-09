@@ -133,9 +133,53 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
     <div class="card kpi" onclick="showTab('nc',document.querySelector('[data-tab=nc]'))"><span class="text-xs font-medium text-muted uppercase tracking-tight">Non-Compliant</span><span class="text-2xl font-bold text-destructive mt-1">162</span><span class="text-xs text-muted">flagged by ESMA</span></div>
   </div>
 
-<!-- What Changed (recent 60 days) -->
+  <!-- Full Register (moved up for immediate visibility) -->
+  <div class="flex gap-2 flex-wrap items-center" id="sec-casps">
+    <button class="tab-btn active" data-tab="casps" onclick="showTab('casps',this)">All Entities (292)</button>
+    <button class="tab-btn" data-tab="nc" onclick="showTab('nc',this)">Non-Compliant (162)</button>
+    <span style="margin-left:auto"><button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button></span>
+  </div>
+  <div id="tab-casps" class="tab-content active">
+    <div class="flex gap-3 flex-wrap items-center" style="margin-bottom:.5rem">
+      <input type="text" id="cs" class="search-box flex-1" placeholder="Search by name, country, or service…" oninput="fC()">
+      <select id="ccf" class="search-box" style="width:auto;min-width:160px" onchange="fC()"><option value="">All countries</option></select>
+      <select id="csf" class="search-box" style="width:auto;min-width:160px" onchange="fC()"><option value="">All services</option></select>
+      <select id="crmf" class="search-box" style="width:auto;min-width:140px" onchange="fC()"><option value="">All CRM status</option><option value="Customer">Customer</option><option value="Prospect">Prospect</option><option value="Partner">Partner</option><option value="In Salesforce (no type)">In SF (untyped)</option><option value="Not in Salesforce">Not in SF</option><option value="Churned Customer">Churned</option></select>
+    </div>
+    <div class="text-sm text-muted" id="cCnt"></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="overflow-x"><table class="text-sm"><thead><tr class="border-b bg-muted" style="text-align:left">
+        <th style="padding:.5rem .75rem" class="text-muted">#</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('n')">Entity ⇅</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('co')">Country ⇅</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('sk')">Auth Date ⇅</th>
+        <th style="padding:.5rem .75rem" class="text-muted">Services</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('cs')">CRM Status ⇅</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('ao')">Owner ⇅</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('pc')">Passporting ⇅</th>
+      </tr></thead><tbody id="cTb"></tbody></table></div>
+      <div style="padding:.75rem" id="cMore"></div>
+    </div>
+  </div>
+  <div id="tab-nc" class="tab-content">
+    <div style="margin-bottom:.5rem"><input type="text" id="ns" class="search-box" placeholder="Search by name or website…" oninput="fN()"></div>
+    <div class="text-sm text-muted" id="nCnt"></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="overflow-x"><table class="text-sm"><thead><tr class="border-b bg-muted" style="text-align:left">
+        <th style="padding:.5rem .75rem" class="text-muted">#</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sN('n')">Entity ⇅</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sN('co')">Country ⇅</th>
+        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sN('sk')">Decision Date ⇅</th>
+        <th style="padding:.5rem .75rem" class="text-muted">Website(s)</th>
+      </tr></thead><tbody id="nTb"></tbody></table></div>
+      <div style="padding:.75rem" id="nMore"></div>
+    </div>
+  </div>
+
+<!-- What Changed -->
   <div class="card" id="sec-changes">
-    <div class="flex justify-between items-center"><h2 class="text-lg font-semibold">What Changed <span class="text-sm font-normal text-muted">last 60 days</span></h2><span class="pill pill-blue" id="rBadge"></span></div>
+    <div class="flex justify-between items-center"><h2 class="text-lg font-semibold">What Changed</h2><span class="pill pill-blue" id="rBadge"></span></div>
+    <p class="text-xs text-muted">New authorisations added to the ESMA register in the last 60 days (since early May 2026).</p>
     <div class="grid g2" id="rCards"></div>
     <div id="rMore"></div>
   </div>
@@ -239,52 +283,7 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
 
 
 
-  <!-- Tabs -->
-  <div class="flex gap-2 flex-wrap items-center" id="sec-casps">
-    <button class="tab-btn active" data-tab="casps" onclick="showTab('casps',this)">All Entities (292)</button>
-    <button class="tab-btn" data-tab="nc" onclick="showTab('nc',this)">Non-Compliant (162)</button>
-    <span style="margin-left:auto"><button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button></span>
-  </div>
 
-  <!-- CASP tab -->
-  <div id="tab-casps" class="tab-content active">
-    <div class="flex gap-3 flex-wrap items-center" style="margin-bottom:.5rem">
-      <input type="text" id="cs" class="search-box flex-1" placeholder="Search by name, country, or service…" oninput="fC()">
-      <select id="ccf" class="search-box" style="width:auto;min-width:160px" onchange="fC()"><option value="">All countries</option></select>
-      <select id="csf" class="search-box" style="width:auto;min-width:160px" onchange="fC()"><option value="">All services</option></select>
-      <select id="crmf" class="search-box" style="width:auto;min-width:140px" onchange="fC()"><option value="">All CRM status</option><option value="Customer">Customer</option><option value="Prospect">Prospect</option><option value="Partner">Partner</option><option value="In Salesforce (no type)">In SF (untyped)</option><option value="Not in Salesforce">Not in SF</option><option value="Churned Customer">Churned</option></select>
-    </div>
-    <div class="text-sm text-muted" id="cCnt"></div>
-    <div class="card" style="padding:0;overflow:hidden">
-      <div class="overflow-x"><table class="text-sm"><thead><tr class="border-b bg-muted" style="text-align:left">
-        <th style="padding:.5rem .75rem" class="text-muted">#</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('n')">Entity ⇅</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('co')">Country ⇅</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('sk')">Auth Date ⇅</th>
-        <th style="padding:.5rem .75rem" class="text-muted">Services</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('cs')">CRM Status ⇅</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('ao')">Owner ⇅</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('pc')">Passporting ⇅</th>
-      </tr></thead><tbody id="cTb"></tbody></table></div>
-      <div style="padding:.75rem" id="cMore"></div>
-    </div>
-  </div>
-
-  <!-- NC tab -->
-  <div id="tab-nc" class="tab-content">
-    <div style="margin-bottom:.5rem"><input type="text" id="ns" class="search-box" placeholder="Search by name or website…" oninput="fN()"></div>
-    <div class="text-sm text-muted" id="nCnt"></div>
-    <div class="card" style="padding:0;overflow:hidden">
-      <div class="overflow-x"><table class="text-sm"><thead><tr class="border-b bg-muted" style="text-align:left">
-        <th style="padding:.5rem .75rem" class="text-muted">#</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sN('n')">Entity ⇅</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sN('co')">Country ⇅</th>
-        <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sN('sk')">Decision Date ⇅</th>
-        <th style="padding:.5rem .75rem" class="text-muted">Website(s)</th>
-      </tr></thead><tbody id="nTb"></tbody></table></div>
-      <div style="padding:.75rem" id="nMore"></div>
-    </div>
-  </div>
 
   <!-- Pipeline -->
   <div class="card">
