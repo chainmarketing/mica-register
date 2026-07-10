@@ -102,10 +102,7 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
 .opp-card2{border-left:3px solid var(--destructive);border-radius:.5rem;padding:.75rem;background:var(--bg)}
 .opp-card2.churned{border-left-color:var(--warning)}
 .score-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
-.edit-btn{cursor:pointer;opacity:.3;font-size:10px;margin-left:4px;transition:opacity .15s}.edit-btn:hover{opacity:1}
-.status-dropdown{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-.status-dropdown div{padding:4px 10px;border-radius:4px;font-size:12px;cursor:pointer;white-space:nowrap}.status-dropdown div:hover{background:var(--muted)}
-.correction-badge{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--warning);margin-left:4px}
+
 
 </style>
 </head>
@@ -290,26 +287,6 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
 
 
 
-  <!-- Corrections Log -->
-  <div class="card" id="sec-corrections" style="display:none">
-    <div class="flex justify-between items-center">
-      <div><h2 class="text-lg font-semibold">📝 Corrections Log</h2>
-      <p class="text-xs text-muted">CRM status changes made on this dashboard. These are saved locally and will be included in the next data refresh.</p></div>
-      <div class="flex gap-2">
-        <button class="export-btn" onclick="exportCorrections()">⬇ Export corrections</button>
-        <button class="export-btn" onclick="clearCorrections()" style="color:var(--destructive)">Clear all</button>
-      </div>
-    </div>
-    <div class="overflow-x"><table class="text-sm"><thead><tr class="border-b bg-muted" style="text-align:left">
-      <th style="padding:.4rem .5rem" class="text-muted">Entity</th>
-      <th style="padding:.4rem .5rem" class="text-muted">Country</th>
-      <th style="padding:.4rem .5rem" class="text-muted">Previous Status</th>
-      <th style="padding:.4rem .5rem" class="text-muted">New Status</th>
-      <th style="padding:.4rem .5rem" class="text-muted">Changed By</th>
-      <th style="padding:.4rem .5rem" class="text-muted">When</th>
-    </tr></thead><tbody id="corrTb"></tbody></table></div>
-  </div>
-
   <!-- Pipeline -->
   <div class="card">
     <div class="section-toggle" onclick="toggleSection('pipeline')"><span class="chevron">▼</span><h2 class="text-lg font-semibold">How This Report Is Generated</h2></div>
@@ -396,7 +373,7 @@ tb.innerHTML=v.map((c,i)=>{const cl=c.wd?'entity-row border-b' +' style="opacity
 const st=c.wd?` <span class="pill pill-red">Withdrawn ${c.ed}</span>`:'';
 const nl=c.w?`<a href="${c.w}" target="_blank" class="text-primary">${c.n}</a>`:c.n;
 const cm=c.cn&&c.cn!==c.n?` <span class="text-muted text-xs">(${c.cn})</span>`:'';
-return`<tr class="${cl}"><td style="padding:.5rem .75rem" class="text-muted">${i+1}</td><td style="padding:.5rem .75rem">${nl}${cm}${st}</td><td style="padding:.5rem .75rem"><a href="#" class="text-muted" onclick="event.preventDefault();setCountryFilter('${c.co}')">${c.co}</a></td><td style="padding:.5rem .75rem" class="text-muted">${c.d}</td><td style="padding:.5rem .75rem">${badge(c.sl)}</td><td style="padding:.5rem .75rem">${crmPill(c.cs)}<span class="edit-btn" onclick="event.stopPropagation();showStatusEditor('${c.n.replace(/'/g,"\\'")}','${c.co}','${c.cs}',this.parentElement)" title="Edit CRM status">✏️</span></td><td style="padding:.5rem .75rem" class="text-muted text-xs">${c.ao||'—'}</td><td style="padding:.5rem .75rem" class="text-muted text-center">${c.pc}</td></tr>`}).join('');
+return`<tr class="${cl}"><td style="padding:.5rem .75rem" class="text-muted">${i+1}</td><td style="padding:.5rem .75rem">${nl}${cm}${st}</td><td style="padding:.5rem .75rem"><a href="#" class="text-muted" onclick="event.preventDefault();setCountryFilter('${c.co}')">${c.co}</a></td><td style="padding:.5rem .75rem" class="text-muted">${c.d}</td><td style="padding:.5rem .75rem">${badge(c.sl)}</td><td style="padding:.5rem .75rem">${crmPill(c.cs)}</td><td style="padding:.5rem .75rem" class="text-muted text-xs">${c.ao||'—'}</td><td style="padding:.5rem .75rem" class="text-muted text-center">${c.pc}</td></tr>`}).join('');
 document.getElementById('cCnt').textContent=`Showing ${Math.min(cS,cF.length)} of ${cF.length} entities`;
 const mc=document.getElementById('cMore');
 if(cS<cF.length){const r=cF.length-cS;mc.innerHTML=`<button class="show-more-btn" onclick="cS+=25;rCR()">Show ${Math.min(r,25)} more (${r} remaining)</button>`}
@@ -564,49 +541,6 @@ box.innerHTML+=`<div class="flex gap-3 text-xs text-muted" style="margin-top:6px
 
 
 
-
-// ═══ Correction System ═══
-const CORRECTIONS_KEY='mica-crm-corrections';
-function getCorrections(){try{return JSON.parse(localStorage.getItem(CORRECTIONS_KEY)||'[]')}catch(e){return[]}}
-function saveCorrection(entity,country,oldStatus,newStatus){
-const corr=getCorrections();
-corr.push({entity,country,oldStatus,newStatus,when:new Date().toISOString().slice(0,16).replace('T',' '),by:''});
-localStorage.setItem(CORRECTIONS_KEY,JSON.stringify(corr));
-// Apply to D array
-D.forEach(c=>{if(c.n===entity||c.cn===entity){c.cs=newStatus}});
-renderCorrections();fC(); // re-render table
-}
-function renderCorrections(){
-const corr=getCorrections();
-const panel=document.getElementById('sec-corrections');
-if(!corr.length){panel.style.display='none';return}
-panel.style.display='block';
-document.getElementById('corrTb').innerHTML=corr.map(c=>
-`<tr class="entity-row border-b"><td style="padding:.4rem .5rem" class="font-medium">${c.entity}</td><td style="padding:.4rem .5rem text-muted">${c.country}</td><td style="padding:.4rem .5rem">${crmPill(c.oldStatus)}</td><td style="padding:.4rem .5rem">${crmPill(c.newStatus)}</td><td style="padding:.4rem .5rem text-muted text-xs">${c.by||'—'}</td><td style="padding:.4rem .5rem text-muted text-xs">${c.when}</td></tr>`).join('');
-}
-function exportCorrections(){
-const corr=getCorrections();if(!corr.length)return;
-const csv='Entity,Country,Previous Status,New Status,Changed By,When\n'+corr.map(c=>
-`"${c.entity}","${c.country}","${c.oldStatus}","${c.newStatus}","${c.by}","${c.when}"`).join('\n');
-const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
-const a=document.createElement('a');a.href=url;a.download='mica-corrections-'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(url);
-}
-function clearCorrections(){if(!confirm('Clear all corrections? This will reset to original data on next reload.'))return;
-localStorage.removeItem(CORRECTIONS_KEY);location.reload();}
-function showStatusEditor(entity,country,currentStatus,el){
-document.querySelectorAll('.status-dropdown').forEach(d=>d.remove());
-const statuses=['Customer','Prospect','Partner','In Salesforce (no type)','Not in Salesforce','Churned Customer'];
-const dd=document.createElement('div');dd.className='status-dropdown';
-dd.innerHTML=statuses.filter(s=>s!==currentStatus).map(s=>
-`<div onclick="event.stopPropagation();saveCorrection('${entity.replace(/'/g,"\\'")}','${country}','${currentStatus}','${s}');this.parentElement.remove()">${s}</div>`).join('');
-el.style.position='relative';el.appendChild(dd);
-setTimeout(()=>document.addEventListener('click',function h(){dd.remove();document.removeEventListener('click',h)},{once:true}),10);
-}
-
-// Apply any saved corrections on load
-!function(){const corr=getCorrections();
-corr.forEach(c=>{D.forEach(d=>{if(d.n===c.entity||d.cn===c.entity){d.cs=c.newStatus}})});
-renderCorrections()}();
 
 // Init
 renderR();renderNotable();renderQ();fC();fN();
