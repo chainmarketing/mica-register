@@ -496,7 +496,7 @@ return`<div style="margin-bottom:.75rem">
 const box=document.getElementById('tierCards');
 box.innerHTML=
 renderTier('Tier 1: No Relationship','Not in Salesforce or churned — create accounts & outreach immediately','var(--destructive)','pill-red',tier1,'tier1-list',true)+
-renderTier('Tier 2: In SF — Unclassified','Account Type is blank. Click a name to copy it, then search in <a href=&quot;https://chainalysisinc.lightning.force.com/lightning/o/Account/home&quot; target=&quot;_blank&quot; class=&quot;text-primary&quot;>Salesforce ↗</a> and set the Type.','var(--warning)','pill-warn',tier2,'tier2-list',false)+
+renderTier('Tier 2: In SF — Unclassified','Account Type is blank. Click a name to copy it, then search in <a href=\'https://chainalysisinc.lightning.force.com/lightning/o/Account/home\' target=\'_blank\' class=\'text-primary\'>Salesforce ↗<\/a> and set the Type.','var(--warning)','pill-warn',tier2,'tier2-list',false)+
 renderTier('Tier 3: Active Prospects','Already being worked — ensure MiCA is part of the conversation','var(--info)','pill-blue',tier3,'tier3-list',false)+
 (tier4.length?renderTier('Tier 4: Partners','Existing partners on the register','var(--primary)','pill-partner',tier4,'tier4-list',false):'');
 }();
