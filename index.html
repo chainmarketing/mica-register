@@ -481,11 +481,10 @@ const tier3=nonCust.filter(c=>c.cs==='Prospect');
 const tier4=nonCust.filter(c=>c.cs==='Partner');
 
 function renderTier(label,desc,color,pill,entities,id,open){
-const sfBase='https://chainalysisinc.lightning.force.com/lightning/o/Account/list?filterName=__Recent';
 const rows=entities.sort((a,b)=>(a.co+a.n).localeCompare(b.co+b.n)).map(c=>{
 const svcs=c.sl?c.sl.length:0;
 const name=c.cn||c.n;
-const sfLink=c.cs==='In Salesforce (no type)'||c.cs==='Prospect'||c.cs==='Partner'?`<a href="${sfBase}&q=${encodeURIComponent(name)}" target="_blank" class="text-primary" title="Search in Salesforce">${name} ↗</a>`:`<span class="font-medium">${name}</span>`;
+const sfLink=c.cs==='In Salesforce (no type)'||c.cs==='Prospect'||c.cs==='Partner'?`<a href="https://chainalysisinc.lightning.force.com/lightning/search/Account/${encodeURIComponent(name)}" target="_blank" class="text-primary" title="Open in Salesforce">${name} ↗</a>`:`<span class="font-medium">${name}</span>`;
 return`<tr class="entity-row border-b"><td style="padding:.4rem .5rem">${sfLink}</td><td style="padding:.4rem .5rem text-muted">${c.co}</td><td style="padding:.4rem .5rem text-muted text-xs">${c.ao||'—'}</td><td style="padding:.4rem .5rem text-muted text-center">${c.pc}</td><td style="padding:.4rem .5rem text-muted text-center">${svcs}</td></tr>`}).join('');
 return`<div style="margin-bottom:.75rem">
 <div class="section-toggle" onclick="document.getElementById('${id}').style.display=document.getElementById('${id}').style.display==='none'?'block':'none'" style="padding:.5rem;border-radius:6px;background:color-mix(in srgb,${color} 8%,transparent)">
