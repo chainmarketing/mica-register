@@ -481,7 +481,7 @@ const tier3=nonCust.filter(c=>c.cs==='Prospect');
 const tier4=nonCust.filter(c=>c.cs==='Partner');
 
 function renderTier(label,desc,color,pill,entities,id,open){
-const sfBase='https://chainalysis.lightning.force.com/lightning/o/Account/list?filterName=__Recent';
+const sfBase='https://chainalysisinc.lightning.force.com/lightning/o/Account/list?filterName=__Recent';
 const rows=entities.sort((a,b)=>(a.co+a.n).localeCompare(b.co+b.n)).map(c=>{
 const svcs=c.sl?c.sl.length:0;
 const name=c.cn||c.n;
