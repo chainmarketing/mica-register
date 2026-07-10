@@ -481,9 +481,12 @@ const tier3=nonCust.filter(c=>c.cs==='Prospect');
 const tier4=nonCust.filter(c=>c.cs==='Partner');
 
 function renderTier(label,desc,color,pill,entities,id,open){
+const sfBase='https://chainalysis.lightning.force.com/lightning/o/Account/list?filterName=__Recent';
 const rows=entities.sort((a,b)=>(a.co+a.n).localeCompare(b.co+b.n)).map(c=>{
 const svcs=c.sl?c.sl.length:0;
-return`<tr class="entity-row border-b"><td style="padding:.4rem .5rem"><span class="font-medium">${c.cn||c.n}</span></td><td style="padding:.4rem .5rem text-muted">${c.co}</td><td style="padding:.4rem .5rem text-muted text-xs">${c.ao||'—'}</td><td style="padding:.4rem .5rem text-muted text-center">${c.pc}</td><td style="padding:.4rem .5rem text-muted text-center">${svcs}</td></tr>`}).join('');
+const name=c.cn||c.n;
+const sfLink=c.cs==='In Salesforce (no type)'||c.cs==='Prospect'||c.cs==='Partner'?`<a href="${sfBase}&q=${encodeURIComponent(name)}" target="_blank" class="text-primary" title="Search in Salesforce">${name} ↗</a>`:`<span class="font-medium">${name}</span>`;
+return`<tr class="entity-row border-b"><td style="padding:.4rem .5rem">${sfLink}</td><td style="padding:.4rem .5rem text-muted">${c.co}</td><td style="padding:.4rem .5rem text-muted text-xs">${c.ao||'—'}</td><td style="padding:.4rem .5rem text-muted text-center">${c.pc}</td><td style="padding:.4rem .5rem text-muted text-center">${svcs}</td></tr>`}).join('');
 return`<div style="margin-bottom:.75rem">
 <div class="section-toggle" onclick="document.getElementById('${id}').style.display=document.getElementById('${id}').style.display==='none'?'block':'none'" style="padding:.5rem;border-radius:6px;background:color-mix(in srgb,${color} 8%,transparent)">
 <span class="chevron">▼</span><h2 class="text-sm font-semibold">${label}</h2><span class="pill ${pill}" style="margin-left:.5rem">${entities.length}</span><span class="text-xs text-muted" style="margin-left:.5rem">${desc}</span></div>
@@ -494,7 +497,7 @@ return`<div style="margin-bottom:.75rem">
 const box=document.getElementById('tierCards');
 box.innerHTML=
 renderTier('Tier 1: No Relationship','Not in Salesforce or churned — create accounts & outreach immediately','var(--destructive)','pill-red',tier1,'tier1-list',true)+
-renderTier('Tier 2: In SF — Unqualified','Tracked in Salesforce but no type set — qualify and assign','var(--warning)','pill-warn',tier2,'tier2-list',false)+
+renderTier('Tier 2: In SF — Unclassified','In Salesforce but Account Type is blank. Go to the account in Salesforce → set Type to Customer, Prospect, or Partner.','var(--warning)','pill-warn',tier2,'tier2-list',false)+
 renderTier('Tier 3: Active Prospects','Already being worked — ensure MiCA is part of the conversation','var(--info)','pill-blue',tier3,'tier3-list',false)+
 (tier4.length?renderTier('Tier 4: Partners','Existing partners on the register','var(--primary)','pill-partner',tier4,'tier4-list',false):'');
 }();
