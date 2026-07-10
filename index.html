@@ -484,7 +484,7 @@ function renderTier(label,desc,color,pill,entities,id,open){
 const rows=entities.sort((a,b)=>(a.co+a.n).localeCompare(b.co+b.n)).map(c=>{
 const svcs=c.sl?c.sl.length:0;
 const name=c.cn||c.n;
-const sfLink=c.cs==='In Salesforce (no type)'||c.cs==='Prospect'||c.cs==='Partner'?`<a href="https://chainalysisinc.lightning.force.com/lightning/search/Account/${encodeURIComponent(name)}" target="_blank" class="text-primary" title="Open in Salesforce">${name} ↗</a>`:`<span class="font-medium">${name}</span>`;
+const sfLink=`<span class="font-medium" style="cursor:pointer" onclick="navigator.clipboard.writeText('${name.replace(/'/g,"\\'")}');this.style.color='var(--success)';this.textContent='✓ Copied';setTimeout(()=>{this.style.color='';this.textContent='${name.replace(/'/g,"\\'")}'}, 1500)" title="Click to copy name">${name}</span>`;
 return`<tr class="entity-row border-b"><td style="padding:.4rem .5rem">${sfLink}</td><td style="padding:.4rem .5rem text-muted">${c.co}</td><td style="padding:.4rem .5rem text-muted text-xs">${c.ao||'—'}</td><td style="padding:.4rem .5rem text-muted text-center">${c.pc}</td><td style="padding:.4rem .5rem text-muted text-center">${svcs}</td></tr>`}).join('');
 return`<div style="margin-bottom:.75rem">
 <div class="section-toggle" onclick="document.getElementById('${id}').style.display=document.getElementById('${id}').style.display==='none'?'block':'none'" style="padding:.5rem;border-radius:6px;background:color-mix(in srgb,${color} 8%,transparent)">
@@ -496,7 +496,7 @@ return`<div style="margin-bottom:.75rem">
 const box=document.getElementById('tierCards');
 box.innerHTML=
 renderTier('Tier 1: No Relationship','Not in Salesforce or churned — create accounts & outreach immediately','var(--destructive)','pill-red',tier1,'tier1-list',true)+
-renderTier('Tier 2: In SF — Unclassified','In Salesforce but Account Type is blank. Go to the account in Salesforce → set Type to Customer, Prospect, or Partner.','var(--warning)','pill-warn',tier2,'tier2-list',false)+
+renderTier('Tier 2: In SF — Unclassified','Account Type is blank. Click a name to copy it, then search in <a href=&quot;https://chainalysisinc.lightning.force.com/lightning/o/Account/home&quot; target=&quot;_blank&quot; class=&quot;text-primary&quot;>Salesforce ↗</a> and set the Type.','var(--warning)','pill-warn',tier2,'tier2-list',false)+
 renderTier('Tier 3: Active Prospects','Already being worked — ensure MiCA is part of the conversation','var(--info)','pill-blue',tier3,'tier3-list',false)+
 (tier4.length?renderTier('Tier 4: Partners','Existing partners on the register','var(--primary)','pill-partner',tier4,'tier4-list',false):'');
 }();
