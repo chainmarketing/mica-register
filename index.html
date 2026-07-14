@@ -586,9 +586,7 @@ Chart.defaults.color=mfg;Chart.defaults.borderColor=brc;Chart.defaults.font.fami
 
 // Country chart (clickable)
 const cc={};D.forEach(c=>{if(!c.wd)cc[c.co]=(cc[c.co]||0)+1});const sc=Object.entries(cc).sort((a,b)=>b[1]-a[1]);
-const _cChartEl=document.getElementById('cChart');if(_cChartEl){new Chart(_cChartEl,{type:'bar',data:{labels:sc.map(c=>c[0]),datasets:[{data:sc.map(c=>c[1]),backgroundColor:c1+'B3',borderColor:c1,borderWidth:1,borderRadius:4}]},
-options:{maintainAspectRatio:false,indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{color:brc+'40'}},y:{grid:{display:false}}},
-onClick:(e,el)=>{if(el.length){const co=sc[el[0].index][0];setCountryFilter(co)}}}});
+
 
 // Timeline
 const cm={},nm={};D.forEach(c=>{if(c.sk&&c.sk!=='9999-99-99'){const m=c.sk.slice(0,7);cm[m]=(cm[m]||0)+1}});N.forEach(n=>{if(n.sk&&n.sk!=='9999-99-99'){const m=n.sk.slice(0,7);nm[m]=(nm[m]||0)+1}});
