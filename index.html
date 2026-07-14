@@ -517,7 +517,7 @@ else mc.innerHTML=r.length>8?`<button class="show-more-btn" onclick="rN=8;render
 // Notable (with show-more)
 let nN=9;function renderNotable(){const found=[],seen=new Set();
 for(const n of NOTABLE)for(const c of D){if(c.wd)continue;if((c.n+' '+(c.cn||'')).toLowerCase().includes(n.m)&&!seen.has(n.m)){seen.add(n.m);found.push({...c,icon:n.i,dn:n.l});break}}
-document.getElementById('nCards').innerHTML=found.slice(0,nN).map(c=>
+const _nc=document.getElementById('nCards');if(!_nc)return;_nc.innerHTML=found.slice(0,nN).map(c=>
 `<div class="notable-card"><div class="flex items-center gap-2"><span class="text-lg">${c.icon}</span><div><div class="font-medium text-sm">${c.dn}</div><div class="text-xs text-muted">${c.co} · ${c.d}</div></div></div><div class="flex flex-wrap gap-2 mt-1">${badge(c.sl.slice(0,3))}${c.sl.length>3?`<span class="svc-badge">+${c.sl.length-3}</span>`:''}</div></div>`).join('');
 const mc=document.getElementById('nMore');
 if(nN<found.length)mc.innerHTML=`<button class="show-more-btn" onclick="nN+=9;renderNotable()">Show more (${found.length-nN} remaining)</button>`;
@@ -715,7 +715,7 @@ box.innerHTML+=`<div class="opp-card2${isC?' churned':''}"><div class="flex just
 }();
 
 // Init
-renderR();renderNotable();renderQ();fC();fN();
+renderR();renderQ();fC();fN();
 
 // ── New toggle helpers ──
 function toggleAction(id) {
@@ -727,24 +727,7 @@ function toggleCtx(id) {
   el.classList.toggle('open');
 }
 
-// ── Notable: render into ctx-notable ──
-(function() {
-  let nN2 = 12;
-  function renderNotable2() {
-    const box = document.getElementById('nCards');
-    if (!box) return;
-    box.innerHTML = N.slice(0, nN2).map(n => `
-      <div class="card" style="padding:.75rem">
-        <div class="font-medium text-sm">${n.n}</div>
-        <div class="text-xs text-muted">${n.co} · ${n.rt||'CASP'}</div>
-        ${n.w ? `<a href="${n.w}" target="_blank" class="text-xs text-primary">Website ↗</a>` : ''}
-      </div>`).join('');
-    const m = document.getElementById('nMore2');
-    if (m) m.innerHTML = nN2 < N.length
-      ? `<button class="show-more-btn" onclick="document.querySelector('#ctx-notable .nN2='+${nN2+12})">Show more</button>` : '';
-  }
-  renderNotable2();
-})();
+
 
 // ── Init ──
 
