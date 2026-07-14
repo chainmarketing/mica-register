@@ -377,11 +377,24 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
   <div class="zone-label"><span class="zone-label-text">Market context</span></div>
   <div style="display:flex;flex-direction:column;gap:.5rem">
 
+
+    <!-- Known Brands -->
+    <div class="ctx-section" id="ctx-brands">
+      <div class="ctx-header" onclick="toggleCtx('ctx-brands')">
+        <div>
+          <div class="ctx-title">🏢 Major Platform Status</div>
+          <div class="ctx-sub">Which major crypto platforms hold a MiCA licence, and how they map to their EU legal entity.</div>
+        </div>
+        <span class="ctx-chevron">▼</span>
+      </div>
+      <div class="ctx-body" id="brands-body"></div>
+    </div>
+
     <!-- CRM Penetration -->
     <div class="ctx-section" id="ctx-crm">
       <div class="ctx-header" onclick="toggleCtx('ctx-crm')">
         <div>
-          <div class="ctx-title">Chainalysis CRM Penetration</div>
+          <div class="ctx-title">📊 Chainalysis CRM Penetration</div>
           <div class="ctx-sub">How the 292 MiCA firms break down by customer, prospect, and untracked status.</div>
         </div>
         <span class="ctx-chevron">▼</span>
@@ -397,27 +410,11 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
         </div>
       </div>
     </div>
-
-    <!-- Notable Entities -->
-    <div class="ctx-section" id="ctx-notable">
-      <div class="ctx-header" onclick="toggleCtx('ctx-notable')">
-        <div>
-          <div class="ctx-title">Notable Licensed Entities</div>
-          <div class="ctx-sub">Major exchanges and fintechs on the register — Coinbase, Bybit, OKX and others.</div>
-        </div>
-        <span class="ctx-chevron">▼</span>
-      </div>
-      <div class="ctx-body">
-        <div class="grid g3" id="nCards"></div>
-        <div id="nMore2" style="padding:.5rem 0"></div>
-      </div>
-    </div>
-
     <!-- Quarterly Approvals -->
     <div class="ctx-section" id="ctx-quarterly">
       <div class="ctx-header" onclick="toggleCtx('ctx-quarterly')">
         <div>
-          <div class="ctx-title">Approvals by Quarter &amp; Country</div>
+          <div class="ctx-title">📅 Approvals by Quarter &amp; Country</div>
           <div class="ctx-sub">Which countries are licensing the most CASPs each quarter, and whether the pace is accelerating or slowing.</div>
         </div>
         <span class="ctx-chevron">▼</span>
@@ -451,7 +448,7 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
     <div class="ctx-section" id="ctx-pipeline">
       <div class="ctx-header" onclick="toggleCtx('ctx-pipeline')">
         <div>
-          <div class="ctx-title">How This Report Is Generated</div>
+          <div class="ctx-title">⚙️ How This Report Is Generated</div>
           <div class="ctx-sub">Data sources, update cadence, and methodology.</div>
         </div>
         <span class="ctx-chevron">▼</span>
@@ -539,7 +536,9 @@ let cK='sk',cD=-1,cF=[],cS=10;
 function rCR(){const tb=document.getElementById('cTb'),v=cF.slice(0,cS);
 tb.innerHTML=v.map((c,i)=>{const cl=c.wd?'entity-row border-b' +' style="opacity:.45"':'entity-row border-b';
 const st=c.wd?` <span class="pill pill-red">Withdrawn ${c.ed}</span>`:'';
-const nl=c.w?`<a href="${c.w}" target="_blank" class="text-primary">${c.n}</a>`:c.n;
+const _dom=c.w?c.w.replace(/^https?:\/\//,'').replace(/\/.*/,''):'';
+const _fav=_dom?`<img src="https://www.google.com/s2/favicons?domain=${_dom}&sz=32" width="16" height="16" style="border-radius:3px;margin-right:6px;vertical-align:middle;flex-shrink:0" onerror="this.style.display='none'">`:'';
+const nl=c.w?`<span style="display:inline-flex;align-items:center">${_fav}<a href="${c.w}" target="_blank" class="text-primary">${c.n}</a></span>`:`<span>${c.n}</span>`;
 const cm=c.cn&&c.cn!==c.n?` <span class="text-muted text-xs">(${c.cn})</span>`:'';
 return`<tr class="${cl}"><td style="padding:.5rem .75rem" class="text-muted">${i+1}</td><td style="padding:.5rem .75rem">${nl}${cm}${st}</td><td style="padding:.5rem .75rem"><a href="#" class="text-muted" onclick="event.preventDefault();setCountryFilter('${c.co}')">${c.co}</a></td><td style="padding:.5rem .75rem" class="text-muted">${c.d}</td><td style="padding:.5rem .75rem">${badge(c.sl)}</td><td style="padding:.5rem .75rem">${crmPill(c.cs)}</td><td style="padding:.5rem .75rem" class="text-muted text-xs">${c.ao||'—'}</td><td style="padding:.5rem .75rem" class="text-muted text-center">${c.pc}</td></tr>`}).join('');
 document.getElementById('cCnt').textContent=`Showing ${Math.min(cS,cF.length)} of ${cF.length} entities`;
@@ -748,6 +747,44 @@ function toggleCtx(id) {
 })();
 
 // ── Init ──
+
+// ═══ Known Brands Panel ═══
+(function(){
+  const BRANDS = [{"brand": "Binance", "entity": "", "country": "", "cs": "", "w": "", "licensed": false}, {"brand": "Coinbase", "entity": "Coinbase Luxembourg S.A.", "country": "Luxembourg", "cs": "Customer", "w": "https://coinbase.com", "licensed": true}, {"brand": "Kraken", "entity": "Payward Europe Solutions Limited", "country": "Ireland", "cs": "Customer", "w": "https://www.kraken.com/", "licensed": true}, {"brand": "Bybit", "entity": "Bybit EU GmbH", "country": "Austria", "cs": "In Salesforce (no type)", "w": "https://www.bybit.eu", "licensed": true}, {"brand": "OKX", "entity": "OKX Europe Limited", "country": "Malta", "cs": "Customer", "w": "www.okx.com", "licensed": true}, {"brand": "Crypto.com", "entity": "Foris DAX MT Limited", "country": "Malta", "cs": "Customer", "w": "crypto.com", "licensed": true}, {"brand": "KuCoin", "entity": "KuCoin EU Exchange GmbH", "country": "Austria", "cs": "Customer", "w": "https://www.kucoin.eu", "licensed": true}, {"brand": "Gemini", "entity": "Gemini Intergalactic EU Ltd", "country": "Malta", "cs": "Customer", "w": "www.gemini.com", "licensed": true}, {"brand": "Bitstamp", "entity": "Bitstamp Europe S.A.", "country": "Luxembourg", "cs": "Customer", "w": "https://www.bitstamp.net/", "licensed": true}, {"brand": "Bitpanda", "entity": "Bitpanda GmbH", "country": "Austria", "cs": "Customer", "w": "https://www.bitpanda.com", "licensed": true}, {"brand": "eToro", "entity": "eToro (Europe) Ltd", "country": "Cyprus", "cs": "Customer", "w": "www.etoro.com", "licensed": true}, {"brand": "Revolut", "entity": "Revolut Digital Assets (Europe) Ltd", "country": "Cyprus", "cs": "Customer", "w": "https://www.revolut.com/en-CY/crypto/", "licensed": true}, {"brand": "Bitvavo", "entity": "Bitvavo B.V.", "country": "Netherlands", "cs": "Customer", "w": "https://bitvavo.com/nl", "licensed": true}, {"brand": "Robinhood", "entity": "Robinhood Europe UAB", "country": "Lithuania", "cs": "In Salesforce (no type)", "w": "https://www.robinhood.com", "licensed": true}, {"brand": "Strike", "entity": "Zap (Strike) Europe Limited", "country": "Malta", "cs": "Customer", "w": "https://strike.me/en-GB/", "licensed": true}, {"brand": "WhiteBIT", "entity": "WB-Shields Innovations GmbH", "country": "Austria", "cs": "Customer", "w": "https://whitebit.eu", "licensed": true}, {"brand": "Swissquote", "entity": "Swissquote Bank Europe SA", "country": "Luxembourg", "cs": "Customer", "w": "https://www.swissquote.com/en-lu/private", "licensed": true}, {"brand": "Bitget", "entity": "", "country": "", "cs": "", "w": "", "licensed": false}, {"brand": "MEXC", "entity": "", "country": "", "cs": "", "w": "", "licensed": false}, {"brand": "HTX / Huobi", "entity": "", "country": "", "cs": "", "w": "", "licensed": false}];
+  function renderBrands() {
+    const box = document.getElementById('brands-body');
+    if (!box) return;
+    box.innerHTML = `
+      <p class="text-xs text-muted" style="margin-bottom:.75rem">
+        ${BRANDS.filter(b=>b.licensed).length} of ${BRANDS.length} major platforms hold a MiCA licence.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.5rem">
+        ${BRANDS.map(b => {
+          const dom = b.w ? b.w.replace(/^https?:\/\//, '').replace(/\/.*/, '') : '';
+          const fav = dom ? `<img src="https://www.google.com/s2/favicons?domain=${dom}&sz=32" width="20" height="20" style="border-radius:4px;flex-shrink:0" onerror="this.style.display='none'">` : `<span style="width:20px;height:20px;border-radius:4px;background:var(--muted);display:inline-block;flex-shrink:0"></span>`;
+          const badge = b.licensed
+            ? `<span class="pill pill-green">Licensed</span>`
+            : `<span class="pill" style="background:var(--muted);color:var(--muted-fg)">Not in register</span>`;
+          const crm = b.cs ? crmPill(b.cs) : '';
+          const entity = b.entity ? `<div class="text-xs text-muted" style="margin-top:2px">${b.entity}${b.country ? ' · ' + b.country : ''}</div>` : '';
+          return `<div style="display:flex;align-items:flex-start;gap:.625rem;padding:.625rem;border-radius:.5rem;border:1px solid var(--border);background:var(--card)">
+            ${fav}
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+                <span class="font-medium text-sm">${b.brand}</span>
+                ${badge}${crm}
+              </div>
+              ${entity}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
+  }
+  // Render when panel opens
+  const header = document.querySelector('#ctx-brands .ctx-header');
+  if (header) header.addEventListener('click', () => setTimeout(renderBrands, 50));
+})();
+
 </script>
 </body>
 </html>
