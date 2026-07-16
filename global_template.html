@@ -6,41 +6,41 @@
 <title>Global Crypto Regulatory Register</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#fff;--fg:#0a0a0a;--card:#fff;--card-fg:#0a0a0a;--muted:#f4f4f5;--muted-fg:#71717a;
---primary:#2563eb;--primary-fg:#fff;--destructive:#ef4444;--success:#22c55e;--warning:#f59e0b;
---info:#3b82f6;--border:#e4e4e7;--chart-1:#ea580c;--chart-2:#0d9488;--chart-3:#164e63;
---chart-4:#fbbf24;--chart-5:#f59e0b}
-@media(prefers-color-scheme:dark){:root{--bg:#09090b;--fg:#fafafa;--card:#0a0a0a;--card-fg:#fafafa;
---muted:#27272a;--muted-fg:#a1a1aa;--primary:#3b82f6;--border:#27272a;
---chart-1:#1d4ed8;--chart-2:#10b981;--chart-3:#f59e0b}}
+:root{--bg:#fff;--fg:#0a0a0a;--card:#fff;--muted:#f4f4f5;--muted-fg:#71717a;
+--primary:#2563eb;--destructive:#ef4444;--success:#22c55e;--warning:#f59e0b;
+--info:#3b82f6;--border:#e4e4e7;--chart-1:#ea580c;--chart-2:#0d9488;--chart-3:#164e63;--chart-4:#fbbf24}
+@media(prefers-color-scheme:dark){:root{--bg:#09090b;--fg:#fafafa;--card:#0a0a0a;--muted:#27272a;
+--muted-fg:#a1a1aa;--primary:#3b82f6;--border:#27272a;--chart-1:#1d4ed8;--chart-2:#10b981;--chart-3:#f59e0b}}
 *,*::before,*::after{box-sizing:border-box;margin:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.6;background:var(--bg);color:var(--fg);min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.6;
+background:var(--bg);color:var(--fg);min-height:100vh}
 .wrap{max-width:72rem;margin:0 auto;padding:2rem 1rem}.wrap>*+*{margin-top:1.25rem}
 .grid{display:grid;gap:.75rem}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
-@media(max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}}.@media(max-width:640px){.g3,.g2,.g4{grid-template-columns:1fr}}
+@media(max-width:768px){.g4,.g3,.g2{grid-template-columns:1fr}}
 .card{background:var(--card);border-radius:.75rem;padding:1rem;box-shadow:0 0 0 1px color-mix(in srgb,var(--fg) 10%,transparent)}
 .kpi{display:flex;flex-direction:column;cursor:pointer;transition:transform .1s}.kpi:hover{transform:translateY(-2px)}
 .flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}
 .flex-wrap{flex-wrap:wrap}.flex-1{flex:1}.gap-2{gap:.5rem}.gap-3{gap:.75rem}
-.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.text-2xl{font-size:1.5rem}.text-3xl{font-size:1.875rem}
+.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-2xl{font-size:1.5rem}.text-3xl{font-size:1.875rem}
 .font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}
-.tracking-tight{letter-spacing:-.025em}.uppercase{text-transform:uppercase}.text-center{text-align:center}
-.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}
-.text-muted{color:var(--muted-fg)}.text-primary{color:var(--primary)}.text-destructive{color:var(--destructive)}
-.text-success{color:var(--success)}.text-warning{color:var(--warning)}
-.overflow-x{overflow-x:auto}
+.tracking-tight{letter-spacing:-.025em}.uppercase{text-transform:uppercase}
+.text-muted{color:var(--muted-fg)}.text-primary{color:var(--primary)}
+.text-destructive{color:var(--destructive)}.text-success{color:var(--success)}.text-warning{color:var(--warning)}
+.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.overflow-x{overflow-x:auto}
 table{border-collapse:collapse;width:100%}
-.pill{display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500}
-.pill-green{background:color-mix(in srgb,var(--success) 12%,transparent);color:var(--success)}
-.pill-blue{background:color-mix(in srgb,var(--primary) 10%,transparent);color:var(--primary)}
-.pill-red{background:color-mix(in srgb,var(--destructive) 10%,transparent);color:var(--destructive)}
-.pill-warn{background:color-mix(in srgb,var(--warning) 10%,transparent);color:var(--warning)}
-.pill-muted{background:var(--muted);color:var(--muted-fg)}
-.pill-purple{background:color-mix(in srgb,#8b5cf6 10%,transparent);color:#8b5cf6}
+
+/* Region nav */
+.region-nav{display:flex;gap:4px;padding:4px;background:var(--muted);border-radius:.625rem;flex-wrap:wrap}
+.region-btn{padding:6px 16px;border-radius:.4rem;border:none;background:none;cursor:pointer;
+  font-size:.82rem;font-weight:600;color:var(--muted-fg);transition:all .15s;white-space:nowrap}
+.region-btn:hover{color:var(--fg);background:color-mix(in srgb,var(--fg) 8%,transparent)}
+.region-btn.active{background:var(--card);color:var(--fg);
+  box-shadow:0 1px 3px color-mix(in srgb,var(--fg) 12%,transparent)}
+.region-desc{font-size:.75rem;color:var(--muted-fg);padding:.25rem .25rem 0}
 
 /* Zone labels */
 .zone-label{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;color:var(--fg);
-  margin-bottom:.75rem;margin-top:.25rem;display:flex;align-items:center;gap:.75rem}
+  margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
 .zone-label::after{content:'';flex:1;height:2px;background:var(--border);border-radius:1px}
 
 /* Sticky nav */
@@ -51,18 +51,20 @@ table{border-collapse:collapse;width:100%}
 
 /* Action cards */
 .action-card{border-radius:.75rem;border:1px solid var(--border);background:var(--card);overflow:hidden}
-.action-card-header{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1rem;cursor:pointer;user-select:none;gap:.75rem}
+.action-card-header{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1rem;
+  cursor:pointer;user-select:none;gap:.75rem}
 .action-card-header:hover{background:var(--muted)}
 .action-card-body{border-top:1px solid var(--border);padding:1rem;display:none}
 .action-card.open .action-card-body{display:block}
-.action-card-chevron{font-size:.75rem;color:var(--muted-fg);transition:transform .2s;flex-shrink:0}
+.action-card-chevron{font-size:.75rem;color:var(--muted-fg);transition:transform .2s}
 .action-card.open .action-card-chevron{transform:rotate(180deg)}
 .action-card-title{font-weight:600;font-size:.95rem;display:flex;align-items:center;gap:.5rem}
 .action-card-sub{font-size:.78rem;color:var(--muted-fg);margin-top:.1rem}
 
 /* Context sections */
 .ctx-section{border-radius:.75rem;border:1px solid var(--border);background:var(--card);overflow:hidden}
-.ctx-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;cursor:pointer;user-select:none}
+.ctx-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;
+  cursor:pointer;user-select:none}
 .ctx-header:hover{background:var(--muted)}
 .ctx-body{border-top:1px solid var(--border);padding:1rem;display:none}
 .ctx-section.open .ctx-body{display:block}
@@ -76,17 +78,25 @@ table{border-collapse:collapse;width:100%}
 table.main-tbl{width:100%;border-collapse:collapse;font-size:.8rem}
 .main-tbl thead{position:sticky;top:0;z-index:5;background:var(--card)}
 .main-tbl th{padding:8px 10px;text-align:left;font-size:.68rem;font-weight:600;text-transform:uppercase;
-  letter-spacing:.05em;color:var(--muted-fg);border-bottom:2px solid var(--border);cursor:pointer}
+  letter-spacing:.05em;color:var(--muted-fg);border-bottom:2px solid var(--border);cursor:pointer;white-space:nowrap}
 .main-tbl th:hover{color:var(--fg)}
 .main-tbl td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top}
 .main-tbl tr:hover td{background:var(--muted)}
-.main-tbl tr.withdrawn td{opacity:.45}
 
-/* Search */
-.search-box{height:2rem;border-radius:.5rem;border:1px solid var(--border);background:var(--background);
-  color:var(--fg);padding:0 .625rem;font-size:.875rem;outline:none;transition:border-color .15s}
+/* Inputs */
+.search-box{height:2rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);
+  color:var(--fg);padding:0 .625rem;font-size:.875rem;outline:none}
 .search-box:focus{border-color:var(--primary)}
 select.search-box{padding-right:.25rem}
+
+/* Pills */
+.pill{display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500}
+.pill-green{background:color-mix(in srgb,var(--success) 12%,transparent);color:var(--success)}
+.pill-blue{background:color-mix(in srgb,var(--primary) 10%,transparent);color:var(--primary)}
+.pill-red{background:color-mix(in srgb,var(--destructive) 10%,transparent);color:var(--destructive)}
+.pill-warn{background:color-mix(in srgb,var(--warning) 10%,transparent);color:var(--warning)}
+.pill-muted{background:var(--muted);color:var(--muted-fg)}
+.pill-purple{background:color-mix(in srgb,#8b5cf6 10%,transparent);color:#8b5cf6}
 
 /* Register badges */
 .reg-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:4px;
@@ -98,81 +108,86 @@ select.search-box{padding-right:.25rem}
 .reg-vara{background:color-mix(in srgb,#7c3aed 12%,transparent);color:#7c3aed}
 .reg-jfsa{background:color-mix(in srgb,#dc2626 10%,transparent);color:#b91c1c}
 .reg-austrac{background:color-mix(in srgb,#0369a1 12%,transparent);color:#0369a1}
-.reg-warning{background:color-mix(in srgb,#ef4444 10%,transparent);color:#ef4444}
+.reg-sfc{background:color-mix(in srgb,#dc2626 12%,transparent);color:#9f1239}
+.reg-fsca{background:color-mix(in srgb,#16a34a 12%,transparent);color:#15803d}
 
-/* Multi-jurisdiction badge */
-.mj-badge{display:inline-flex;align-items:center;gap:2px;padding:1px 6px;border-radius:9999px;
-  font-size:10px;font-weight:700;background:color-mix(in srgb,#8b5cf6 12%,transparent);color:#8b5cf6}
+/* Region colour accents */
+.nemea-accent{border-left:3px solid #2563eb}
+.semea-accent{border-left:3px solid #7c3aed}
+.apac-accent{border-left:3px solid #d97706}
+.amer-accent{border-left:3px solid #059669}
 
-/* Show more btn */
+/* Cards */
+.opp-card{border-radius:.5rem;padding:.625rem .875rem;background:var(--bg);margin-bottom:.375rem;
+  border:1px solid var(--border)}
+.cross-card{border-left:3px solid #8b5cf6;border-radius:.5rem;padding:.625rem .875rem;
+  background:var(--bg);margin-bottom:.375rem}
 .show-more-btn{display:block;width:100%;padding:.5rem;text-align:center;font-size:.8rem;
   color:var(--primary);cursor:pointer;border:none;background:none;border-top:1px solid var(--border)}
 .show-more-btn:hover{background:var(--muted)}
-
-/* Opp cards */
-.opp-card{border-left:3px solid var(--destructive);border-radius:.5rem;padding:.625rem .875rem;background:var(--bg);margin-bottom:.375rem}
-.opp-card.churned{border-left-color:var(--warning)}
-.mj-card{border-left:3px solid #8b5cf6;border-radius:.5rem;padding:.625rem .875rem;background:var(--bg);margin-bottom:.375rem}
 </style>
 </head>
 <body>
 
 <!-- Sticky nav -->
 <div class="top-nav">
-  <span style="font-weight:700">Global Crypto Regulatory Register</span>
+  <span style="font-weight:700">Global Crypto Register</span>
   <a href="#zone-table">Find a firm</a>
   <a href="#zone-action">Take action</a>
   <a href="#zone-context">Market context</a>
   <span style="flex:1"></span>
-  <span class="text-muted" style="font-size:.72rem">Source: master_register.csv · 2026-07-16</span>
+  <span class="text-muted" style="font-size:.72rem">Updated 2026-07-16</span>
 </div>
 
 <div class="wrap">
 
-<!-- Header -->
+<!-- Header + Region selector -->
 <div>
-  <div class="flex justify-between items-center flex-wrap gap-2">
+  <div class="flex justify-between items-center flex-wrap gap-2" style="margin-bottom:.75rem">
     <div>
-      <h1 class="text-2xl font-bold tracking-tight">Global Crypto Regulatory Register</h1>
-      <p class="text-xs text-muted mt-1">🇪🇺 MiCA · 🇬🇧 FCA · 🇺🇸 NYDFS · 🇸🇬 MAS · 🇦🇪 VARA · 🇯🇵 JFSA · 🇦🇺 AUSTRAC</p>
+      <h1 style="font-size:1.5rem;font-weight:700;letter-spacing:-.025em" id="page-title">Global Crypto Regulatory Register</h1>
+      <p class="text-xs text-muted mt-1" id="page-sub">9 registers · 539 licensed firms</p>
     </div>
-    <button onclick="exportCSV()" style="height:2rem;padding:0 .75rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:.8rem;cursor:pointer">↓ Export CSV</button>
+    <button onclick="exportCSV()" style="height:2rem;padding:0 .75rem;border-radius:.5rem;border:1px solid var(--border);
+      background:var(--bg);color:var(--fg);font-size:.8rem;cursor:pointer">↓ Export CSV</button>
   </div>
-  <p class="text-sm text-muted mt-2" style="line-height:1.7" id="exec-summary">Loading…</p>
+
+  <!-- Region nav -->
+  <div class="region-nav" id="region-nav">
+    <button class="region-btn active" onclick="setRegion('global',this)">🌐 Global</button>
+    <button class="region-btn" onclick="setRegion('nemea',this)">🌍 NEMEA</button>
+    <button class="region-btn" onclick="setRegion('semea',this)">🌍 SEMEA</button>
+    <button class="region-btn" onclick="setRegion('apac',this)">🌏 APAC</button>
+    <button class="region-btn" onclick="setRegion('amer',this)">🌎 AMER</button>
+  </div>
+  <p class="region-desc" id="region-desc">All 9 registers · 539 active firms across all regions</p>
 </div>
 
 <!-- KPIs -->
 <div class="grid g4">
-  <div class="card kpi" onclick="document.getElementById('zone-table').scrollIntoView({behavior:'smooth'})">
-    <span class="text-xs font-medium text-muted uppercase tracking-tight">Registered Firms</span>
+  <div class="card kpi"><span class="text-xs font-medium text-muted uppercase tracking-tight">Registered Firms</span>
     <span class="text-2xl font-bold mt-1" id="kpi-total">—</span>
-    <span class="text-xs text-muted">across 7 registers</span>
-  </div>
-  <div class="card kpi" onclick="document.getElementById('act-targets').click()">
+    <span class="text-xs text-muted" id="kpi-sub">—</span></div>
+  <div class="card kpi" onclick="toggleAction('ac-targets')">
     <span class="text-xs font-medium text-muted uppercase tracking-tight">Chainalysis Customers</span>
     <span class="text-2xl font-bold mt-1 text-success" id="kpi-customers">—</span>
-    <span class="text-xs text-muted" id="kpi-pct">— penetration</span>
-  </div>
-  <div class="card kpi" onclick="document.getElementById('act-multi').click()">
-    <span class="text-xs font-medium text-muted uppercase tracking-tight">Multi-Jurisdiction</span>
-    <span class="text-2xl font-bold mt-1 text-purple" style="color:#8b5cf6" id="kpi-multi">—</span>
-    <span class="text-xs text-muted">firms in 2+ registers</span>
-  </div>
-  <div class="card kpi" onclick="document.getElementById('act-targets').click()">
+    <span class="text-xs text-muted" id="kpi-pct">—</span></div>
+  <div class="card kpi" onclick="toggleAction('ac-cross')">
+    <span class="text-xs font-medium text-muted uppercase tracking-tight" id="kpi-cross-label">Cross-Regional</span>
+    <span class="text-2xl font-bold mt-1" style="color:#8b5cf6" id="kpi-cross">—</span>
+    <span class="text-xs text-muted" id="kpi-cross-sub">firms in multiple regions</span></div>
+  <div class="card kpi" onclick="toggleAction('ac-targets')">
     <span class="text-xs font-medium text-muted uppercase tracking-tight">🎯 Sales Targets</span>
     <span class="text-2xl font-bold text-destructive mt-1" id="kpi-targets">—</span>
-    <span class="text-xs text-muted">not in SF or churned</span>
-  </div>
+    <span class="text-xs text-muted">not in SF or churned</span></div>
 </div>
 
 <!-- ZONE 2: FIND A FIRM -->
 <div id="zone-table">
   <div class="zone-label"><span>Find a firm</span></div>
-
-  <!-- Filters -->
   <div class="flex flex-wrap gap-2" style="margin-bottom:.75rem">
-    <input id="qs" class="search-box flex-1" style="min-width:200px" placeholder="Search firm name, country…" oninput="render()">
-    <select id="frs" class="search-box" onchange="render()">
+    <input id="qs" class="search-box flex-1" style="min-width:200px" placeholder="Search firm, country…" oninput="renderTable()">
+    <select id="frs" class="search-box" onchange="renderTable()">
       <option value="">All registers</option>
       <option value="ESMA_MICA">🇪🇺 MiCA</option>
       <option value="FCA_CRYPTOASSET">🇬🇧 FCA</option>
@@ -181,8 +196,10 @@ select.search-box{padding-right:.25rem}
       <option value="VARA_UAE">🇦🇪 VARA</option>
       <option value="JFSA_JAPAN">🇯🇵 JFSA</option>
       <option value="AUSTRAC_DCE">🇦🇺 AUSTRAC</option>
+      <option value="HKSFC_VATP">🇭🇰 HK SFC</option>
+      <option value="FSCA_SA">🇿🇦 FSCA</option>
     </select>
-    <select id="fet" class="search-box" onchange="render()">
+    <select id="fet" class="search-box" onchange="renderTable()">
       <option value="">All types</option>
       <option value="Exchange">Exchange</option>
       <option value="Bank">Bank</option>
@@ -190,37 +207,27 @@ select.search-box{padding-right:.25rem}
       <option value="Custodian / Trust">Custodian / Trust</option>
       <option value="Payment Institution">Payment Institution</option>
       <option value="Broker / Securities">Broker / Securities</option>
-      <option value="Neo-bank">Neo-bank</option>
       <option value="VASP / Other">VASP / Other</option>
     </select>
-    <select id="fcs" class="search-box" onchange="render()">
+    <select id="fcs" class="search-box" onchange="renderTable()">
       <option value="">All CRM status</option>
       <option value="Customer">Customer</option>
       <option value="Prospect">Prospect</option>
       <option value="Not in Salesforce">Not in SF</option>
-      <option value="In Salesforce (no type)">Unclassified</option>
-    </select>
-    <select id="frt" class="search-box" onchange="render()">
-      <option value="">All regulation types</option>
-      <option value="Full Licence">Full Licence</option>
-      <option value="AML/CTF Only">AML/CTF Only</option>
-      <option value="Payment Svcs">Payment Svcs</option>
-      <option value="Exchange Reg.">Exchange Reg.</option>
     </select>
   </div>
   <p class="text-xs text-muted" id="cnt" style="margin-bottom:.5rem"></p>
-
   <div class="tbl-wrap">
-    <table class="main-tbl" id="main-tbl">
+    <table class="main-tbl">
       <thead><tr>
-        <th onclick="sort('n')">#  Entity ⇅</th>
+        <th onclick="sort('n')">Entity ⇅</th>
         <th onclick="sort('rl')">Register ⇅</th>
         <th onclick="sort('co')">Country ⇅</th>
         <th onclick="sort('et')">Type ⇅</th>
         <th onclick="sort('rt')">Regulation ⇅</th>
         <th onclick="sort('cs')">CRM Status ⇅</th>
-        <th onclick="sort('mj')">Jurisdictions ⇅</th>
-        <th onclick="sort('rd')">Registered ⇅</th>
+        <th onclick="sort('mj')" title="Jurisdictions registered in">Jurs ⇅</th>
+        <th onclick="sort('rd')">Since ⇅</th>
       </tr></thead>
       <tbody id="tbody"></tbody>
     </table>
@@ -233,44 +240,36 @@ select.search-box{padding-right:.25rem}
   <div class="zone-label"><span>Take action</span></div>
   <div style="display:flex;flex-direction:column;gap:.5rem">
 
-    <!-- Sales Targets -->
     <div class="action-card" id="ac-targets" style="border-left:3px solid var(--destructive)">
-      <div class="action-card-header" id="act-targets" onclick="toggleAction('ac-targets')">
+      <div class="action-card-header" onclick="toggleAction('ac-targets')">
         <div>
           <div class="action-card-title">🎯 Sales Targets <span class="pill pill-red" id="lbl-targets"></span></div>
-          <div class="action-card-sub">Licensed crypto firms with no active Chainalysis relationship — across all 7 registers. Every one is a qualified compliance buyer.</div>
-        </div>
-        <span class="action-card-chevron">▼</span>
+          <div class="action-card-sub" id="sub-targets">Licensed firms with no active Chainalysis relationship in this region.</div>
+        </div><span class="action-card-chevron">▼</span>
       </div>
       <div class="action-card-body" id="target-cards"></div>
     </div>
 
-    <!-- Multi-Jurisdiction -->
-    <div class="action-card" id="ac-multi" style="border-left:3px solid #8b5cf6">
-      <div class="action-card-header" id="act-multi" onclick="toggleAction('ac-multi')">
+    <div class="action-card" id="ac-cross" style="border-left:3px solid #8b5cf6">
+      <div class="action-card-header" onclick="toggleAction('ac-cross')">
         <div>
-          <div class="action-card-title" style="color:#8b5cf6">🌐 Multi-Jurisdiction Firms <span class="pill pill-purple" id="lbl-multi"></span></div>
-          <div class="action-card-sub">Firms registered in 2 or more jurisdictions — the highest compliance spenders and most sophisticated buyers.</div>
-        </div>
-        <span class="action-card-chevron">▼</span>
+          <div class="action-card-title" style="color:#8b5cf6">🌐 Cross-Regional Firms <span class="pill pill-purple" id="lbl-cross"></span></div>
+          <div class="action-card-sub" id="sub-cross">Firms in this region also registered in other jurisdictions — global compliance programmes and coordinated account opportunities.</div>
+        </div><span class="action-card-chevron">▼</span>
       </div>
-      <div class="action-card-body" id="multi-cards"></div>
+      <div class="action-card-body" id="cross-cards"></div>
     </div>
 
-    <!-- Prospect Priority -->
     <div class="action-card" id="ac-prospects" style="border-left:3px solid var(--warning)">
       <div class="action-card-header" onclick="toggleAction('ac-prospects')">
         <div>
           <div class="action-card-title">🏆 Prospect Priority</div>
-          <div class="action-card-sub">Non-customers ranked by number of jurisdictions registered in, then by entity type. Higher = more urgent.</div>
-        </div>
-        <span class="action-card-chevron">▼</span>
+          <div class="action-card-sub">Non-customers in this region, ranked — multi-jurisdiction firms first.</div>
+        </div><span class="action-card-chevron">▼</span>
       </div>
       <div class="action-card-body">
         <div class="overflow-x"><table class="main-tbl">
-          <thead><tr>
-            <th>#</th><th>Firm</th><th>Country</th><th>Register(s)</th><th>Type</th><th>Jurisdictions</th><th>Owner</th>
-          </tr></thead>
+          <thead><tr><th>#</th><th>Firm</th><th>Register(s)</th><th>Country</th><th>Type</th><th>Jurs</th><th>Owner</th></tr></thead>
           <tbody id="prospect-tbody"></tbody>
         </table></div>
         <div id="prospect-more"></div>
@@ -285,42 +284,27 @@ select.search-box{padding-right:.25rem}
   <div class="zone-label"><span>Market context</span></div>
   <div style="display:flex;flex-direction:column;gap:.5rem">
 
-    <div class="ctx-section" id="ctx-regs">
-      <div class="ctx-header" onclick="toggleCtx('ctx-regs')">
-        <div><div class="ctx-title">📋 Register Breakdown</div>
-          <div class="ctx-sub">How many firms are licensed in each jurisdiction and what type of regulation it represents.</div></div>
-        <span class="ctx-chevron">▼</span>
-      </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">📋 Register Breakdown</div>
+        <div class="ctx-sub">Firm count by register and regulation type in this view.</div></div>
+      <span class="ctx-chevron">▼</span></div>
       <div class="ctx-body"><div style="height:280px"><canvas id="reg-chart"></canvas></div></div>
     </div>
 
-    <div class="ctx-section" id="ctx-types">
-      <div class="ctx-header" onclick="toggleCtx('ctx-types')">
-        <div><div class="ctx-title">🏢 Entity Type Breakdown</div>
-          <div class="ctx-sub">What kinds of businesses hold crypto licences globally — exchanges, banks, custodians, payment firms.</div></div>
-        <span class="ctx-chevron">▼</span>
-      </div>
-      <div class="ctx-body"><div class="grid g2"><div style="height:260px"><canvas id="et-chart"></canvas></div>
-        <div style="height:260px"><canvas id="reg-type-chart"></canvas></div></div></div>
-    </div>
-
-    <div class="ctx-section" id="ctx-crm">
-      <div class="ctx-header" onclick="toggleCtx('ctx-crm')">
-        <div><div class="ctx-title">📊 Chainalysis CRM Penetration</div>
-          <div class="ctx-sub">How many of the 510 registered firms across all jurisdictions are Chainalysis customers, prospects, or untracked.</div></div>
-        <span class="ctx-chevron">▼</span>
-      </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">📊 Chainalysis CRM Penetration</div>
+        <div class="ctx-sub">Customer, prospect and untracked split for this region.</div></div>
+      <span class="ctx-chevron">▼</span></div>
       <div class="ctx-body"><div style="height:240px"><canvas id="crm-chart"></canvas></div></div>
     </div>
 
-    <div class="ctx-section" id="ctx-nc">
-      <div class="ctx-header" onclick="toggleCtx('ctx-nc')">
-        <div><div class="ctx-title">⚠️ ESMA Warning List</div>
-          <div class="ctx-sub">Entities flagged as non-compliant by EU/EEA national regulators under MiCA. Not related to FCA, NYDFS or MAS registers.</div></div>
-        <span class="ctx-chevron">▼</span>
-      </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">⚠️ ESMA Warning List</div>
+        <div class="ctx-sub">Entities flagged as non-compliant by EU/EEA national regulators. Not related to FCA, NYDFS or other non-EU registers.</div></div>
+      <span class="ctx-chevron">▼</span></div>
       <div class="ctx-body">
-        <input id="nc-q" class="search-box" style="width:100%;margin-bottom:.5rem" placeholder="Search ESMA warning list…" oninput="renderNC()">
+        <input id="nc-q" class="search-box" style="width:100%;margin-bottom:.5rem"
+          placeholder="Search ESMA warning list…" oninput="renderNC()">
         <p class="text-xs text-muted" id="nc-cnt" style="margin-bottom:.5rem"></p>
         <div class="tbl-wrap" style="max-height:40vh"><table class="main-tbl"><thead><tr>
           <th>#</th><th>Entity</th><th>Country</th><th>Regulator</th>
@@ -331,283 +315,213 @@ select.search-box{padding-right:.25rem}
   </div>
 </div>
 
-</div><!-- /wrap -->
+</div>
 
 <script>
 const D=[];
 const N=[];
 
-const REG_CLASS={"ESMA_MICA":"mica","FCA_CRYPTOASSET":"fca","NYDFS_BITLICENSE":"nydfs",
-"MAS_DPT":"mas","VARA_UAE":"vara","JFSA_JAPAN":"jfsa","AUSTRAC_DCE":"austrac"};
+// ── Regional config ──────────────────────────────────────────────────────────
+const REGION_DESC = {
+  global: '9 registers · all regions',
+  nemea:  'FCA · VARA · FSCA · MiCA (DE/NL/AT/BE/IE/LU/SE/DK/FI/NO/EE/LV/LT/LI/IS/BG)',
+  semea:  'MiCA (FR/ES/IT/PT/CY/MT/GR/HR/CZ/SK/SI/HU/PL/RO)',
+  apac:   'MAS · JFSA · HK SFC · AUSTRAC',
+  amer:   'NYDFS BitLicense',
+};
+const REGION_TITLE = {
+  global:'Global Crypto Regulatory Register',
+  nemea:'NEMEA Crypto Register',semea:'SEMEA Crypto Register',
+  apac:'APAC Crypto Register',amer:'AMER Crypto Register',
+};
+const REG_CLASS = {ESMA_MICA:'mica',FCA_CRYPTOASSET:'fca',NYDFS_BITLICENSE:'nydfs',
+  MAS_DPT:'mas',VARA_UAE:'vara',JFSA_JAPAN:'jfsa',AUSTRAC_DCE:'austrac',
+  HKSFC_VATP:'sfc',FSCA_SA:'fsca'};
+const REGION_LABELS = {nemea:'NEMEA',semea:'SEMEA',apac:'APAC',amer:'AMER'};
 
-function regBadge(r){
-  const cls=REG_CLASS[r.rs]||'muted';
-  return`<span class="reg-badge reg-${cls}">${r.rf} ${r.rl}</span>`;
+let currentRegion = new URLSearchParams(window.location.search).get('r') || 'global';
+let cF = [], cS = 10, cK = 'sk', cDir = -1;
+
+// ── Region filter ─────────────────────────────────────────────────────────────
+function getView() {
+  return currentRegion === 'global' ? D.filter(r=>!r.wd) : D.filter(r=>!r.wd && r.rg===currentRegion);
 }
-function mjBadge(mj){
-  return mj>1?`<span class="mj-badge">🌐 ${mj}</span>`:'';
+
+function setRegion(r, btn) {
+  currentRegion = r;
+  document.querySelectorAll('.region-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  const url = new URL(window.location);
+  if(r==='global') url.searchParams.delete('r'); else url.searchParams.set('r',r);
+  window.history.replaceState({}, '', url);
+  document.getElementById('page-title').textContent = REGION_TITLE[r] || 'Crypto Register';
+  document.getElementById('region-desc').textContent = REGION_DESC[r] || '';
+  updateAll();
 }
-function crmPill(cs){
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function regBadge(r) {
+  return`<span class="reg-badge reg-${REG_CLASS[r.rs]||'muted'}">${r.rf} ${r.rl}</span>`;
+}
+function crmPill(cs) {
   const m={'Customer':'pill-green','Prospect':'pill-warn','Partner':'pill-blue',
-            'Not in Salesforce':'pill-red','Churned Customer':'pill-red',
-            'In Salesforce (no type)':'pill-muted','Customer (status unset)':'pill-blue'};
+    'Not in Salesforce':'pill-red','Churned Customer':'pill-red','In Salesforce (no type)':'pill-muted'};
   const s=cs||'Not in Salesforce';
   return`<span class="pill ${m[s]||'pill-muted'}">${s.replace('In Salesforce (no type)','Unclassified')}</span>`;
 }
-function domainFav(w){
+function fav(w) {
   if(!w) return '';
-  const dom=w.replace(/^https?:\/\//,'').replace(/\/.*/,'');
-  return dom?`<img src="https://www.google.com/s2/favicons?domain=${dom}&sz=32" width="14" height="14" style="border-radius:2px;margin-right:5px;vertical-align:middle" onerror="this.style.display='none'">`:''
+  const d=w.replace(/^https?:\/\//,'').replace(/\/.*/,'');
+  return d?`<img src="https://www.google.com/s2/favicons?domain=${d}&sz=32" width="14" height="14"
+    style="border-radius:2px;margin-right:5px;vertical-align:middle" onerror="this.style.display='none'">`:''
+}
+function regionBadge(rg) {
+  const colours={nemea:'#2563eb',semea:'#7c3aed',apac:'#d97706',amer:'#059669'};
+  const c=colours[rg]||'#666';
+  return`<span style="display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700;
+    background:${c}18;color:${c}">${REGION_LABELS[rg]||rg}</span>`;
 }
 
-// ── KPIs ──
-const customers=D.filter(r=>r.cs==='Customer');
-const targets=D.filter(r=>r.cs==='Not in Salesforce'||r.cs==='Churned Customer');
-const multiD=D.filter(r=>r.mj>1);
-const pct=Math.round(customers.length/D.filter(r=>r.rs==='ESMA_MICA').length*100);
-document.getElementById('kpi-total').textContent=D.length;
-document.getElementById('kpi-customers').textContent=customers.length;
-document.getElementById('kpi-pct').textContent=`${pct}% of MiCA firms`;
-document.getElementById('kpi-multi').textContent=new Set(multiD.map(r=>r.cn||r.n)).size;
-document.getElementById('kpi-targets').textContent=targets.length;
-document.getElementById('lbl-targets').textContent=targets.length;
-document.getElementById('lbl-multi').textContent=new Set(multiD.map(r=>r.cn||r.n)).size;
+// ── Cross-regional matching ───────────────────────────────────────────────────
+function normKey(s) {
+  return (s||'').toLowerCase()
+    .replace(/\b(pte|ltd|llc|inc|gmbh|sa|bv|oy|as|ag|sas|srl|spa|limited|europe|eu|
+      global|digital|asia|pacific|apac|mena|uk|us|usa|ny|hk|sg|jp|au|fze|dmcc|
+      proprietary|pty|crypto|com)\b/g,'')
+    .replace(/[^a-z0-9]/g,'').trim();
+}
 
-// Exec summary
-(function(){
-  const bySrc={};D.forEach(r=>{bySrc[r.rs]=(bySrc[r.rs]||0)+1});
-  const parts=Object.entries(bySrc).map(([s,c])=>{
-    const lbl={ESMA_MICA:'MiCA (EU)',FCA_CRYPTOASSET:'FCA (UK)',NYDFS_BITLICENSE:'NYDFS (NY)',
-      MAS_DPT:'MAS (SG)',VARA_UAE:'VARA (UAE)',JFSA_JAPAN:'JFSA (JP)',AUSTRAC_DCE:'AUSTRAC (AU)'};
-    return`<strong>${c}</strong> ${lbl[s]||s}`;
-  }).join(' · ');
-  document.getElementById('exec-summary').innerHTML=
-    `<strong>${D.length} firms</strong> registered across 7 crypto regulatory jurisdictions: ${parts}. `+
-    `Chainalysis has <strong>${customers.length} customers</strong> on the combined register with `+
-    `<strong>${targets.length} uncontacted targets</strong> and `+
-    `<strong>${new Set(multiD.map(r=>r.cn||r.n)).size} firms</strong> registered in multiple jurisdictions.`;
-})();
+function buildCrossRegional(view) {
+  const groups = {};
+  D.filter(r=>!r.wd).forEach(r=>{
+    const k = normKey(r.cn||r.n);
+    if(k.length<4) return;
+    if(!groups[k]) groups[k]={name:r.cn||r.n,records:[]};
+    groups[k].records.push(r);
+  });
 
-// ── Main table ──
-let cS=10,cK='sk',cDir=-1,cF=D.filter(r=>!r.wd);
-function sort(k){if(cK===k)cDir*=-1;else{cK=k;cDir=k==='sk'?-1:1}render()}
+  const thisRegionNames = new Set(view.map(r=>normKey(r.cn||r.n)));
+  const result = [];
 
-function render(){
-  const q=document.getElementById('qs').value.toLowerCase();
-  const rs=document.getElementById('frs').value;
-  const et=document.getElementById('fet').value;
-  const cs=document.getElementById('fcs').value;
-  const rt=document.getElementById('frt').value;
-  cF=D.filter(r=>{
-    if(r.wd)return false;
-    if(rs&&r.rs!==rs)return false;
-    if(et&&r.et!==et)return false;
-    if(cs&&r.cs!==cs)return false;
-    if(rt&&r.rt!==rt)return false;
-    if(q&&!(r.n+' '+(r.cn||'')+' '+r.co).toLowerCase().includes(q))return false;
+  Object.values(groups).forEach(g=>{
+    const regions = [...new Set(g.records.map(r=>r.rg).filter(Boolean))];
+    if(regions.length < 2) return;
+
+    const inThisRegion = currentRegion==='global' || regions.includes(currentRegion);
+    if(!inThisRegion) return;
+
+    const byRegion = {};
+    g.records.forEach(r=>{
+      if(!r.rg) return;
+      if(!byRegion[r.rg]) byRegion[r.rg]=[];
+      if(!byRegion[r.rg].find(x=>x.rs===r.rs)) byRegion[r.rg].push(r);
+    });
+
+    result.push({name:g.name, regions, byRegion, records:g.records});
+  });
+
+  return result.sort((a,b)=>b.regions.length-a.regions.length);
+}
+
+// ── KPIs ──────────────────────────────────────────────────────────────────────
+function updateKPIs(view) {
+  const customers = view.filter(r=>r.cs==='Customer');
+  const targets   = view.filter(r=>r.cs==='Not in Salesforce'||r.cs==='Churned Customer');
+  const cross     = buildCrossRegional(view);
+  const pct       = view.length ? Math.round(customers.length/view.length*100) : 0;
+
+  document.getElementById('kpi-total').textContent    = view.length;
+  document.getElementById('kpi-sub').textContent      = currentRegion==='global'?'across 9 registers':`${currentRegion.toUpperCase()} region`;
+  document.getElementById('kpi-customers').textContent = customers.length;
+  document.getElementById('kpi-pct').textContent      = `${pct}% penetration`;
+  document.getElementById('kpi-cross').textContent    = cross.length;
+  document.getElementById('kpi-cross-label').textContent = currentRegion==='global'?'Cross-Regional':'Also in other regions';
+  document.getElementById('kpi-targets').textContent  = targets.length;
+  document.getElementById('lbl-targets').textContent  = targets.length;
+  document.getElementById('lbl-cross').textContent    = cross.length;
+}
+
+// ── Main table ────────────────────────────────────────────────────────────────
+function sort(k) { if(cK===k) cDir*=-1; else{cK=k;cDir=k==='sk'?-1:1} renderTable(); }
+
+function renderTable() {
+  const view = getView();
+  const q  = document.getElementById('qs').value.toLowerCase();
+  const rs = document.getElementById('frs').value;
+  const et = document.getElementById('fet').value;
+  const cs = document.getElementById('fcs').value;
+
+  cF = view.filter(r=>{
+    if(rs && r.rs!==rs) return false;
+    if(et && r.et!==et) return false;
+    if(cs && r.cs!==cs) return false;
+    if(q  && !(r.n+' '+(r.cn||'')+' '+r.co).toLowerCase().includes(q)) return false;
     return true;
   }).sort((a,b)=>{
-    const av=a[cK]||'',bv=b[cK]||'';
+    const av=a[cK]||'', bv=b[cK]||'';
     return typeof av==='number'?(av-bv)*cDir:av.localeCompare(bv)*cDir;
   });
-  document.getElementById('cnt').textContent=`${cF.length} of ${D.length} firms`;
-  const v=cF.slice(0,cS);
-  document.getElementById('tbody').innerHTML=v.map((r,i)=>{
-    const fav=domainFav(r.w);
-    const name=r.w?`<a href="${r.w}" target="_blank" style="color:var(--primary)">${r.n}</a>`:r.n;
-    const cn=r.cn&&r.cn!==r.n?` <span class="text-muted text-xs">(${r.cn})</span>`:'';
-    const rd=r.rd?r.rd.slice(0,7):'';
-    return`<tr class="${r.wd?'withdrawn':''}">
-      <td style="padding:7px 10px"><span style="display:inline-flex;align-items:center">${fav}${name}${cn}</span></td>
+
+  document.getElementById('cnt').textContent=`${cF.length} of ${view.length} firms`;
+  const v = cF.slice(0, cS);
+  document.getElementById('tbody').innerHTML = v.map(r=>{
+    const name = r.w?`<a href="${r.w}" target="_blank" style="color:var(--primary)">${r.n}</a>`:r.n;
+    const cn   = r.cn&&r.cn!==r.n?` <span class="text-muted text-xs">(${r.cn})</span>`:'';
+    const mjb  = r.mj>1?`<span class="pill pill-purple" style="font-size:10px">🌐${r.mj}</span>`:`${r.mj}`;
+    return`<tr>
+      <td style="padding:7px 10px"><span style="display:inline-flex;align-items:center">${fav(r.w)}${name}${cn}</span></td>
       <td style="padding:7px 10px">${regBadge(r)}</td>
       <td style="padding:7px 10px;font-size:.78rem;color:var(--muted-fg)">${r.co}</td>
       <td style="padding:7px 10px"><span class="pill pill-muted" style="font-size:10px">${r.et}</span></td>
       <td style="padding:7px 10px"><span class="pill pill-blue" style="font-size:10px">${r.rt}</span></td>
       <td style="padding:7px 10px">${crmPill(r.cs)}</td>
-      <td style="padding:7px 10px;text-align:center">${mjBadge(r.mj)||r.mj}</td>
-      <td style="padding:7px 10px;font-size:.75rem;color:var(--muted-fg)">${rd}</td>
+      <td style="padding:7px 10px;text-align:center">${mjb}</td>
+      <td style="padding:7px 10px;font-size:.75rem;color:var(--muted-fg)">${r.rd?r.rd.slice(0,7):''}</td>
     </tr>`;
   }).join('');
-  const mc=document.getElementById('tMore');
-  mc.innerHTML=cF.length>cS?`<button class="show-more-btn" onclick="cS+=20;render()">Show more (${cF.length-cS} remaining)</button>`:'';
-}
-render();
 
-// ── Target cards ──
-(function(){
-  const tgts=targets.slice(0,30);
-  document.getElementById('target-cards').innerHTML=tgts.map(r=>{
-    const cls=r.cs==='Churned Customer'?' churned':'';
-    return`<div class="opp-card${cls}">
+  const mc = document.getElementById('tMore');
+  mc.innerHTML = cF.length>cS
+    ?`<button class="show-more-btn" onclick="cS+=20;renderTable()">Show more (${cF.length-cS} remaining)</button>`
+    :'';
+}
+
+// ── Action panels ─────────────────────────────────────────────────────────────
+function renderTargets(view) {
+  const targets = view.filter(r=>r.cs==='Not in Salesforce'||r.cs==='Churned Customer');
+  document.getElementById('target-cards').innerHTML = targets.slice(0,30).map(r=>`
+    <div class="opp-card">
       <div class="flex items-center justify-between flex-wrap gap-2">
         <div><span class="font-medium text-sm">${r.cn||r.n}</span>
           <span class="text-xs text-muted"> · ${r.co}</span></div>
         <div style="display:flex;gap:.3rem">${regBadge(r)}${crmPill(r.cs)}</div>
       </div>
-      <div class="text-xs text-muted" style="margin-top:3px">${r.rt||''}${r.w?` · <a href="${r.w}" target="_blank" style="color:var(--primary)">website ↗</a>`:''}</div>
-    </div>`;
-  }).join('');
-  if(targets.length>30) document.getElementById('target-cards').innerHTML+=
-    `<p class="text-xs text-muted" style="padding:.5rem;text-align:center">+ ${targets.length-30} more — use the register filter above to narrow down</p>`;
-})();
+      <div class="text-xs text-muted" style="margin-top:3px">${r.et} · ${r.rt||''}${r.w?` · <a href="${r.w}" target="_blank" style="color:var(--primary)">website ↗</a>`:''}</div>
+    </div>`).join('') + (targets.length>30?`<p class="text-xs text-muted" style="padding:.5rem;text-align:center">+ ${targets.length-30} more</p>`:'');
+}
 
-// ── Multi-jurisdiction cards ──
-(function(){
-  const seen=new Set();
-  const grouped={};
-  D.filter(r=>r.mj>1).forEach(r=>{
-    const key=r.cn||r.n;
-    if(!grouped[key])grouped[key]={name:key,records:[],maxMj:0};
-    grouped[key].records.push(r);
-    if(r.mj>grouped[key].maxMj)grouped[key].maxMj=r.mj;
-  });
-  const sorted=Object.values(grouped).sort((a,b)=>b.maxMj-a.maxMj);
-  document.getElementById('multi-cards').innerHTML=sorted.map(g=>{
-    const regs=g.records.map(r=>regBadge(r)).join(' ');
-    const cs=g.records.find(r=>r.cs==='Customer')?'Customer':g.records[0].cs;
-    return`<div class="mj-card">
-      <div class="flex items-center justify-between flex-wrap gap-2">
-        <div><span class="font-medium text-sm">${g.name}</span>
-          <span class="mj-badge" style="margin-left:6px">🌐 ${g.maxMj} registers</span></div>
-        ${crmPill(cs)}
-      </div>
-      <div style="margin-top:4px;display:flex;gap:3px;flex-wrap:wrap">${regs}</div>
-    </div>`;
-  }).join('');
-})();
-
-// ── Prospect priority ──
-(function(){
-  let pS=15;
-  const prospects=D.filter(r=>r.cs!=='Customer'&&!r.wd)
-    .sort((a,b)=>b.mj-a.mj||b.rd.localeCompare(a.rd));
-  function renderP(){
-    document.getElementById('prospect-tbody').innerHTML=
-      prospects.slice(0,pS).map((r,i)=>{
-        const regs=D.filter(x=>(x.cn||x.n)===(r.cn||r.n)).map(x=>regBadge(x)).join(' ');
-        return`<tr><td style="padding:6px 8px;color:var(--muted-fg)">${i+1}</td>
-          <td style="padding:6px 8px"><span class="font-medium">${r.cn||r.n}</span></td>
-          <td style="padding:6px 8px;font-size:.75rem">${r.co}</td>
-          <td style="padding:6px 8px">${regs}</td>
-          <td style="padding:6px 8px"><span class="pill pill-muted" style="font-size:10px">${r.et}</span></td>
-          <td style="padding:6px 8px;text-align:center">${mjBadge(r.mj)||r.mj}</td>
-          <td style="padding:6px 8px;font-size:.75rem">${r.ao||'—'}</td>
-        </tr>`;
-      }).join('');
-    const mc=document.getElementById('prospect-more');
-    mc.innerHTML=pS<prospects.length?`<button class="show-more-btn" onclick="pS+=20;renderP()">Show more (${prospects.length-pS} remaining)</button>`:'';
+function renderCrossRegional(view) {
+  const cross = buildCrossRegional(view);
+  if(!cross.length) {
+    document.getElementById('cross-cards').innerHTML='<p class="text-xs text-muted">No cross-regional firms in this view.</p>';
+    return;
   }
-  renderP();
-})();
-
-// ── Charts ──
-(function(){
-  const cs2=getComputedStyle(document.documentElement);
-  const c1=cs2.getPropertyValue('--chart-1').trim()||'#ea580c';
-  const c2=cs2.getPropertyValue('--chart-2').trim()||'#0d9488';
-  const c3=cs2.getPropertyValue('--chart-3').trim()||'#164e63';
-  const c4=cs2.getPropertyValue('--chart-4').trim()||'#fbbf24';
-  const mfg=cs2.getPropertyValue('--muted-fg').trim()||'#71717a';
-  Chart.defaults.color=mfg;Chart.defaults.font.family='system-ui,sans-serif';
-
-  // Register breakdown
-  const regCounts={};const regLabels={};
-  D.forEach(r=>{regCounts[r.rl]=(regCounts[r.rl]||0)+1;regLabels[r.rl]=r.rf+' '+r.rl});
-  const regE=Object.entries(regCounts).sort((a,b)=>b[1]-a[1]);
-  const regColors=['#2563eb','#dc2626','#059669','#d97706','#7c3aed','#b91c1c','#0369a1'];
-  new Chart(document.getElementById('reg-chart'),{type:'bar',
-    data:{labels:regE.map(e=>Object.values({'ESMA_MICA':'🇪🇺 MiCA','FCA_CRYPTOASSET':'🇬🇧 FCA',
-      'NYDFS_BITLICENSE':'🇺🇸 NYDFS','MAS_DPT':'🇸🇬 MAS','VARA_UAE':'🇦🇪 VARA',
-      'JFSA_JAPAN':'🇯🇵 JFSA','AUSTRAC_DCE':'🇦🇺 AUSTRAC'})[Object.keys({'ESMA_MICA':0,'FCA_CRYPTOASSET':0,
-      'NYDFS_BITLICENSE':0,'MAS_DPT':0,'VARA_UAE':0,'JFSA_JAPAN':0,'AUSTRAC_DCE':0}).indexOf(
-      Object.entries({'ESMA_MICA':'🇪🇺 MiCA','FCA_CRYPTOASSET':'🇬🇧 FCA','NYDFS_BITLICENSE':'🇺🇸 NYDFS',
-      'MAS_DPT':'🇸🇬 MAS','VARA_UAE':'🇦🇪 VARA','JFSA_JAPAN':'🇯🇵 JFSA','AUSTRAC_DCE':'🇦🇺 AUSTRAC'}).find(
-      ([k])=>{const srcCnt={};D.forEach(r=>srcCnt[r.rs]=(srcCnt[r.rs]||0)+1);
-      return srcCnt[k]===e[1]&&!regE.slice(0,regE.indexOf(e)).some(prev=>{
-      const s2={};D.forEach(r=>s2[r.rs]=(s2[r.rs]||0)+1);return s2[k]===prev[1]})})][0])]||e[0]),
-    datasets:[{data:regE.map(e=>e[1]),
-      backgroundColor:regColors.slice(0,regE.length),borderRadius:4,borderSkipped:false}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}
-    }});
-
-  // Simpler register chart (replace the complex one above)
-  const srcMap={};D.forEach(r=>srcMap[r.rs]=(srcMap[r.rs]||0)+1);
-  const srcLabels={'ESMA_MICA':'🇪🇺 MiCA','FCA_CRYPTOASSET':'🇬🇧 FCA','NYDFS_BITLICENSE':'🇺🇸 NYDFS',
-    'MAS_DPT':'🇸🇬 MAS','VARA_UAE':'🇦🇪 VARA','JFSA_JAPAN':'🇯🇵 JFSA','AUSTRAC_DCE':'🇦🇺 AUSTRAC'};
-  const srcE=Object.entries(srcMap).sort((a,b)=>b[1]-a[1]);
-  document.getElementById('reg-chart').parentElement.innerHTML='<canvas id="reg-chart2" style="height:280px"></canvas>';
-  new Chart(document.getElementById('reg-chart2'),{type:'bar',
-    data:{labels:srcE.map(([s])=>srcLabels[s]||s),
-    datasets:[{data:srcE.map(e=>e[1]),backgroundColor:regColors,borderRadius:4,borderSkipped:false}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}
-    }});
-
-  // Entity type chart
-  const etMap={};D.filter(r=>!r.wd).forEach(r=>etMap[r.et]=(etMap[r.et]||0)+1);
-  const etE=Object.entries(etMap).sort((a,b)=>b[1]-a[1]);
-  new Chart(document.getElementById('et-chart'),{type:'doughnut',
-    data:{labels:etE.map(e=>e[0]),
-    datasets:[{data:etE.map(e=>e[1]),backgroundColor:[c1,c2,c3,c4,'#8b5cf6','#ec4899',mfg+'88'],borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
-      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}
-    }});
-
-  // Regulation type chart
-  const rtMap={};D.filter(r=>!r.wd).forEach(r=>rtMap[r.rt]=(rtMap[r.rt]||0)+1);
-  const rtE=Object.entries(rtMap).sort((a,b)=>b[1]-a[1]);
-  new Chart(document.getElementById('reg-type-chart'),{type:'doughnut',
-    data:{labels:rtE.map(e=>e[0]),
-    datasets:[{data:rtE.map(e=>e[1]),backgroundColor:[c2,c1,c3,c4],borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
-      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}
-    }});
-
-  // CRM chart
-  const csMap={};D.filter(r=>!r.wd).forEach(r=>{const s=r.cs||'Not in Salesforce';csMap[s]=(csMap[s]||0)+1});
-  const csColors={'Customer':'#22c55e','Prospect':'#f59e0b','Partner':c1,
-    'Not in Salesforce':'#ef4444','Churned Customer':'#ef444488',
-    'Unclassified':mfg,'In Salesforce (no type)':mfg+'88','Customer (status unset)':c2+'88'};
-  const csE=Object.entries(csMap).sort((a,b)=>b[1]-a[1]);
-  new Chart(document.getElementById('crm-chart'),{type:'bar',
-    data:{labels:csE.map(e=>e[0].replace('In Salesforce (no type)','Unclassified')),
-    datasets:[{data:csE.map(e=>e[1]),backgroundColor:csE.map(e=>csColors[e[0]]||mfg),borderRadius:4,borderSkipped:false}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}
-    }});
-})();
-
-// ── Warning list ──
-let ncF=N,ncS=20;
-function renderNC(){
-  const q=document.getElementById('nc-q').value.toLowerCase();
-  ncF=q?N.filter(r=>(r.n+' '+r.co).toLowerCase().includes(q)):N;
-  document.getElementById('nc-cnt').textContent=`${ncF.length} entities`;
-  document.getElementById('nc-tbody').innerHTML=ncF.slice(0,ncS).map((r,i)=>
-    `<tr><td style="padding:6px 10px;color:var(--muted-fg)">${i+1}</td>
-     <td style="padding:6px 10px;font-size:.8rem"><strong>${r.n}</strong></td>
-     <td style="padding:6px 10px;font-size:.75rem">${r.co}</td>
-     <td style="padding:6px 10px;font-size:.72rem;color:var(--muted-fg)">${r.ca}</td></tr>`
-  ).join('');
+  document.getElementById('cross-cards').innerHTML = cross.map(c=>{
+    const byReg = Object.entries(c.byRegion).map(([rg, recs])=>{
+      const regs = recs.map(r=>r.rf+' '+r.rl).join(', ');
+      return regionBadge(rg)+' <span class="text-xs text-muted">'+regs+'</span>';
+    }).join(' &nbsp;');
+    const bestStatus = (c.records.find(r=>r.cs==='Customer')||c.records[0]).cs;
+    return '<div class="cross-card">'
+      +'<div class="flex items-center justify-between flex-wrap gap-2">'
+      +'<span class="font-medium text-sm">'+c.name+'</span>'
+      +'<div style="display:flex;gap:.3rem">'
+      +'<span class="pill pill-purple">🌐 '+c.regions.length+' regions</span>'
+      +crmPill(bestStatus)
+      +'</div></div>'
+      +'<div class="text-xs" style="margin-top:5px;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">'+byReg+'</div>'
+      +'</div>';
+  }).join('');
 }
-renderNC();
 
-// ── Toggles ──
-function toggleAction(id){document.getElementById(id).classList.toggle('open')}
-function toggleCtx(id){document.getElementById(id).classList.toggle('open')}
-
-// ── CSV Export ──
-function exportCSV(){
-  const cols=['legal_name','commercial_name','register','jurisdiction','country','entity_type','regulation_type','registration_status','registration_date','multi_jurisdiction_count','crm_status','sf_owner'];
-  const rows=[cols];
-  cF.forEach(r=>rows.push([r.n,r.cn,r.rl,r.ju,r.co,r.et,r.rtf,r.st,r.rd,r.mj,r.cs,r.ao]));
-  const csv=rows.map(r=>r.map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download='global-crypto-register.csv';a.click();
-}
-</script>
-</body>
-</html>
+>
