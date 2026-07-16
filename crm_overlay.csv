@@ -1,0 +1,331 @@
+entity_id,legal_name,sf_account_id,sf_account_owner,sf_billing_country,sf_sector,chainalysis_client_status,abs_stage
+f8e04afdb608,IQANA TECHNOLOGIES S.L.,,,,,,
+393098eebdd1,OSL EU GmbH,,,,,,
+cdeb10cd78aa,CPS Europe S.A.,,,,,,
+78a108ea0205,Volksbank Schwarzwald-Donau-Neckar eG,,,,,,
+aae2b48c01a5,Donau-Iller-Bank eG,,Samantha Stutman,United States,Private,Prospect,
+4475ecd7ddb5,SMART VALOR AG,,,,,,
+db0583028a5d,Altlift s.r.o.,,Chris Velez,United States,Private,Not in Salesforce,
+15e98f83ef30,PROSEGUR CUSTODIA DE ACTIVOS DIGITALES,0015w00002NaUSrAAN,Success Outreach Team,Spain,Private,Active Customer,Active
+614bb25fe701,Kaiser Partner Privatbank AG,,,,,,
+4dbabb018ee0,HERCLE S.R.L.,0016Q00001ZbWF5QAN,Success Outreach Team,Italy,Private,Customer (status unset),
+07ae7383f304,YOUNG PLATFORM S.P.A.,001f200001w95fgAAA,Success Outreach Team,Italy,Private,Active Customer,Active
+958d8580e994,HODLIE S.R.L.,001VM000003mPf7YAE,Paula Burgess,Italy,Private,Active Customer,Open
+b9942899c5aa,Bequant Pro Limited,001f200001fzdJPAAY,Fabien Ribert,Malta,Private,Active Customer,Active
+056369f3c341,MEREAU FINANCE SAS,,Chris Velez,United States,Private,Not in Salesforce,
+124b2a30c997,ICEBLOCK SAS,,Integration User,,Private,Not in Salesforce,
+5b0165dd2575,APLO SAS,,,,,,
+b4260a5a9b3f,Everest Network Limited,0015w00002XaJhrAAF,Chris Velez,United States,Private,In Salesforce (no type),
+4a15fc3e6336,"MINOS GLOBAL, S.L.",,Christian Menda,Spain,Private,Prospect,Open
+ab205c1a5760,Webull Securities (Europe) B.V.,001VM00000SIV5IYAX,Ricky Siewers,United States,Private,In Salesforce (no type),
+ffcf04bc28af,Digital Currency Services B.V.,,Integration User,United States,Public,Not in Salesforce,
+ce008a3af4d4,Bridge Building S.A.,0016Q00001j4mOjQAI,Matt Giancanelli,United States,Private,Active Customer,Open
+f93f67ae3a0c,Ripple Payments Europe S.A.,,,,,,
+298cd4a30216,Brilliantscope Trading Limited,,,,,,
+65e62ac96be0,COMPLYCRYPTO DEPOSITORY EU LIMITED,,Paula Burgess,Switzerland,Private,Not in Salesforce,
+c34925671c7f,Unlimit Crypto Ltd,0016Q00001u84fBQAQ,Henry Fletcher,Switzerland,Private,In Salesforce (no type),
+9d64b2256836,NOEMON TECH LTD,,Paula Burgess,United Kingdom,Private,Not in Salesforce,
+8afbc2033c39,TRIA BRIDGE LIMITED (ex Tokenomica Bridge Ltd),,,,,,
+5b520e00fb28,NORWEGIAN BLOCK EXCHANGE AS,,,,,,
+983c9f1d5bff,CF Technologies Ltd,0016Q00001ZcKM9QAN,Fabien Ribert,Malta,Private,Active Customer,Open
+ff0d9a849cf8,bitFlyer EUROPE S.A.,0015w00002ZaSQvAAN,Jed Sibley,Japan,Private,Customer (status unset),
+094646bfa56d,BARE BITCOIN AS,,,,,,
+0edffca402f5,Sygnum Europe AG,0016Q00001Zcbs4QAB,Jed Sibley,Switzerland,Private,Customer (status unset),
+ef54ed614a52,CROSSMINT EUROPE S.L.,0016Q00001YzG5HQAV,Tracy Flori,United States,Private,Active Customer,Open
+aaca2086a10d,"CRIPTAN TRADE, S.L.",0016Q00001hRoh2QAC,Christian Menda,Spain,Private,Active Customer,Open
+eb1fda33d4bf,FalconX Limited,001VM00000lNrJxYAK,Fabien Ribert,Malta,Private,Active Customer,Open
+85c89f4c8b38,"wBTCb.cz, s.r.o.",,Mike Meisels,Australia,Private,Prospect,
+60874fe18ef9,Standard Chartered Luxembourg S.A.,,Jed Sibley,United Kingdom,Private,Prospect,Open
+4776ddf7a4d0,DekaBank Deutsche Girozentrale,0016Q00001ZZn5IQAT,Jed Sibley,Germany,Private,In Salesforce (no type),
+cd1ee61c5bc0,Myntkaup ehf.,001VM00000b5H4XYAU,Success Outreach Team,Iceland,Private,Active Customer,Active
+6398b01d1735,Zap (Strike) Europe Limited,0015w00002XYZhDAAX,Chris Velez,United States,Private,Active Customer,Open
+744219e3c0fe,Hodleris SIA,,,,,,
+6b970b05e2e1,ALPHACAP DIGITAL ASSETS SAS,001VM00000UaRExYAN,Success Outreach Team,United States,Private,Customer (status unset),
+d1de2b4ff1f0,FLOWDESK EUROPE SAS,0016Q00001j4IOsQAM,Fabien Ribert,France,Private,Customer (status unset),
+9871b145d86b,CRYPTOSMART S.P.A.,0015w00002RHWUzAAP,Paula Burgess,Serbia,Private,In Salesforce (no type),
+0228775d9464,Simple Coin s.r.o.,0015w00002HXlxfAAD,Paula Burgess,Czech Republic,Private,Active Customer,Open
+9133fea50848,Legion Malta Limited,001VM00000Fe1xdYAB,Judge Lucich,"Virgin Islands, British",Private,Active Customer,Open
+1b61f48737c1,OP Digital Services Limited,0016Q00001cz1fwQAA,Paula Burgess,United States,Public,In Salesforce (no type),
+707523b08eb7,Ronin EM Ltd,001VM00000Yyua3YAB,Success Outreach Team,Cyprus,Private,In Salesforce (no type),
+981cf21ac997,LEONOD SARL,0015w00002NtVqWAAV,Fabien Ribert,France,Private,Active Customer,Open
+600b39111a17,MERIA SAS,0015w00002RGzakAAD,Fabien Ribert,United States,Private,In Salesforce (no type),
+528deb9bd5e3,PAYMIUM SAS,001f200001h1W5xAAE,Fabien Ribert,France,Private,Active Customer,Open
+3466e84c8d4e,STOKR S.A.,001f200001l6FTCAA2,Paula Burgess,Luxembourg,Private,Active Customer,Open
+c2d3583dd420,Bitcoin Suisse (Europe) AG,001f200001fLHXgAAO,Jed Sibley,United States,Private,In Salesforce (no type),
+cddb1e67f244,Raiffeisebank Auerbach-Freihung eG,,,,,,
+da4b5b11997f,SIA AlphaRoute,,James Ang,Singapore,Private,Partner,
+0debf5b32baa,RCUBE ASSET MANAGEMENT,,Marvin Miao,China,Private,Not in Salesforce,
+2deaa624bb92,Bpifrance Investissement,0016Q00001bJsfeQAC,Fabien Ribert,United Kingdom,Private,In Salesforce (no type),
+92aa6431028c,WB-Shields Innovations GmbH,001VM00000dq4kEYAQ,Lucas Martino,Georgia,Private,Customer (status unset),
+8b99076f758e,Bitblock Ltd. for Services,001f200001fLHYhAAO,Success Outreach Team,Estonia,Private,Churned Customer,Churned
+fe8422f72679,IN KAPITAL limited liability company for trade and services,,,,,,
+8877cabee786,Hrvatska poštanska banka d.d.,,,,,,
+bc18bcd1b4b0,CONIO S.R.L.,0015w0000260exbAAA,Andrea Aymerich,Italy,Private,Active Customer,Active
+9f88bda148be,K33 MARKETS as,,Samantha Stutman,United States,Private,Prospect,
+d8c12f4f91ef,Lightspark Payments Europe AS,,Samantha Stutman,United States,Private,Prospect,
+54c87640e014,Krypto Knight Ltd,,Paula Burgess,Austria,Private,Not in Salesforce,
+4d8d8b80fa66,"IP wBTCb solutions, s.r.o.",,Mike Meisels,Australia,Private,Prospect,
+cb509d25923f,DUE NETWORK S.L.,,Paula Burgess,United Kingdom,Private,Not in Salesforce,
+b0694164f362,RUFIJI CAPITAL SAS,0016Q00001j3Tn2QAE,Paula Burgess,Panama,Private,In Salesforce (no type),
+d056563ce903,KEYROCK FR SAS,0015w000025zsK7AAI,Paula Burgess,Belgium,Private,Active Customer,Open
+7958b91d3eca,RIV-DIGITAL S.R.L.,,Integration User,,Private,Not in Salesforce,
+c8a94b1a1877,Floin AG,0016Q00001YzYsUQAV,Paula Burgess,United States,Private,In Salesforce (no type),
+f1080f50dbe8,NAGA X,,Success Outreach Team,Gibraltar,Private,Prospect,
+cf4512a55440,S.K. DASK KRYPTO LTD,,Ray Chia,China,Private,Not in Salesforce,
+f18aa1fa42f5,AS TWINO Investments,,,,,Not in Salesforce,
+7917af0b54bb,OLLIV ITALIA S.R.L.,001f200001fLHjdAAG,Danny Soifer,United States,Private,Churned Customer,Churned
+28d5d19e2626,Volksbank Heiden eG,,Samantha Stutman,United States,Private,Prospect,
+5ea5735b5e39,RULEMATCH Europe AG,,Chris Velez,United States,Private,Not in Salesforce,
+c65c46ca9d0c,DIGITAL ASSETS Limited liability company for intermediation and services,,,,,,
+470854de87a7,Olmipay Limited,001VM000001vCS6YAM,Success Outreach Team,Netherlands,Private,In Salesforce (no type),
+525075427fc5,Stable Mint Ltd.,,Drey Dias,Colombia,Private,Not in Salesforce,
+a122989b5a7f,"""Trek Technologies"" SIA",,Peter Brereton,United Arab Emirates,Private,Not in Salesforce,
+3eccf0301a60,FIRI AS,,Richard Gannon,Norway,Private,Churned Customer,
+d1b6bcf29a91,QWARKS SAS,0016Q00001zmyL8QAI,Fabien Ribert,France,Private,Active Customer,Open
+721ecfbfdb94,PAYTOP SAS,,Paula Burgess,Netherlands,Private,Not in Salesforce,
+18cb20b8e1b9,Neverless SIA,0016Q00001hRIpDQAW,Success Outreach Team,United Kingdom,Private,Active Customer,Active
+8d22baf7c7de,"Bison Bank, S.A.",,,,,,
+4a11bb1bc270,TÝR MARKETS AS,001VM00000UCh81YAD,Success Outreach Team,Norway,Private,In Salesforce (no type),
+b9966ff67f5d,AS LHV Pank,001f200001fLHV2AAO,Henry Fletcher,Estonia,Private,Customer (status unset),
+c56ca36de962,"GG Digital, a.s.",,,,,Not in Salesforce,
+865f96c93811,Raiffeisenbank Kreis Kelheim eG,,Integration User,,Private,Not in Salesforce,
+9a985a26f25b,B2C2 Europe Sarl,,Jed Sibley,United Kingdom,Private,Active Customer,Active
+523581f2c480,"SIA ""Paybis Europe""",,Richard Gannon,Latvia,Private,Active Customer,
+ea1c51e7ed30,COINHOUSE SAS,,Chris Velez,United States,Private,Not in Salesforce,
+047ae1280cda,Vermögensbutler GmbH,,Jed Sibley,United Kingdom,Private,Prospect,
+dc43d89b4bf4,CHECKSIG S.R.L. SOCIETÀ BENEFIT,,,,,,
+1bc38608a569,DESKOIN SAS,0015w00002RGzakAAD,Fabien Ribert,France,Private,In Salesforce (no type),
+6c59c2006981,Belayer ООD,,,,,,
+b1570be1c9e9,Virtu Financial Ireland Limited,0016Q00001bJ4pOQAS,Anson Yong,United States,Private,Customer (status unset),
+160fd76c4800,BANCA SELLA,,Andrea Aymerich,Italy,Private,Prospect,Active
+e846fec6aa78,Swissquote Bank Europe SA,001f200001fNXt3AAG,Richard Gannon,Luxembourg,Private,Active Customer,Active
+e7590937b334,WHITE TECH Limited liability company for services,,Integration User,United States,Public,Not in Salesforce,
+bf1a0ceda862,CIRCLE INTERNET FINANCIAL EUROPE SAS,001VM00000HQ8o9YAD,Fabien Ribert,,Private,In Salesforce (no type),
+500635a3a9d7,Change Securities B.V.,001f200001fLHpaAAG,Richard Gannon,United States,Private,In Salesforce (no type),
+99f8d1aedb24,Validvent Technology GmbH,,Chris Velez,United States,Private,Not in Salesforce,
+80b8435b35aa,ELECTROCOIN Ltd for services,001f200001tYgdIAAS,Success Outreach Team,Croatia,Private,Active Customer,Active
+2f27ee0f6b49,Northstake ApS,0016Q00001j3oJgQAI,Success Outreach Team,Denmark,Private,Customer (status unset),
+127403c6b6ed,ClearBank Europe N.V.,0015w00002EjLzZAAV,Henry Fletcher,United Kingdom,Private,In Salesforce (no type),
+2683d297ddf5,CAIXABANK S.A.,0015w00002TEcVCAA1,Christian Menda,Spain,Private,Active Customer,Active
+04aa8572da91,KUTXABANK S.A.,0015w00002TGjJlAAL,Christian Menda,Spain,Private,Active Customer,Open
+66806410cc1b,D2X Group N.V.,,Chris Velez,United States,Private,Not in Salesforce,
+8111db67f29c,Trading.com Markets EU Ltd,,Richard Gannon,Netherlands,Private,Not in Salesforce,
+5b507397f0d3,J2TX Ltd,,Chris Velez,United States,Private,Not in Salesforce,
+0fadc26a3180,BV & P Vermögen AG,,Jed Sibley,United Kingdom,Private,Prospect,
+a5d5daed70d2,Celsion Bank AG,001VM00000nkETZYA2,Paula Burgess,Liechtenstein,Private,In Salesforce (no type),
+e50ff65a193a,MLP Banking AG,,Richard Gannon,Netherlands,Private,Not in Salesforce,
+ea9a4248a46e,"Joh. Berenberg, Gossler & Co. KG",,Jed Sibley,Germany,Private,Prospect,
+19e1fef9dd11,BLOCKNODES SAS,001f200002300WKAAY,Lucas Martino,Switzerland,Private,Active Customer,Active
+38efdb1ed617,AnCeKa Vermögensbetreuungs Aktiengesellschaft,,Mike Meisels,Australia,Private,Not in Salesforce,
+66dbeef629a0,Calamatta Cuschieri Investment Services Limited,,Integration User,United States,Public,Not in Salesforce,
+b097716a0e73,Noemon Finance Ltd,,Vishnu Veluri,Viet Nam,Private,Not in Salesforce,
+781e4c6428f0,Scalable Capital Bank GmbH,,Jed Sibley,Germany,Private,Partner,
+4b3e650423d2,Pluso a.s.,,Steven Casella,United States,Private,Not in Salesforce,
+986a457d27c8,COINMATE a.s.,0016Q00001j3xjUQAQ,Richard Gannon,United States,Private,In Salesforce (no type),
+05d13b24dc3c,MipSoftware s.r.o.,,Jed Sibley,Isle of Man,Private,Not in Salesforce,
+c09e9181c850,UAB Micar assets,,Anson Yong,China,Private,Not in Salesforce,
+8e1489317808,Plutos Vermögensverwaltung AG,,Paula Burgess,United Kingdom,Private,Not in Salesforce,
+6306c470a9d7,Banking Circle S.A.,,Richard Gannon,United Kingdom,Private,Prospect,Churned
+e7e6b260d021,System Pay Services (Malta) Limited,0015w00002Nv6DYAAZ,Jed Sibley,United Kingdom,Private,Active Customer,Active
+e4e1ff2b5ec2,Wyden Capital AG,001VM00000nkBnHYAU,Paula Burgess,United States,Private,In Salesforce (no type),
+8369ce66fd01,ILAVO GROUP a.s.,001VM00000DuqywYAB,Success Outreach Team,United States,Private,In Salesforce (no type),
+4d4f00055192,WEB3 Technology B.V.,001VM00000oE6dWYAS,Paula Burgess,Poland,Private,In Salesforce (no type),
+bcdb205dd19f,MP Developers s.r.o.,,Chris Velez,United States,Private,Not in Salesforce,
+07ae0ec39657,Invity Finance s.r.o.,0016Q00001YzbvLQAR,Paula Burgess,United States,Private,In Salesforce (no type),
+045378615988,HEXARQ SAS,001VM00000IL5TmYAL,Fabien Ribert,France,Private,Active Customer,Active
+60bc74c6e70b,AK JENSEN NORWAY AS,0016Q00001u6ESgQAM,Paula Burgess,Norway,Private,In Salesforce (no type),
+c0198f39dc87,Damex Digital LTD,0015w00002PtlApAAJ,Success Outreach Team,Gibraltar,Private,Active Customer,Active
+431e4c93f3e9,ISF Institut Deutsch-Schweizer Finanzdienstleistungen GmbH,,Chris Velez,United States,Private,Not in Salesforce,
+748d585c3e22,FIPTO PI SAS,0016Q00001Za8c1QAB,Success Outreach Team,France,Private,Active Customer,Active
+9106ef821373,Interactive Brokers Ireland Limited,0015w000025ztsGAAQ,Mark Walz,United States,Private,In Salesforce (no type),
+7bd8db60b8f9,Okazio s.r.o.,,Chris Velez,United States,Private,Not in Salesforce,
+f960c5e2d78b,CONCEDUS GmbH,0016Q00001X8DL1QAN,Success Outreach Team,United States,Private,Customer (status unset),
+63b7b5561db5,Penning Financial Services ApS,0016Q00001j5UkLQAU,Paula Burgess,Denmark,Private,Customer (status unset),
+6e5ed5c3793c,Firefish Europe s.r.o,001VM00000DfVQ9YAN,Richard Gannon,United States,Private,In Salesforce (no type),
+da86ec4ac36d,DZ BANK AG Deutsche Zentral-Genossenschaftsbank,,Jed Sibley,Germany,Private,Prospect,
+203655c8b1f5,Bank Frick AG,001f200001fLHpJAAW,Jed Sibley,Liechtenstein,Private,In Salesforce (no type),
+73d76f085015,PELICAN EXCHANGE EUROPE (CY) LTD,,Chris Velez,United States,Private,Not in Salesforce,
+24eaa6d58494,Alaric Securities OOD,,Chris Velez,United States,Private,Not in Salesforce,
+96d4aa4eb638,Tradevest Digital Assets GmbH,001VM000009Qo43YAC,Jed Sibley,Germany,Private,Active Customer,Active
+7cb72b6d0e04,wSw PortfolioManagement AG,,Chris Velez,United States,Private,Not in Salesforce,
+3332d2b7955d,Tradevest Markets AG,,Samantha Stutman,United States,Private,Prospect,
+fc8b5307ebd1,FINTECH SK s. r. o.,001VM00000A8s8jYAB,Success Outreach Team,Slovakia,Private,Active Customer,Active
+cb0f519a5e9a,FIDUS Finanz AG,0016Q00001X5eQEQAZ,Drey Dias,Brazil,Private,In Salesforce (no type),
+45d4dc0b6db4,Coinfinity GmbH,0016Q00001u756NQAQ,Jed Sibley,Austria,Private,Active Customer,Active
+49db4f0e03d9,StoneX Digital International Limited,001f200001i7EqMAAU,Fabien Ribert,Cyprus,Private,Active Customer,Open
+4bab9e4b7ba5,LGT Bank AG,0016Q00001bHwKBQA0,Marvin Miao,China,Private,Active Customer,Active
+e28df45ed940,Sutor Bank GmbH,0016Q00001ZaLAJQA3,Jed Sibley,Germany,Private,In Salesforce (no type),
+3ef1c15ca8ef,DLT Securities GmbH,,Sham Rajendra,Canada,Private,Not in Salesforce,
+24bbf1b8b9d7,Pionew Ireland Limited,001VM00000GvFnVYAV,Vishnu Veluri,Ireland,Private,Active Customer,Active
+23b6af77c7f7,Madison Six j. s. a.,001VM00000hWjdxYAC,Richard Gannon,Slovakia,Private,In Salesforce (no type),
+e97928bebff5,"FUMBI, s.r.o.",0015w00002TDFgRAAX,Success Outreach Team,United States,Private,In Salesforce (no type),
+8462050b8a58,"Fintegence, s.r.o.",001f200001pmAOMAA2,Paula Burgess,Slovakia,Private,Active Customer,Open
+a2decb9a7110,Volksbank Raiffeisenbank Würzburg eG,,Samantha Stutman,United States,Private,Prospect,
+5cb937077ab7,DADAT Krypto GmbH,,Chris Velez,United States,Private,Not in Salesforce,
+0a9bd96f0633,Nuvei Liquidity UAB,001f200001pm47nAAA,Odelya Ben Shimon,United States,Private,Active Customer,Open
+c98026e6fd20,VR-Bank Rottal-Inn eG,,Samantha Stutman,United States,Private,Prospect,
+761006ee4dda,Confirmo Limited,0016Q00001j71hkQAA,Richard Gannon,Slovakia,Private,In Salesforce (no type),
+e27afaa2c8d6,UAB Decentralized,001f200001fLHq7AAG,Richard Gannon,Lithuania,Private,Active Customer,Open
+67f39fa3a816,XTB Limited,001VM00000ZTIqFYAX,Fabien Ribert,Cyprus,Private,In Salesforce (no type),
+dd5abcf58f76,Hannoversche Volksbank eG,,Samantha Stutman,United States,Private,Prospect,
+2bc2c3071cbd,VR TeilhaberBank Metropolregion Nürnberg eG,,Mike Meisels,Australia,Private,Not in Salesforce,
+0eb289564ca9,VR Bank Südpfalz eG,,Chris Velez,United States,Private,Not in Salesforce,
+dc1831a52313,GC Exchange A/S,,Success Outreach Team,Denmark,Private,Partner,
+6b21e8c49d22,Zodia Custody (Europe) S.A.,0015w00002RG8Q3AAL,Henry Fletcher,United States,Private,Customer (status unset),
+178c02a11aa4,Westerwald Bank eG Volks- und Raiffeisenbank,,Samantha Stutman,United States,Private,Prospect,
+705130382ba3,Fels wealth GmbH,,Chris Velez,United States,Private,Not in Salesforce,
+04e7a39c3a58,Nexdesk SIA,001VM0000018oVJYAY,Richard Gannon,Lithuania,Private,Active Customer,Open
+ab31884fede7,CoinJar Europe Limited,001f200001l6G6tAAE,Mike Meisels,Italy,Private,Customer (status unset),
+ad9178f133e0,Monflo B.V.,,Paula Burgess,United Kingdom,Private,Not in Salesforce,
+39a078e1d779,Deutsche WertpapierService Bank AG,,Integration User,United States,Public,Not in Salesforce,
+2770198382f0,COMETH SAS,001VM000004guZlYAI,Success Outreach Team,France,Private,Active Customer,Active
+0c6cd83452b3,Paysafe Payment Solutions Limited.,001f200001jpPGFAA2,Henry Fletcher,Netherlands,Private,In Salesforce (no type),
+27a4d4f8b6e1,BlockBen SIA,001f2000023lbjaAAA,Paula Burgess,Hungary,Private,Active Customer,Open
+9530e3237fbd,Ramp Swaps (Ireland) Limited,0015w00002PtltvAAB,Henry Fletcher,Poland,Private,Customer (status unset),
+d7dcec5344d0,Kvarn Capital Oy,0016Q00001YzHDfQAN,Success Outreach Team,Finland,Private,Active Customer,Active
+98ff705df196,ZEUS Anstalt für Vermögensverwaltung,0016Q00001cxnb1QAA,Chris Velez,United States,Private,Customer (status unset),
+805ea1cb65c0,CAPITAL VAULT LTD,001f200001fLHjIAAW,Henry Fletcher,Cyprus,Private,Active Customer,Active
+9c4732a2dc10,Hauck Aufhäuser Digital Custody GmbH,0016Q00001Z0CBHQA3,Success Outreach Team,United States,Private,Customer (status unset),
+69b47067892a,KuCoin EU Exchange GmbH,001VM00000TWg8JYAT,Jed Sibley,China,Private,Customer (status unset),
+a3f65fb6a8c6,FIOR Digital GmbH,0016Q00001j4nL5QAI,Success Outreach Team,Austria,Private,Customer (status unset),
+7458642e61d6,Blockrise Capital B.V.,0015w00002MFyTlAAL,Integration User,,Private,In Salesforce (no type),
+1bc19d5f5d64,NorthCrypto Oy,,Success Outreach Team,Finland,Private,Prospect,Churned
+fc2a1ef2838c,Payhound Limited,0015w00002RJ3Z6AAL,Fabien Ribert,Malta,Private,Active Customer,Active
+4e6707c443a2,Hyphe Markets GmbH,0015w000029STOBAA4,Success Outreach Team,Germany,Private,Customer (status unset),
+9614123553d1,sino Aktiengesellschaft,,Paula Burgess,France,Private,Not in Salesforce,
+cdb767758b39,RENTA 4 BANCO S.A.,0015w00002RHicyAAD,Success Outreach Team,Spain,Private,Customer (status unset),
+7b35c146707f,Bitonic B.V.,0016Q00001pqgVTQAY,Paula Burgess,Netherlands,Private,In Salesforce (no type),
+a27d2b87ff36,EUWAX AG,,Chris Velez,United States,Private,Not in Salesforce,
+08886514c6fa,IG Europe GmbH,0016Q00001bIqvWQAS,Jed Sibley,Austria,Private,In Salesforce (no type),
+4a08f9174c86,Bitmymoney B.V.,001f2000021EbDhAAK,Paula Burgess,Netherlands,Private,In Salesforce (no type),
+037a3a12d2a6,Lightyear Europe AS,0016Q00001u5ohCQAQ,Paula Burgess,United Kingdom,Private,In Salesforce (no type),
+91351df4d2f4,"Newrails, UAB",,Jinwoo Jeon,,Private,Not in Salesforce,
+3a69db30f6cc,Push Virtual Assets Ireland Limited,,Steven Casella,United States,Private,Not in Salesforce,
+c221b0b2d2e9,Orcabay finančne storitve d.o.o.,,Paula Burgess,United Kingdom,Private,Not in Salesforce,
+170f09586985,Huddlestock GmbH,,,,,Not in Salesforce,
+7712c65f9ce4,INCREMENTUM družba za izvajanje storitev v zvezi s kriptosredstvi d.o.o.,,,,,,
+b2e2d269178e,Volksbank Mittlerer Schwarzwald eG,,Samantha Stutman,United States,Private,Prospect,
+b979c91c98ee,Coinmerce B.V.,001f200001xEbNFAA0,Richard Gannon,Netherlands,Private,Active Customer,Active
+e66759c03a48,Volksbank Raiffeisenbank Bayern Mitte eG,0016Q00001ZaLIwQAN,Jed Sibley,Germany,Private,Active Customer,Open
+4e1cffa0963f,Bitcoinforme S.L.,0015w00002B7pPQAAZ,Christian Menda,Spain,Private,Active Customer,Active
+24138be77d55,AMINA (Austria) AG,001f200001l6FlbAAE,Jed Sibley,Switzerland,Private,Customer (status unset),
+c16de3066f15,zerohash europe B.V.,0015w000025ztwuAAA,Bryce Hedrick,United States,Private,In Salesforce (no type),
+f133212677dd,DonauCapital Wertpapier GmbH,,Fabio Cardona,Panama,Private,Not in Salesforce,
+43f1d6d32f4d,BANQUE DELUBAC ET CIE,0015w00002WhOFkAAN,Fabien Ribert,France,Private,In Salesforce (no type),
+c031ef47f2d7,SOCIETE GENERALE - FORGE,0015w000025ztviAAA,Fabien Ribert,France,Private,Customer (status unset),
+dbd932918acb,RELAI EU SASU,0016Q00001ZdB6uQAF,Jed Sibley,Switzerland,Private,In Salesforce (no type),
+e2326102c8f6,Lang & Schwarz TradeCenter AG & Co. KG,,Integration User,,Private,Not in Salesforce,
+891fa1b54dd7,Blue Cube (Malta) Limited,,Erik Hug,Cayman Islands,Private,Prospect,Active
+82651dbef9b2,Revolut Digital Assets (Europe) Ltd,001f200001fLHqSAAW,Henry Fletcher,United Kingdom,Private,Customer (status unset),
+fc4a1e1c19ba,Cryptonow GmbH,001f200001w8ce3AAA,Paula Burgess,Switzerland,Private,In Salesforce (no type),
+554736e28b9f,Stratos Europe Ltd,,Alex Cable,United States,Private,Partner,
+a0d8530e4167,TEROXX DIGITAL ASSET LTD,0016Q00001YzsA0QAJ,Paula Burgess,United States,Private,In Salesforce (no type),
+29f0a9e6b2ec,Safello AB,,Richard Gannon,Sweden,Private,Active Customer,
+f8fc2e5aa0bc,Legend Financial Ireland Limited,,Chris Velez,United States,Private,Not in Salesforce,
+e88ab659f2c1,EU Internet Ventures B.V.,,Drey Dias,Colombia,Private,Not in Salesforce,
+0dd37df90eae,BLOX B.V.,0016Q00001pojMeQAI,Paula Burgess,Netherlands,Private,Customer (status unset),
+0f91514fada5,Gate Technology Limited,0016Q00001bJ2ztQAC,Ray Chia,Malta,Private,Active Customer,Open
+2bd554a9501a,COLLECT & EXCHANGE CY LTD,,Chris Velez,United States,Private,Not in Salesforce,
+8a656ce88622,Trading 212 Markets Ltd,001VM000003pX0DYAU,Fabien Ribert,Netherlands,Private,Customer (status unset),
+cba137365f5e,ILIRIKA borzno posredniška hiša d.d.,,Chris Velez,United States,Private,Not in Salesforce,
+67af364e6deb,V-Bank AG,0016Q00001X64VPQAZ,Jed Sibley,Germany,Private,Active Customer,Active
+67e441a35071,Lunar Block A/S,0016Q00001YzPyRQAV,Richard Gannon,Denmark,Private,In Salesforce (no type),
+6f36d45cf8db,Bittimaatti Oy,001VM000007GZc5YAG,Henry Fletcher,Finland,Private,Active Customer,Open
+4290b9d949f3,Tesseract Investment Oy,0015w00002VEH6wAAH,Richard Gannon,Finland,Private,In Salesforce (no type),
+98663145d9f7,FINCTEK UE SAS,0016Q00001u87D3QAI,Paula Burgess,United States,Private,In Salesforce (no type),
+e379aecf0381,Socios Europe Services Limited,001VM00000cE4ttYAC,Fabien Ribert,Malta,Private,Active Customer,Active
+5c99f91cbcf9,Bullish Europe GmbH,0015w00002XZQSFAA5,Bryce Hedrick,Gibraltar,Private,Customer (status unset),
+508ed71f7422,Gemini Intergalactic EU Ltd,,Bryce Hedrick,United States,Private,Active Customer,Active
+9606afccfe3d,Dietrich & Richter Private Asset Management AG,,Chris Velez,United States,Private,Not in Salesforce,
+9664de7f930a,Smartbroker AG,,Chris Velez,United States,Private,Not in Salesforce,
+063c9f51bb48,Tangany GmbH,0015w000023ofHlAAI,Lucas Martino,Germany,Private,Active Customer,Active
+797726a71bbe,Bankhaus Scheich Wertpapierspezialist AG,0016Q00001X7dbWQAR,Jed Sibley,United States,Private,Customer (status unset),
+4c9dd9a111ed,Fiat Republic Netherlands B.V.,0015w00002ZaawmAAB,Paula Burgess,United Kingdom,Private,In Salesforce (no type),
+75d7540bb2c2,Decubate B.V.,,,,,Not in Salesforce,
+543afff64dee,CECABANK S.A.,0015w00002UszGEAAZ,Christian Menda,Spain,Private,Active Customer,Open
+48d313cfd4ec,Finst B.V.,,Success Outreach Team,Netherlands,Private,Prospect,
+6a7f975dcb38,OPEN BANK S.A.,0016Q00001Za7ZsQAJ,Paula Burgess,Spain,Private,Active Customer,Open
+b797ef64d295,Traders Place GmbH & Co. KGaA,,Chris Velez,,Private,Not in Salesforce,
+ad2af533bd78,COINSHARES ASSET MANAGEMENT,0015w00002Wh1NFAAZ,Jed Sibley,United States,Private,In Salesforce (no type),
+6ed644c5156d,METAL GEAR SAS,001VM00000hFZvyYAG,Fabien Ribert,France,Private,Active Customer,Open
+1684088700a2,Baden-Württembergische Wertpapierbörse GmbH,,Mike Meisels,Australia,Private,Not in Salesforce,
+e7814e25a6a7,Coinmotion Oy,,Success Outreach Team,Finland,Private,Active Customer,Active
+b5c44dad8d6b,BITSTACK DIGITAL ASSETS SAS,0015w00002TERf2AAH,Fabien Ribert,France,Private,Active Customer,Active
+5a6c3855ef89,Bitvavo B.V.,001f200001l6FWpAAM,Richard Gannon,Netherlands,Private,Active Customer,Active
+a1083be6bf07,Amdax B.V.,001f200001tawxNAAQ,Success Outreach Team,Netherlands,Private,Customer (status unset),
+e1503b2aa159,Payward Europe Solutions Limited,,Jeremey Kohler,United States,Private,Active Customer,Active
+1c761a7551c7,Payward Global Solutions Limited,,Jeremey Kohler,United States,Private,Active Customer,Active
+c1ea2ddba66c,CACEIS BANK,,Fabien Ribert,France,Private,Prospect,Open
+56dd4b20353c,Coinbase Luxembourg S.A.,,Peter Brereton,United States,Private,Active Customer,Active
+098b58dc4146,GOin SAS,,Success Outreach Team,France,Private,Partner,Active
+dfb63aee6570,BTC Direct Europe B.V.,001f200001fLHfhAAG,Richard Gannon,Netherlands,Private,Customer (status unset),
+81d79c876077,Robinhood Europe UAB,001f200001fLHpyAAG,Ricky Siewers,United States,Private,In Salesforce (no type),
+01dbc1f0ee87,Bybit EU GmbH,0015w000025zWvMAAU,Ray Chia,China,Private,In Salesforce (no type),
+3c2b3ed7b8e1,Acheron Europe B.V.,0015w00002ZZiQQAA1,Integration User,Singapore,Private,In Salesforce (no type),
+aeac36b892c4,DEBLOCK SAS,0016Q00001hS43AQAS,Henry Fletcher,United Kingdom,Private,Active Customer,Open
+fdbe095225aa,Baader Bank Aktiengesellschaft,,Chris Velez,United States,Private,Not in Salesforce,
+84ee65c4ba49,Bitstamp Europe S.A.,0016Q00001bIfxfQAC,Integration User,United States,Private,Active Customer,Open
+04df9033b645,One Trading Exchange B.V.,0016Q00001j4NMAQA2,Success Outreach Team,Netherlands,Private,Customer (status unset),
+d606c2849e3e,N26 Bank SE,001f2000023nr6pAAA,Jed Sibley,Germany,Private,In Salesforce (no type),
+4df036c359e0,UAB BLUE EMI LT,,Chris Velez,United States,Private,Prospect,
+c960f8c59715,BitGo Europe GmbH,001f200001fLHboAAG,Danny Soifer,United States,Private,In Salesforce (no type),
+739a56dcaab0,Vivid Money B.V.,0016Q00001ZZn5rQAD,Paula Burgess,Germany,Private,Customer (status unset),
+eedc0706c474,Trade Republic Bank GmbH,,Jed Sibley,Germany,Private,Prospect,
+63d1f20577d3,Bitpanda GmbH,,Lucas Martino,Austria,Private,Active Customer,Active
+70c035573805,Commerzbank Aktiengesellschaft,0015w00002JELalAAH,Jed Sibley,Germany,Private,Customer (status unset),
+48180a6f5fec,flatexDEGIRO Bank AG,0016Q00001ZaGmgQAF,Jed Sibley,Germany,Private,In Salesforce (no type),
+377b166d91d6,AvianLabs Netherlands B.V.,,Chris Velez,United States,Private,Not in Salesforce,
+e81efa58f9c1,360 Treasury Systems AG,,Jed Sibley,Germany,Private,Not in Salesforce,
+ae26ccf4a1e1,Altarius Asset Management Limited,,Chris Velez,United States,Private,Not in Salesforce,
+2a8f2ce2773a,Tradias GmbH,,Chris Velez,,Private,Not in Salesforce,
+e80ba334e292,Banco Bilbao Vizcaya Argentaria S.A.,0016Q00001bJ9GSQA0,Christian Menda,Spain,Private,Active Customer,Open
+c2c05585f0bc,Clearstream Banking S.A.,001VM00000nkBn0YAE,Paula Burgess,Luxembourg,Private,Active Customer,Open
+faaa91264cab,Zillion Bits Limited,001f200001pbzLDAAY,Success Outreach Team,Malta,Private,Active Customer,Active
+ce2c4589f907,OKX Europe Limited,0016Q00001ZbI2YQAV,Ray Chia,,Private,Active Customer,Open
+2bd88583478e,BP23 CA Limited,,Lucas Martino,Austria,Private,Active Customer,
+3dd0439be09b,Foris DAX MT Limited,,Ray Chia,Singapore,Private,Active Customer,Active
+3275bbb36d48,Crypto Finance (Deutschland) GmbH,0016Q00001ZaDyiQAF,Jed Sibley,Switzerland,Private,In Salesforce (no type),
+5ae7854cca6e,Bitpanda Asset Management GmbH,001f200001fLHldAAG,Lucas Martino,United States,Private,In Salesforce (no type),
+9a6f8f7ee96a,Boerse Stuttgart Digital Custody GmbH,0015w00002RIQXyAAP,Jed Sibley,Germany,Private,Active Customer,Active
+c62d135b5716,eToro (Europe) Ltd,,Fabien Ribert,Israel,Private,Active Customer,
+a02aa888ba9e,Hidden Road Partners CIV NL B.V.,0015w00002TEia2AAD,Matt Giancanelli,United States,Private,Customer (status unset),
+55a37d8e8cb3,Zebedee Europe B.V.,0015w00002FurNCAAZ,Chris Velez,United States,Private,In Salesforce (no type),
+9aaec604ed10,MoonPay Europe B.V.,0015w00002FvXW0AAN,Henry Fletcher,United States,Private,Customer (status unset),
+a09d31573b71,BitStaete B.V.,,Anson Yong,China,Private,Not in Salesforce,
+78f17de72bef,KBC Bank NV,001f20000213MnzAAE,Richard Gannon,Belgium,Private,Active Customer,Active
+b78710fa93d7,Payment Corporation SE,,,,,Not in Salesforce,
+b78710fa93d7,Payment Corporation SE,,,,,Not in Salesforce,
+b78710fa93d7,Payment Corporation SE,,,,,Not in Salesforce,
+969dfcb77efe,AllUnity GmbH,001VM00000Ki0NOYAZ,Paula Burgess,Germany,Private,In Salesforce (no type),
+969dfcb77efe,AllUnity GmbH,001VM00000Ki0NOYAZ,Paula Burgess,Germany,Private,In Salesforce (no type),
+969dfcb77efe,AllUnity GmbH,001VM00000Ki0NOYAZ,Paula Burgess,Germany,Private,In Salesforce (no type),
+969dfcb77efe,AllUnity GmbH,001VM00000Ki0NOYAZ,Paula Burgess,Germany,Private,In Salesforce (no type),
+2dc21480638e,Eurodollar ApS,,,,,Not in Salesforce,
+d6b19bc20ff6,Paxos Issuance Europe Oy,,Liz Palmer,United States,Private,Active Customer,
+d6b19bc20ff6,Paxos Issuance Europe Oy,,Liz Palmer,United States,Private,Active Customer,
+d6b19bc20ff6,Paxos Issuance Europe Oy,,Liz Palmer,United States,Private,Active Customer,
+d6b19bc20ff6,Paxos Issuance Europe Oy,,Liz Palmer,United States,Private,Active Customer,
+09763f8fbbd4,Société Générale - Forge,0015w000025ztviAAA,Fabien Ribert,France,Private,Customer (status unset),
+09763f8fbbd4,Société Générale - Forge,0015w000025ztviAAA,Fabien Ribert,France,Private,Customer (status unset),
+d29df872d97d,SALVUS,,,,,Not in Salesforce,
+6d0035af1b27,Oddo BHF SCA,0015w00002TCv1RAAT,Fabien Ribert,France,Private,In Salesforce (no type),
+53d46784b926,HEURO SAS,,Fabien Ribert,France,Private,Prospect,Open
+55b3830e62e7,CACEIS BANK SA,,,,,,
+b225c32d52ec,Monerium ehf,,,,,Not in Salesforce,
+73acb27e5431,AIEU Services Limited S.A.,,,,,Not in Salesforce,
+3c74b7df7d4f,SIA GR8 PAY,,,,,Not in Salesforce,
+3c74b7df7d4f,SIA GR8 PAY,,,,,Not in Salesforce,
+7935306274c5,StablR Ltd,0016Q00001cz7LwQAI,Success Outreach Team,Netherlands,Private,Customer (status unset),
+7935306274c5,StablR Ltd,0016Q00001cz7LwQAI,Success Outreach Team,Netherlands,Private,Customer (status unset),
+e6569e53213c,Stable mint Ltd,,Drey Dias,Colombia,Private,Not in Salesforce,
+e6569e53213c,Stable mint Ltd,,Drey Dias,Colombia,Private,Not in Salesforce,
+bd6dba362fbc,Fiat Republic Netherlands,,,,,,
+bd6dba362fbc,Fiat Republic Netherlands,,,,,,
+bd6dba362fbc,Fiat Republic Netherlands,,,,,,
+2439ab26183a,Quantoz Payments B.V,,Success Outreach Team,Netherlands,Private,Prospect,
+2439ab26183a,Quantoz Payments B.V,,Success Outreach Team,Netherlands,Private,Prospect,
+2439ab26183a,Quantoz Payments B.V,,Success Outreach Team,Netherlands,Private,Prospect,
+2439ab26183a,Quantoz Payments B.V,,Success Outreach Team,Netherlands,Private,Prospect,
+2439ab26183a,Quantoz Payments B.V,,Success Outreach Team,Netherlands,Private,Prospect,
+2439ab26183a,Quantoz Payments B.V,,Success Outreach Team,Netherlands,Private,Prospect,
+d6923c2b7eba,StaBillon sp. z o.o.,,,,,Not in Salesforce,
