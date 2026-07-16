@@ -385,9 +385,7 @@ function regionBadge(rg) {
 // ── Cross-regional matching ───────────────────────────────────────────────────
 function normKey(s) {
   return (s||'').toLowerCase()
-    .replace(/\b(pte|ltd|llc|inc|gmbh|sa|bv|oy|as|ag|sas|srl|spa|limited|europe|eu|
-      global|digital|asia|pacific|apac|mena|uk|us|usa|ny|hk|sg|jp|au|fze|dmcc|
-      proprietary|pty|crypto|com)\b/g,'')
+    .replace(/\b(pte|ltd|llc|inc|gmbh|sa|bv|oy|as|ag|sas|srl|spa|limited|europe|eu|global|digital|asia|pacific|apac|mena|uk|us|usa|ny|hk|sg|jp|au|fze|dmcc|proprietary|pty|crypto|com)\b/g,'')
     .replace(/[^a-z0-9]/g,'').trim();
 }
 
