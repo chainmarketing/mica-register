@@ -514,18 +514,15 @@ function renderCrossRegional(view) {
       return`${regionBadge(rg)} <span class="text-xs text-muted">${regs}</span>`;
     }).join(' &nbsp;');
     const crmStatus = (c.records.find(r=>r.cs==='Customer')||c.records[0]).cs;
-    return`<div class="cross-card">
-      <div class="flex items-center justify-between flex-wrap gap-2">
-        <span class="font-medium text-sm">${c.name}</span>
-        <div style="display:flex;gap:.3rem">
-          <span class="pill pill-purple">🌐 ${allRegions.length} regions</span>
-          ${crmPill(csmStatus||crmStatus)}
-        </div>
-      </div>
-      <div class="text-xs" style="margin-top:5px;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">${byReg}</div>
-    </div>`;
-
-    function csmStatus(){ return (c.records.find(r=>r.cs==='Customer')||c.records[0]).cs; }
+    return`<div class="cross-card">`
+      +'<div class="flex items-center justify-between flex-wrap gap-2">'
+      +'<span class="font-medium text-sm">'+c.name+'</span>'
+      +'<div style="display:flex;gap:.3rem">'
+      +'<span class="pill pill-purple">🌐 '+allRegions.length+' regions</span>'
+      +crmPill(crmStatus)
+      +'</div></div>'
+      +'<div class="text-xs" style="margin-top:5px;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">'+byReg+'</div>'
+      +'</div>';
   }).join('');
 }
 
