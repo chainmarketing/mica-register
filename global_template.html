@@ -507,21 +507,148 @@ function renderCrossRegional(view) {
     return;
   }
   document.getElementById('cross-cards').innerHTML = cross.map(c=>{
+    const otherRegions = c.regions.filter(r=>r!==currentRegion&&currentRegion!=='global');
+    const allRegions   = c.regions;
     const byReg = Object.entries(c.byRegion).map(([rg, recs])=>{
-      const regs = recs.map(r=>r.rf+' '+r.rl).join(', ');
-      return regionBadge(rg)+' <span class="text-xs text-muted">'+regs+'</span>';
+      const regs = recs.map(r=>`${r.rf} ${r.rl}`).join(', ');
+      return`${regionBadge(rg)} <span class="text-xs text-muted">${regs}</span>`;
     }).join(' &nbsp;');
-    const bestStatus = (c.records.find(r=>r.cs==='Customer')||c.records[0]).cs;
-    return '<div class="cross-card">'
-      +'<div class="flex items-center justify-between flex-wrap gap-2">'
-      +'<span class="font-medium text-sm">'+c.name+'</span>'
-      +'<div style="display:flex;gap:.3rem">'
-      +'<span class="pill pill-purple">🌐 '+c.regions.length+' regions</span>'
-      +crmPill(bestStatus)
-      +'</div></div>'
-      +'<div class="text-xs" style="margin-top:5px;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">'+byReg+'</div>'
-      +'</div>';
+    const crmStatus = (c.records.find(r=>r.cs==='Customer')||c.records[0]).cs;
+    return`<div class="cross-card">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <span class="font-medium text-sm">${c.name}</span>
+        <div style="display:flex;gap:.3rem">
+          <span class="pill pill-purple">🌐 ${allRegions.length} regions</span>
+          ${crmPill(csmStatus||crmStatus)}
+        </div>
+      </div>
+      <div class="text-xs" style="margin-top:5px;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">${byReg}</div>
+    </div>`;
+
+    function csmStatus(){ return (c.records.find(r=>r.cs==='Customer')||c.records[0]).cs; }
   }).join('');
 }
 
->
+function renderProspects(view) {
+  let pS = 15;
+  const prospects = view.filter(r=>r.cs!=='Customer'&&!r.wd)
+    .sort((a,b)=>b.mj-a.mj||b.rd.localeCompare(a.rd));
+  function doRender(){
+    document.getElementById('prospect-tbody').innerHTML = prospects.slice(0,pS).map((r,i)=>{
+      const allRegs = D.filter(x=>(x.cn||x.n)===(r.cn||r.n)&&!x.wd).map(x=>regBadge(x)).join(' ');
+      return`<tr><td style="padding:6px 8px;color:var(--muted-fg)">${i+1}</td>
+        <td style="padding:6px 8px"><span class="font-medium">${r.cn||r.n}</span></td>
+        <td style="padding:6px 8px">${allRegs||regBadge(r)}</td>
+        <td style="padding:6px 8px;font-size:.75rem">${r.co}</td>
+        <td style="padding:6px 8px"><span class="pill pill-muted" style="font-size:10px">${r.et}</span></td>
+        <td style="padding:6px 8px;text-align:center">${r.mj>1?`<span class="pill pill-purple" style="font-size:10px">🌐${r.mj}</span>`:r.mj}</td>
+        <td style="padding:6px 8px;font-size:.75rem">${r.ao||'—'}</td></tr>`;
+    }).join('');
+    const mc=document.getElementById('prospect-more');
+    mc.innerHTML=pS<prospects.length?`<button class="show-more-btn" onclick="pS+=20;doRender()">Show more (${prospects.length-pS} remaining)</button>`:'';
+  }
+  doRender();
+}
+
+// ── Charts ────────────────────────────────────────────────────────────────────
+let regChart = null, crmChart = null;
+function renderCharts(view) {
+  const cs2 = getComputedStyle(document.documentElement);
+  const c1=cs2.getPropertyValue('--chart-1').trim()||'#ea580c';
+  const c2=cs2.getPropertyValue('--chart-2').trim()||'#0d9488';
+  const c3=cs2.getPropertyValue('--chart-3').trim()||'#164e63';
+  const c4=cs2.getPropertyValue('--chart-4').trim()||'#fbbf24';
+  const mfg=cs2.getPropertyValue('--muted-fg').trim()||'#71717a';
+  Chart.defaults.color=mfg; Chart.defaults.font.family='system-ui,sans-serif';
+
+  const srcMap={};
+  view.forEach(r=>srcMap[r.rl]=(srcMap[r.rl]||0)+1);
+  const srcE=Object.entries(srcMap).sort((a,b)=>b[1]-a[1]);
+  const regColors=['#2563eb','#dc2626','#059669','#d97706','#7c3aed','#b91c1c','#0369a1','#9f1239','#15803d'];
+
+  if(regChart) regChart.destroy();
+  regChart = new Chart(document.getElementById('reg-chart'),{type:'bar',
+    data:{labels:srcE.map(e=>e[0]),datasets:[{data:srcE.map(e=>e[1]),
+      backgroundColor:regColors.slice(0,srcE.length),borderRadius:4,borderSkipped:false}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}}});
+
+  const csMap={};
+  view.forEach(r=>{const s=r.cs||'Not in Salesforce';csMap[s]=(csMap[s]||0)+1});
+  const csColors={'Customer':'#22c55e','Prospect':'#f59e0b','Not in Salesforce':'#ef4444',
+    'Churned Customer':'#ef444488','In Salesforce (no type)':mfg,'Partner':c1};
+  const csE=Object.entries(csMap).sort((a,b)=>b[1]-a[1]);
+
+  if(crmChart) crmChart.destroy();
+  crmChart = new Chart(document.getElementById('crm-chart'),{type:'bar',
+    data:{labels:csE.map(e=>e[0].replace('In Salesforce (no type)','Unclassified')),
+    datasets:[{data:csE.map(e=>e[1]),
+      backgroundColor:csE.map(e=>csColors[e[0]]||mfg),borderRadius:4,borderSkipped:false}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}}});
+}
+
+// ── Warning list ──────────────────────────────────────────────────────────────
+function renderNC() {
+  const q = document.getElementById('nc-q').value.toLowerCase();
+  const f = q ? N.filter(r=>(r.n+' '+r.co).toLowerCase().includes(q)) : N;
+  document.getElementById('nc-cnt').textContent = `${f.length} entities`;
+  document.getElementById('nc-tbody').innerHTML = f.slice(0,25).map((r,i)=>
+    `<tr><td style="padding:6px 10px;color:var(--muted-fg)">${i+1}</td>
+     <td style="padding:6px 10px;font-size:.8rem"><strong>${r.n}</strong></td>
+     <td style="padding:6px 10px;font-size:.75rem">${r.co}</td>
+     <td style="padding:6px 10px;font-size:.72rem;color:var(--muted-fg)">${r.ca}</td></tr>`
+  ).join('');
+}
+renderNC();
+
+// ── Master update ─────────────────────────────────────────────────────────────
+function updateAll() {
+  cS = 10;
+  const view = getView();
+  updateKPIs(view);
+  renderTable();
+  renderTargets(view);
+  renderCrossRegional(view);
+  renderProspects(view);
+  // Only re-render charts if context section is open
+  if(document.querySelector('.ctx-section.open')) renderCharts(view);
+}
+
+// Open charts on click
+document.querySelectorAll('.ctx-header').forEach(h=>{
+  h.addEventListener('click',()=>setTimeout(()=>{
+    const view=getView();renderCharts(view);
+  },50));
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+// Activate correct region button from URL
+if(currentRegion!=='global') {
+  document.querySelectorAll('.region-btn').forEach(b=>{
+    if(b.textContent.toLowerCase().includes(currentRegion)) {
+      b.classList.add('active');
+      document.querySelectorAll('.region-btn')[0].classList.remove('active');
+    }
+  });
+  document.getElementById('region-desc').textContent = REGION_DESC[currentRegion]||'';
+  document.getElementById('page-title').textContent  = REGION_TITLE[currentRegion]||'';
+}
+updateAll();
+
+// ── Toggles + CSV ─────────────────────────────────────────────────────────────
+function toggleAction(id){document.getElementById(id).classList.toggle('open')}
+function exportCSV(){
+  const cols=['firm','commercial_name','register','country','type','regulation','crm_status','region','jurisdictions','registered'];
+  const rows=[cols];
+  cF.forEach(r=>rows.push([r.n,r.cn,r.rl,r.co,r.et,r.rtf,r.cs,r.rg,r.mj,r.rd]));
+  const csv=rows.map(r=>r.map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`${currentRegion}-crypto-register.csv`;a.click();
+}
+</script>
+</body>
+</html>
