@@ -210,7 +210,7 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
     <div class="flex gap-2 flex-wrap items-center" style="margin-bottom:.75rem">
       <button class="tab-btn active" data-tab="casps" onclick="showTab('casps',this)">Register (294)</button>
       <button class="tab-btn" data-tab="sf" onclick="showTab('sf',this);rSF()">Salesforce</button>
-      <button class="tab-btn" data-tab="nc" onclick="showTab('nc',this)">Non-Compliant (164)</button>
+      <button class="tab-btn" data-tab="nc" onclick="showTab('nc',this)">ESMA Warning List (164)</button>
       <div style="flex:1"></div>
       <button class="inline-flex items-center justify-center rounded-lg h-8 gap-1.5 px-2.5 text-sm font-medium border border-border bg-background text-foreground hover:bg-muted transition-all" onclick="exportCSV()">↓ CSV</button>
     </div>
@@ -268,7 +268,10 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
     <!-- Non-Compliant tab -->
     <div class="tab-content" id="tab-nc">
       <div class="flex flex-wrap gap-2" style="margin-bottom:.75rem">
-        <input id="ns" class="search-box flex-1" style="min-width:180px" placeholder="Search non-compliant entities…" oninput="fN()">
+        <p class="text-xs text-muted w-full" style="margin-bottom:.5rem">
+          Entities flagged as non-compliant by national regulators and reported to ESMA under MiCA — the EU/EEA warning list. Not related to FCA, NYDFS or MAS registers.
+        </p>
+        <input id="ns" class="search-box flex-1" style="min-width:180px" placeholder="Search ESMA warning list…" oninput="fN()">
         <select id="ncf" class="search-box" style="width:auto;min-width:140px" onchange="fN()"><option value="">All countries</option></select>
       </div>
       <p class="text-xs text-muted" id="nCnt" style="margin-bottom:.5rem"></p>
