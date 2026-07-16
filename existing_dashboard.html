@@ -160,7 +160,7 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
       <button class="inline-flex items-center justify-center rounded-lg h-8 gap-1.5 px-2.5 text-sm font-medium border border-border bg-background text-foreground hover:bg-muted transition-all" onclick="exportCSV()">↓ Export CSV</button>
     </div>
   </div>
-  <p class="text-sm mt-2" style="line-height:1.7;color:var(--muted-fg)">The ESMA MiCA Register contains <strong style="color:var(--fg)">292 entities</strong> across <strong style="color:var(--fg)">26 EEA countries</strong>, led by Germany (58), France (33), Netherlands (28). By type: <strong style="color:var(--fg)">279 CASPs</strong>, <strong style="color:var(--fg)">13 EMT Issuers</strong>, <strong style="color:var(--fg)">8 dual-registered</strong>. Chainalysis has <strong style="color:var(--fg)">114 customers</strong> on the register (<strong style="color:var(--fg)">39% penetration</strong>), with 74% of entities tracked in Salesforce. There are <strong style="color:var(--fg)">79 immediate sales targets</strong> and <strong style="color:var(--fg)">29 active prospects</strong>.</p>
+  <p class="text-sm mt-2" style="line-height:1.7;color:var(--muted-fg)">The ESMA MiCA Register contains <strong style="color:var(--fg)">330 entities</strong> across <strong style="color:var(--fg)">27 EEA countries</strong>, led by Germany (63), France (37), Netherlands (36). By type: <strong style="color:var(--fg)">294 CASPs</strong>, <strong style="color:var(--fg)">36 EMT Issuers</strong>, <strong style="color:var(--fg)">4 dual-registered</strong>. Chainalysis has <strong style="color:var(--fg)">119 customers</strong> on the register (<strong style="color:var(--fg)">36% penetration</strong>), with 76% of entities tracked in Salesforce. There are <strong style="color:var(--fg)">83 immediate sales targets</strong> and <strong style="color:var(--fg)">34 active prospects</strong>.</p>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -169,8 +169,8 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
 <div class="grid g3" style="margin-top:.5rem">
   <div class="card kpi" onclick="document.getElementById('zone-table').scrollIntoView({behavior:'smooth'})">
     <span class="text-xs font-medium text-muted uppercase tracking-tight">Registered Entities</span>
-    <span class="text-2xl font-bold mt-1">292</span>
-    <span class="text-xs text-muted">279 CASPs · 13 EMT · 8 dual</span>
+    <span class="text-2xl font-bold mt-1">294</span>
+    <span class="text-xs text-muted">Authorised CASPs · 36 EMT issuers · 4 dual</span>
   </div>
   <div class="card kpi" onclick="document.getElementById('act-targets').click()">
     <span class="text-xs font-medium text-muted uppercase tracking-tight">Chainalysis Customers</span>
@@ -208,8 +208,9 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
   <!-- Tabs + filters + table -->
   <div class="card" id="sec-casps">
     <div class="flex gap-2 flex-wrap items-center" style="margin-bottom:.75rem">
-      <button class="tab-btn active" data-tab="casps" onclick="showTab('casps',this)">All Entities (292)</button>
-      <button class="tab-btn" data-tab="nc" onclick="showTab('nc',this)">Non-Compliant (149)</button>
+      <button class="tab-btn active" data-tab="casps" onclick="showTab('casps',this)">Register (294)</button>
+      <button class="tab-btn" data-tab="sf" onclick="showTab('sf',this);rSF()">Salesforce</button>
+      <button class="tab-btn" data-tab="nc" onclick="showTab('nc',this)">Non-Compliant (164)</button>
       <div style="flex:1"></div>
       <button class="inline-flex items-center justify-center rounded-lg h-8 gap-1.5 px-2.5 text-sm font-medium border border-border bg-background text-foreground hover:bg-muted transition-all" onclick="exportCSV()">↓ CSV</button>
     </div>
@@ -220,15 +221,6 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
         <input id="cs" class="search-box flex-1" style="min-width:180px" placeholder="Search name, country, or service…" oninput="fC()">
         <select id="ccf" class="search-box" style="width:auto;min-width:140px" onchange="fC()"><option value="">All countries</option></select>
         <select id="csf" class="search-box" style="width:auto;min-width:160px" onchange="fC()"><option value="">All services</option></select>
-        <select id="crmf" class="search-box" style="width:auto;min-width:140px" onchange="fC()">
-          <option value="">All CRM status</option>
-          <option value="Customer">Customer</option>
-          <option value="Prospect">Prospect</option>
-          <option value="Partner">Partner</option>
-          <option value="In Salesforce (no type)">In SF (untyped)</option>
-          <option value="Not in Salesforce">Not in SF</option>
-          <option value="Churned Customer">Churned</option>
-        </select>
       </div>
       <p class="text-xs text-muted" id="cCnt" style="margin-bottom:.5rem"></p>
       <div class="overflow-x">
@@ -240,8 +232,6 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
               <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('co')">Country ⇅</th>
               <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('d')">Auth Date ⇅</th>
               <th style="padding:.5rem .75rem" class="text-muted">Services</th>
-              <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('cs')">CRM Status ⇅</th>
-              <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('ao')">Owner ⇅</th>
               <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sC('pc')">Passporting ⇅</th>
             </tr>
           </thead>
@@ -249,6 +239,30 @@ box-shadow:0 0 0 1px color-mix(in srgb,var(--destructive) 20%,transparent)}
         </table>
       </div>
       <div id="cMore" style="padding:.5rem 0"></div>
+    </div>
+
+    <!-- Salesforce tab -->
+    <div class="tab-content" id="tab-sf">
+      <p class="text-xs text-muted" style="margin-bottom:.75rem">
+        Chainalysis CRM data matched against the register. Owner, CRM status and ABS Stage are sourced from Salesforce — updated separately from the register.
+      </p>
+      <div class="overflow-x">
+        <table class="text-sm">
+          <thead>
+            <tr class="border-b bg-muted" style="text-align:left">
+              <th style="padding:.5rem .75rem" class="text-muted">#</th>
+              <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sSF('n')">Entity ⇅</th>
+              <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sSF('co')">Country ⇅</th>
+              <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sSF('ao')">SF Owner ⇅</th>
+              <th style="padding:.5rem .75rem" class="sort-btn text-muted" onclick="sSF('cs')">CRM Status ⇅</th>
+              <th style="padding:.5rem .75rem" class="text-muted">ABS Stage</th>
+              <th style="padding:.5rem .75rem" class="text-muted">SF Account ID</th>
+            </tr>
+          </thead>
+          <tbody id="sfTb"></tbody>
+        </table>
+      </div>
+      <div id="sfMore" style="padding:.5rem 0"></div>
     </div>
 
     <!-- Non-Compliant tab -->
@@ -542,7 +556,7 @@ const _dom=c.w?c.w.replace(/^https?:\/\//,'').replace(/\/.*/,''):'';
 const _fav=_dom?`<img src="https://www.google.com/s2/favicons?domain=${_dom}&sz=32" width="16" height="16" style="border-radius:3px;margin-right:6px;vertical-align:middle;flex-shrink:0" onerror="this.style.display='none'">`:'';
 const nl=c.w?`<span style="display:inline-flex;align-items:center">${_fav}<a href="${c.w}" target="_blank" class="text-primary">${c.n}</a></span>`:`<span>${c.n}</span>`;
 const cm=c.cn&&c.cn!==c.n?` <span class="text-muted text-xs">(${c.cn})</span>`:'';
-return`<tr class="${cl}"><td style="padding:.5rem .75rem" class="text-muted">${i+1}</td><td style="padding:.5rem .75rem">${nl}${cm}${st}</td><td style="padding:.5rem .75rem"><a href="#" class="text-muted" onclick="event.preventDefault();setCountryFilter('${c.co}')">${c.co}</a></td><td style="padding:.5rem .75rem" class="text-muted">${c.d}</td><td style="padding:.5rem .75rem">${badge(c.sl)}</td><td style="padding:.5rem .75rem">${crmPill(c.cs)}</td><td style="padding:.5rem .75rem" class="text-muted text-xs">${c.ao||'—'}</td><td style="padding:.5rem .75rem" class="text-muted text-center">${c.pc}</td></tr>`}).join('');
+return`<tr class="${cl}"><td style="padding:.5rem .75rem" class="text-muted">${i+1}</td><td style="padding:.5rem .75rem">${nl}${cm}${st}</td><td style="padding:.5rem .75rem"><a href="#" class="text-muted" onclick="event.preventDefault();setCountryFilter('${c.co}')">${c.co}</a></td><td style="padding:.5rem .75rem" class="text-muted">${c.d}</td><td style="padding:.5rem .75rem">${badge(c.sl)}</td><td style="padding:.5rem .75rem" class="text-muted text-center">${c.pc}</td></tr>`}).join('');
 document.getElementById('cCnt').textContent=`Showing ${Math.min(cS,cF.length)} of ${cF.length} entities`;
 const mc=document.getElementById('cMore');
 if(cS<cF.length){const r=cF.length-cS;mc.innerHTML=`<button class="show-more-btn" onclick="cS+=25;rCR()">Show ${Math.min(r,25)} more (${r} remaining)</button>`}
@@ -713,6 +727,35 @@ targets.forEach(c=>{const isC=c.cs==='Churned Customer';
 const svcs=c.sl?c.sl.slice(0,4).join(', '):'';const more=c.sl&&c.sl.length>4?' +'+( c.sl.length-4)+' more':'';
 box.innerHTML+=`<div class="opp-card2${isC?' churned':''}"><div class="flex justify-between items-center"><span class="font-medium text-sm">${c.cn||c.n}</span>${crmPill(c.cs)}</div><div class="text-xs text-muted" style="margin-top:4px">${c.co} · ${c.rt} · ${c.pc} passporting countries${c.w?' · <a href="'+c.w+'" target="_blank" class="text-primary">Website ↗</a>':''}</div><div class="text-xs text-muted" style="margin-top:2px">Services: ${svcs}${more}</div></div>`});
 }();
+
+
+// ═══ Salesforce Tab ═══
+let sfS=10, sfK='n', sfD=1;
+const sfData = D.filter(c => c.ao && c.ao !== '' && c.ao !== 'undefined');
+function rSF() {
+  const tb = document.getElementById('sfTb');
+  if (!tb) return;
+  const v = [...sfData].sort((a,b)=>(a[sfK]||'').localeCompare(b[sfK]||'')*sfD).slice(0, sfS);
+  tb.innerHTML = v.map((c,i) => {
+    const _dom = c.w ? c.w.replace(/^https?:\/\//, '').replace(/\/.*/, '') : '';
+    const _fav = _dom ? `<img src="https://www.google.com/s2/favicons?domain=${_dom}&sz=32" width="14" height="14" style="border-radius:2px;margin-right:5px;vertical-align:middle" onerror="this.style.display='none'">` : '';
+    return `<tr class="entity-row border-b">
+      <td style="padding:.5rem .75rem" class="text-muted">${i+1}</td>
+      <td style="padding:.5rem .75rem">${_fav}${c.w ? `<a href="${c.w}" target="_blank" class="text-primary">${c.n}</a>` : c.n}${c.cn&&c.cn!==c.n?` <span class="text-muted text-xs">(${c.cn})</span>`:''}</td>
+      <td style="padding:.5rem .75rem text-muted">${c.co}</td>
+      <td style="padding:.5rem .75rem text-xs">${c.ao||'—'}</td>
+      <td style="padding:.5rem .75rem">${crmPill(c.cs)}</td>
+      <td style="padding:.5rem .75rem text-xs text-muted">${c.abs||'—'}</td>
+      <td style="padding:.5rem .75rem;font-family:monospace;font-size:.72rem;color:var(--primary)">${c.sfid||'—'}</td>
+    </tr>`;
+  }).join('');
+  const mc = document.getElementById('sfMore');
+  if (mc) {
+    if (sfS < sfData.length) mc.innerHTML = `<button class="show-more-btn" onclick="sfS+=20;rSF()">Show more (${sfData.length - sfS} remaining)</button>`;
+    else mc.innerHTML = '';
+  }
+}
+function sSF(k) { if(sfK===k)sfD*=-1; else{sfK=k;sfD=1} rSF(); }
 
 // Init
 renderR();renderQ();fC();fN();
