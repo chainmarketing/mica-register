@@ -415,61 +415,87 @@ renderNC();
   }).join('')+'<div class="flex gap-3 text-xs text-muted" style="margin-top:6px"><span style="color:#22c55e">■ Customer</span><span style="color:#f59e0b">■ Prospect</span><span style="color:#ef4444">■ Not in SF</span></div>';
 })();
 
-// Charts
-(function(){
+// Charts — lazy init per section
+const _charts = {};
+function _getChartColors() {
   const cs2=getComputedStyle(document.documentElement);
-  const c1=cs2.getPropertyValue('--chart-1').trim()||'#ea580c';
-  const c2=cs2.getPropertyValue('--chart-2').trim()||'#0d9488';
-  const c3=cs2.getPropertyValue('--chart-3').trim()||'#164e63';
-  const c4=cs2.getPropertyValue('--chart-4').trim()||'#fbbf24';
-  const c5=cs2.getPropertyValue('--chart-5').trim()||'#f59e0b';
-  const mfg=cs2.getPropertyValue('--muted-fg').trim()||'#71717a';
-  Chart.defaults.color=mfg;Chart.defaults.font.family='system-ui,sans-serif';
+  return {
+    c1:cs2.getPropertyValue('--chart-1').trim()||'#ea580c',
+    c2:cs2.getPropertyValue('--chart-2').trim()||'#0d9488',
+    c3:cs2.getPropertyValue('--chart-3').trim()||'#164e63',
+    c4:cs2.getPropertyValue('--chart-4').trim()||'#fbbf24',
+    c5:cs2.getPropertyValue('--chart-5').trim()||'#f59e0b',
+    mfg:cs2.getPropertyValue('--muted-fg').trim()||'#71717a',
+  };
+}
+function _initChart(id, buildFn) {
+  if(_charts[id]) return;
+  const el=document.getElementById(id);
+  if(!el) return;
+  _charts[id] = buildFn(el, _getChartColors());
+}
 
-  const csMap={};D.filter(r=>!r.wd).forEach(r=>{const s=r.cs||'Not in Salesforce';csMap[s]=(csMap[s]||0)+1;});
-  const csColors={'Customer':'#22c55e','Prospect':'#f59e0b','Not in Salesforce':'#ef4444','Churned Customer':'#ef444488','In Salesforce (no type)':mfg,'Partner':c1};
-  const csE=Object.entries(csMap).sort((a,b)=>b[1]-a[1]);
-  new Chart(document.getElementById('crm-chart'),{type:'doughnut',
-    data:{labels:csE.map(e=>e[0].replace('In Salesforce (no type)','Unclassified')),
-    datasets:[{data:csE.map(e=>e[1]),backgroundColor:csE.map(e=>csColors[e[0]]||mfg),borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
-      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}}});
+// Wire lazy init to each ctx-section open
+document.querySelectorAll('.ctx-header').forEach(h=>{
+  h.addEventListener('click', ()=>setTimeout(()=>{
+    const {c1,c2,c3,c4,c5,mfg} = _getChartColors();
+    Chart.defaults.color=mfg; Chart.defaults.font.family='system-ui,sans-serif';
 
-  const etMap={};D.filter(r=>!r.wd).forEach(r=>etMap[r.et]=(etMap[r.et]||0)+1);
-  const etE=Object.entries(etMap).sort((a,b)=>b[1]-a[1]);
-  new Chart(document.getElementById('type-chart'),{type:'doughnut',
-    data:{labels:etE.map(e=>e[0]),datasets:[{data:etE.map(e=>e[1]),backgroundColor:[c1,c2,c3,c4,c5,mfg+'88'],borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
-      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}}});
+    _initChart('crm-chart', (el)=>{
+      const csMap={};D.filter(r=>!r.wd).forEach(r=>{const s=r.cs||'Not in Salesforce';csMap[s]=(csMap[s]||0)+1;});
+      const csColors={'Customer':'#22c55e','Prospect':'#f59e0b','Not in Salesforce':'#ef4444','Churned Customer':'#ef444488','In Salesforce (no type)':mfg,'Partner':c1};
+      const csE=Object.entries(csMap).sort((a,b)=>b[1]-a[1]);
+      return new Chart(el,{type:'doughnut',
+        data:{labels:csE.map(e=>e[0].replace('In Salesforce (no type)','Unclassified')),
+        datasets:[{data:csE.map(e=>e[1]),backgroundColor:csE.map(e=>csColors[e[0]]||mfg),borderWidth:0}]},
+        options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+          plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}}});
+    });
 
-  const qMap={};D.forEach(c=>{const q=getQ(c.sk);if(!q)return;if(!qMap[q.l])qMap[q.l]={l:q.l,s:q.s,cs:{},t:0};qMap[q.l].cs[c.co]=(qMap[q.l].cs[c.co]||0)+1;qMap[q.l].t++;});
-  const qSorted=Object.values(qMap).sort((a,b)=>a.s.localeCompare(b.s));
-  const allCC={};Object.values(qMap).forEach(q=>Object.entries(q.cs).forEach(([co,n])=>allCC[co]=(allCC[co]||0)+n));
-  const topC=Object.entries(allCC).sort((a,b)=>b[1]-a[1]).slice(0,8).map(e=>e[0]);
-  const qColors=[c1,c2,c3,c4,c5,c1+'99',c2+'99',c3+'99'];
-  new Chart(document.getElementById('q-chart'),{type:'bar',
-    data:{labels:qSorted.map(q=>q.l),
-      datasets:topC.map((co,i)=>({label:co,data:qSorted.map(q=>q.cs[co]||0),backgroundColor:qColors[i],borderRadius:2,borderSkipped:false}))},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}},
-      scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{display:false}}}}});
+    _initChart('type-chart', (el)=>{
+      const etMap={};D.filter(r=>!r.wd).forEach(r=>etMap[r.et]=(etMap[r.et]||0)+1);
+      const etE=Object.entries(etMap).sort((a,b)=>b[1]-a[1]);
+      return new Chart(el,{type:'doughnut',
+        data:{labels:etE.map(e=>e[0]),datasets:[{data:etE.map(e=>e[1]),backgroundColor:[c1,c2,c3,c4,c5,mfg+'88'],borderWidth:0}]},
+        options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+          plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}}});
+    });
 
-  const sv={};D.filter(r=>!r.wd).forEach(c=>c.sl.forEach(s=>sv[s]=(sv[s]||0)+1));
-  const ss=Object.entries(sv).sort((a,b)=>b[1]-a[1]);
-  new Chart(document.getElementById('svc-chart'),{type:'bar',
-    data:{labels:ss.map(s=>s[0]),datasets:[{data:ss.map(s=>s[1]),backgroundColor:c2,borderRadius:4,borderSkipped:false}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}}});
+    _initChart('q-chart', (el)=>{
+      const qMap={};D.forEach(c=>{const q=getQ(c.sk);if(!q)return;if(!qMap[q.l])qMap[q.l]={l:q.l,s:q.s,cs:{},t:0};qMap[q.l].cs[c.co]=(qMap[q.l].cs[c.co]||0)+1;qMap[q.l].t++;});
+      const qSorted=Object.values(qMap).sort((a,b)=>a.s.localeCompare(b.s));
+      const allCC={};Object.values(qMap).forEach(q=>Object.entries(q.cs).forEach(([co,n])=>allCC[co]=(allCC[co]||0)+n));
+      const topC=Object.entries(allCC).sort((a,b)=>b[1]-a[1]).slice(0,8).map(e=>e[0]);
+      const qColors=[c1,c2,c3,c4,c5,c1+'99',c2+'99',c3+'99'];
+      return new Chart(el,{type:'bar',
+        data:{labels:qSorted.map(q=>q.l),datasets:topC.map((co,i)=>({label:co,data:qSorted.map(q=>q.cs[co]||0),backgroundColor:qColors[i],borderRadius:2,borderSkipped:false}))},
+        options:{responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}},
+          scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{display:false}}}}});
+    });
 
-  const bc={};D.forEach(r=>{if(r.bc&&r.bc!==r.co)bc[r.bc]=(bc[r.bc]||0)+1;});
-  const top=Object.entries(bc).sort((a,b)=>b[1]-a[1]).slice(0,12);
-  new Chart(document.getElementById('hq-chart'),{type:'bar',
-    data:{labels:top.map(b=>b[0]),datasets:[{data:top.map(b=>b[1]),backgroundColor:c3+'B3',borderRadius:4,borderSkipped:false}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw} firms billing from ${c.label}`}}},
-      scales:{y:{beginAtZero:true,grid:{display:false}},x:{grid:{display:false}}}}});
-})();
+    _initChart('svc-chart', (el)=>{
+      const sv={};D.filter(r=>!r.wd).forEach(c=>c.sl.forEach(s=>sv[s]=(sv[s]||0)+1));
+      const ss=Object.entries(sv).sort((a,b)=>b[1]-a[1]);
+      return new Chart(el,{type:'bar',
+        data:{labels:ss.map(s=>s[0]),datasets:[{data:ss.map(s=>s[1]),backgroundColor:c2,borderRadius:4,borderSkipped:false}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{display:false}},
+          scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}}});
+    });
+
+    _initChart('hq-chart', (el)=>{
+      const bc={};D.forEach(r=>{if(r.bc&&r.bc!==r.co)bc[r.bc]=(bc[r.bc]||0)+1;});
+      const top=Object.entries(bc).sort((a,b)=>b[1]-a[1]).slice(0,12);
+      return new Chart(el,{type:'bar',
+        data:{labels:top.map(b=>b[0]),datasets:[{data:top.map(b=>b[1]),backgroundColor:c3+'B3',borderRadius:4,borderSkipped:false}]},
+        options:{responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw} firms billing from ${c.label}`}}},
+          scales:{y:{beginAtZero:true,grid:{display:false}},x:{grid:{display:false}}}}});
+    });
+
+  }, 50));
+});
 
 function exportCSV(){
   const rows=[['Entity','Commercial Name','Country','Auth Date','Register Type','Services','Passporting','LEI','Website','CRM Status','Owner','SF Account ID']];
