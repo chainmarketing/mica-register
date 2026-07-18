@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU/EEA MiCA Register</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#fff;--fg:#0a0a0a;--card:#fff;--muted:#f4f4f5;--muted-fg:#71717a;
+--primary:#2563eb;--destructive:#ef4444;--success:#22c55e;--warning:#f59e0b;
+--border:#e4e4e7;--chart-1:#ea580c;--chart-2:#0d9488;--chart-3:#164e63;--chart-4:#fbbf24;--chart-5:#f59e0b}
+@media(prefers-color-scheme:dark){:root{--bg:#09090b;--fg:#fafafa;--card:#0a0a0a;--muted:#27272a;
+--muted-fg:#a1a1aa;--primary:#3b82f6;--border:#27272a;--chart-1:#1d4ed8;--chart-2:#10b981;--chart-3:#f59e0b}}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.6;background:var(--bg);color:var(--fg);min-height:100vh}
+.wrap{max-width:72rem;margin:0 auto;padding:2rem 1rem}.wrap>*+*{margin-top:1.25rem}
+.grid{display:grid;gap:.75rem}.g2{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:768px){.g4,.g2{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:.75rem;padding:1rem;box-shadow:0 0 0 1px color-mix(in srgb,var(--fg) 10%,transparent)}
+.kpi{display:flex;flex-direction:column;cursor:pointer;transition:transform .1s}.kpi:hover{transform:translateY(-2px)}
+.flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}
+.flex-wrap{flex-wrap:wrap}.flex-1{flex:1}.gap-2{gap:.5rem}
+.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-2xl{font-size:1.5rem}
+.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}
+.tracking-tight{letter-spacing:-.025em}.text-muted{color:var(--muted-fg)}.text-primary{color:var(--primary)}
+.text-destructive{color:var(--destructive)}.text-success{color:var(--success)}.text-warning{color:var(--warning)}
+.mt-1{margin-top:.25rem}.overflow-x{overflow-x:auto}
+.zone-label{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;color:var(--fg);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
+.zone-label::after{content:'';flex:1;height:2px;background:var(--border);border-radius:1px}
+.top-nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:.5rem 1rem;display:flex;gap:1.5rem;align-items:center;font-size:.78rem;font-weight:500}
+.top-nav a{color:var(--muted-fg);text-decoration:none;transition:color .15s}.top-nav a:hover{color:var(--fg)}
+.action-card{border-radius:.75rem;border:1px solid var(--border);background:var(--card);overflow:hidden}
+.action-card-header{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1rem;cursor:pointer;user-select:none;gap:.75rem}
+.action-card-header:hover{background:var(--muted)}.action-card-body{border-top:1px solid var(--border);padding:1rem;display:none}
+.action-card.open .action-card-body{display:block}
+.action-card-chevron{font-size:.75rem;color:var(--muted-fg);transition:transform .2s}.action-card.open .action-card-chevron{transform:rotate(180deg)}
+.action-card-title{font-weight:600;font-size:.95rem;display:flex;align-items:center;gap:.5rem}
+.action-card-sub{font-size:.78rem;color:var(--muted-fg);margin-top:.1rem}
+.ctx-section{border-radius:.75rem;border:1px solid var(--border);background:var(--card);overflow:hidden}
+.ctx-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;cursor:pointer;user-select:none}
+.ctx-header:hover{background:var(--muted)}.ctx-body{border-top:1px solid var(--border);padding:1rem;display:none}
+.ctx-section.open .ctx-body{display:block}
+.ctx-chevron{font-size:.75rem;color:var(--muted-fg);transition:transform .2s}.ctx-section.open .ctx-chevron{transform:rotate(180deg)}
+.ctx-title{font-weight:600;font-size:.875rem}.ctx-sub{font-size:.75rem;color:var(--muted-fg)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:.75rem;max-height:60vh;overflow-y:auto}
+table.main-tbl{width:100%;border-collapse:collapse;font-size:.8rem}
+.main-tbl thead{position:sticky;top:0;z-index:5;background:var(--card)}
+.main-tbl th{padding:8px 10px;text-align:left;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-fg);border-bottom:2px solid var(--border);cursor:pointer;white-space:nowrap}
+.main-tbl th:hover{color:var(--fg)}.main-tbl td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+.main-tbl tr:hover td{background:var(--muted)}
+.search-box{height:2rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);padding:0 .625rem;font-size:.875rem;outline:none}
+.search-box:focus{border-color:var(--primary)}
+.pill{display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500}
+.pill-green{background:color-mix(in srgb,var(--success) 12%,transparent);color:var(--success)}
+.pill-blue{background:color-mix(in srgb,var(--primary) 10%,transparent);color:var(--primary)}
+.pill-red{background:color-mix(in srgb,var(--destructive) 10%,transparent);color:var(--destructive)}
+.pill-warn{background:color-mix(in srgb,var(--warning) 10%,transparent);color:var(--warning)}
+.pill-muted{background:var(--muted);color:var(--muted-fg)}
+.tab-btn{padding:6px 14px;border-radius:.4rem;border:none;background:none;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted-fg);transition:all .15s}
+.tab-btn.active{background:var(--primary);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+.opp-card{border-left:3px solid var(--destructive);border-radius:.5rem;padding:.625rem .875rem;background:var(--bg);margin-bottom:.375rem;border:1px solid var(--border)}
+.show-more-btn{display:block;width:100%;padding:.5rem;text-align:center;font-size:.8rem;color:var(--primary);cursor:pointer;border:none;background:none;border-top:1px solid var(--border)}
+.show-more-btn:hover{background:var(--muted)}
+.svc-badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:11px;font-weight:500;margin:1px 2px;white-space:nowrap;background:color-mix(in srgb,var(--primary) 10%,transparent);color:var(--primary)}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <span style="font-weight:700">🇪🇺 EU/EEA MiCA Register</span>
+  <a href="#zone-table">Find a firm</a>
+  <a href="#zone-action">Take action</a>
+  <a href="#zone-context">EU context</a>
+  <span style="flex:1"></span>
+  <a href="global.html" style="font-size:.72rem;color:var(--primary)">→ All registers</a>
+  <span class="text-muted" style="font-size:.72rem">Updated <!-- TODAY --></span>
+</div>
+
+<div class="wrap">
+
+<div>
+  <div class="flex justify-between items-center flex-wrap gap-2">
+    <div>
+      <h1 style="font-size:1.5rem;font-weight:700;letter-spacing:-.025em">EU/EEA MiCA Register</h1>
+      <p class="text-xs text-muted mt-1">ESMA Interim MiCA Register · <!-- ENTITIES --> entities · <!-- COUNTRIES --> EEA countries · led by <!-- TOP3 --></p>
+    </div>
+    <button onclick="exportCSV()" style="height:2rem;padding:0 .75rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:.8rem;cursor:pointer">↓ Export CSV</button>
+  </div>
+</div>
+
+<div class="grid g4">
+  <div class="card kpi"><span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">Registered Firms</span>
+    <span class="text-2xl font-bold mt-1"><!-- ENTITIES --></span>
+    <span class="text-xs text-muted"><!-- AUTHORISED --> authorised · <!-- EMT --> EMT</span></div>
+  <div class="card kpi" onclick="toggleAction('ac-targets')">
+    <span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">Chainalysis Customers</span>
+    <span class="text-2xl font-bold mt-1 text-success"><!-- CUSTOMERS --></span>
+    <span class="text-xs text-muted"><!-- PCT -->% penetration</span></div>
+  <div class="card kpi" onclick="toggleAction('ac-targets')">
+    <span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">🎯 Sales Targets</span>
+    <span class="text-2xl font-bold text-destructive mt-1"><!-- TARGETS --></span>
+    <span class="text-xs text-muted">not in SF or churned</span></div>
+  <div class="card kpi">
+    <span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">Countries</span>
+    <span class="text-2xl font-bold mt-1"><!-- COUNTRIES --></span>
+    <span class="text-xs text-muted">of 30 EEA states</span></div>
+</div>
+
+<div id="zone-table">
+  <div class="zone-label"><span>Find a firm</span></div>
+  <div class="flex gap-2 flex-wrap items-center" style="margin-bottom:.75rem">
+    <button class="tab-btn active" onclick="showTab('register',this)">Register (<!-- ENTITIES -->)</button>
+    <button class="tab-btn" onclick="showTab('sf',this)">Salesforce</button>
+    <button class="tab-btn" onclick="showTab('nc',this)">⚠️ ESMA Warning List (<!-- NC -->)</button>
+    <span style="flex:1"></span>
+    <button onclick="exportCSV()" style="height:2rem;padding:0 .75rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:.8rem;cursor:pointer">↓ CSV</button>
+  </div>
+
+  <div class="tab-content active" id="tab-register">
+    <div class="flex flex-wrap gap-2" style="margin-bottom:.75rem">
+      <input id="qs" class="search-box flex-1" style="min-width:200px" placeholder="Search firm, country, service…" oninput="renderTable()">
+      <select id="fcountry" class="search-box" onchange="renderTable()"><option value="">All countries</option></select>
+      <select id="fservice" class="search-box" onchange="renderTable()"><option value="">All services</option></select>
+      <select id="ftype" class="search-box" onchange="renderTable()">
+        <option value="">All types</option>
+        <option value="Exchange">Exchange</option>
+        <option value="Bank">Bank</option>
+        <option value="Custodian">Custodian</option>
+        <option value="Custodian / Trust">Custodian / Trust</option>
+        <option value="Payment Institution">Payment Institution</option>
+        <option value="Broker / Securities">Broker / Securities</option>
+      </select>
+    </div>
+    <p class="text-xs text-muted" id="cnt" style="margin-bottom:.5rem"></p>
+    <div class="tbl-wrap">
+      <table class="main-tbl">
+        <thead><tr>
+          <th onclick="sort('n')">Entity ⇅</th>
+          <th onclick="sort('co')">Country ⇅</th>
+          <th onclick="sort('d')">Auth Date ⇅</th>
+          <th>Services</th>
+          <th onclick="sort('pc')">Passporting ⇅</th>
+          <th onclick="sort('et')">Type ⇅</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div id="tMore"></div>
+  </div>
+
+  <div class="tab-content" id="tab-sf">
+    <p class="text-xs text-muted" style="margin-bottom:.75rem">Chainalysis CRM data matched against the MiCA register. Owner, CRM status and ABS Stage sourced from Salesforce.</p>
+    <div class="tbl-wrap">
+      <table class="main-tbl">
+        <thead><tr>
+          <th onclick="sortSF('n')">Entity ⇅</th><th onclick="sortSF('co')">Country ⇅</th>
+          <th onclick="sortSF('ao')">SF Owner ⇅</th><th onclick="sortSF('cs')">CRM Status ⇅</th>
+          <th>ABS Stage</th><th>SF Account ID</th>
+        </tr></thead>
+        <tbody id="sf-tbody"></tbody>
+      </table>
+    </div>
+    <div id="sf-more"></div>
+  </div>
+
+  <div class="tab-content" id="tab-nc">
+    <p class="text-xs text-muted" style="margin-bottom:.5rem">Entities flagged as non-compliant by EU/EEA national regulators under MiCA — ESMA warning list only.</p>
+    <input id="nc-q" class="search-box" style="width:100%;margin-bottom:.5rem" placeholder="Search warning list…" oninput="renderNC()">
+    <p class="text-xs text-muted" id="nc-cnt" style="margin-bottom:.5rem"></p>
+    <div class="tbl-wrap" style="max-height:40vh">
+      <table class="main-tbl"><thead><tr><th>#</th><th>Entity</th><th>Country</th><th>Regulator</th></tr></thead>
+      <tbody id="nc-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div id="zone-action">
+  <div class="zone-label"><span>Take action</span></div>
+  <div style="display:flex;flex-direction:column;gap:.5rem">
+    <div class="action-card" id="ac-targets" style="border-left:3px solid var(--destructive)">
+      <div class="action-card-header" onclick="toggleAction('ac-targets')">
+        <div><div class="action-card-title">🎯 Sales Targets <span class="pill pill-red" id="lbl-targets"></span></div>
+          <div class="action-card-sub">MiCA-authorised firms with no active Chainalysis relationship.</div>
+        </div><span class="action-card-chevron">▼</span>
+      </div>
+      <div class="action-card-body" id="target-cards"></div>
+    </div>
+    <div class="action-card" id="ac-prospects" style="border-left:3px solid var(--warning)">
+      <div class="action-card-header" onclick="toggleAction('ac-prospects')">
+        <div><div class="action-card-title">🏆 Prospect Priority</div>
+          <div class="action-card-sub">Non-customers ranked by passporting reach and service breadth.</div>
+        </div><span class="action-card-chevron">▼</span>
+      </div>
+      <div class="action-card-body">
+        <div class="overflow-x"><table class="main-tbl">
+          <thead><tr><th>#</th><th>Firm</th><th>Country</th><th>Score</th><th>Pass.</th><th>Svcs</th><th>CRM</th><th>Owner</th></tr></thead>
+          <tbody id="prospect-tbody"></tbody></table></div>
+        <div id="prospect-more"></div>
+      </div>
+    </div>
+    <div class="action-card" id="ac-territory" style="border-left:3px solid var(--primary)">
+      <div class="action-card-header" onclick="toggleAction('ac-territory')">
+        <div><div class="action-card-title">🗺️ My Territory</div>
+          <div class="action-card-sub">Customer penetration by EEA country.</div>
+        </div><span class="action-card-chevron">▼</span>
+      </div>
+      <div class="action-card-body" id="territory-bars"></div>
+    </div>
+  </div>
+</div>
+
+<div id="zone-context">
+  <div class="zone-label"><span>EU context</span></div>
+  <div style="display:flex;flex-direction:column;gap:.5rem">
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">📊 CRM Penetration &amp; Entity Types</div>
+        <div class="ctx-sub">Customer/prospect split and what kinds of firms hold MiCA licences.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div class="grid g2">
+        <div style="height:220px"><canvas id="crm-chart"></canvas></div>
+        <div style="height:220px"><canvas id="type-chart"></canvas></div>
+      </div></div>
+    </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">📅 Approvals by Quarter &amp; Country</div>
+        <div class="ctx-sub">Which countries are licensing the most CASPs each quarter.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div style="height:320px"><canvas id="q-chart"></canvas></div></div>
+    </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">⚙️ Service Authorisations</div>
+        <div class="ctx-sub">Which of the 10 MiCA services are most commonly licensed.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div style="height:280px"><canvas id="svc-chart"></canvas></div></div>
+    </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">🌐 Global HQ Intelligence</div>
+        <div class="ctx-sub">Firms registered in one EU country but billing from another.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div style="height:220px"><canvas id="hq-chart"></canvas></div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const D=[];
+const N=[];
+
+function crmPill(cs) {
+  const m={'Customer':'pill-green','Prospect':'pill-warn','Partner':'pill-blue',
+    'Not in Salesforce':'pill-red','Churned Customer':'pill-red','In Salesforce (no type)':'pill-muted'};
+  const s=cs||'Not in Salesforce';
+  return '<span class="pill '+(m[s]||'pill-muted')+'">'+s.replace('In Salesforce (no type)','Unclassified')+'</span>';
+}
+function badge(sl) {
+  if(!sl||!sl.length) return '';
+  return sl.slice(0,3).map(s=>'<span class="svc-badge">'+s+'</span>').join('')+(sl.length>3?'<span class="svc-badge">+'+(sl.length-3)+'</span>':'');
+}
+function fav(w) {
+  if(!w) return '';
+  const d=w.replace(/^https?:\/\//,'').replace(/\/.*/,'');
+  return d?'<img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" width="14" height="14" style="border-radius:2px;margin-right:5px;vertical-align:middle" onerror="this.style.display=\'none\'">':'';
+}
+function getQ(sk) {
+  if(!sk||sk==='9999-99-99') return null;
+  const [y,m]=sk.split('-');
+  const q=Math.ceil(parseInt(m)/3);
+  return {l:'Q'+q+' '+y,s:y+'-'+String(q).padStart(2,'0')};
+}
+function showTab(t,btn) {
+  document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(t==='sf') renderSF();
+  if(t==='nc') renderNC();
+}
+function toggleAction(id){document.getElementById(id).classList.toggle('open');}
+
+// Dropdowns
+[...new Set(D.map(r=>r.co))].sort().forEach(co=>{
+  const o=document.createElement('option');o.value=co;
+  o.textContent=co+' ('+D.filter(r=>r.co===co&&!r.wd).length+')';
+  document.getElementById('fcountry').appendChild(o);
+});
+[...new Set(D.flatMap(r=>r.sl))].sort().forEach(s=>{
+  const o=document.createElement('option');o.value=s;o.textContent=s;
+  document.getElementById('fservice').appendChild(o);
+});
+
+// Main table
+let cF=D.filter(r=>!r.wd), cS=10, cK='sk', cDir=-1;
+function sort(k){if(cK===k)cDir*=-1;else{cK=k;cDir=k==='sk'?-1:1}renderTable();}
+function renderTable(){
+  const q=document.getElementById('qs').value.toLowerCase();
+  const co=document.getElementById('fcountry').value;
+  const sv=document.getElementById('fservice').value;
+  const et=document.getElementById('ftype').value;
+  cF=D.filter(r=>{
+    if(r.wd)return false;
+    if(co&&r.co!==co)return false;
+    if(sv&&!r.sl.includes(sv))return false;
+    if(et&&r.et!==et)return false;
+    if(q&&!(r.n+' '+(r.cn||'')+' '+r.co).toLowerCase().includes(q))return false;
+    return true;
+  }).sort((a,b)=>{
+    const av=a[cK]||'',bv=b[cK]||'';
+    return typeof av==='number'?(av-bv)*cDir:av.localeCompare(bv)*cDir;
+  });
+  document.getElementById('cnt').textContent=cF.length+' of '+D.filter(r=>!r.wd).length+' firms';
+  document.getElementById('tbody').innerHTML=cF.slice(0,cS).map(r=>{
+    const name=r.w?'<span style="display:inline-flex;align-items:center">'+fav(r.w)+'<a href="'+r.w+'" target="_blank" style="color:var(--primary)">'+r.n+'</a></span>':r.n;
+    const cn=r.cn&&r.cn!==r.n?' <span class="text-xs text-muted">('+r.cn+')</span>':'';
+    return '<tr><td style="padding:7px 10px">'+name+cn+'</td>'
+      +'<td style="padding:7px 10px;font-size:.78rem;color:var(--muted-fg)">'+r.co+'</td>'
+      +'<td style="padding:7px 10px;font-size:.75rem;color:var(--muted-fg)">'+(r.d?r.d.slice(0,7):'')+'</td>'
+      +'<td style="padding:7px 10px">'+badge(r.sl)+'</td>'
+      +'<td style="padding:7px 10px;text-align:center;font-size:.8rem">'+r.pc+'</td>'
+      +'<td style="padding:7px 10px"><span class="pill pill-muted" style="font-size:10px">'+r.et+'</span></td>'
+      +'</tr>';
+  }).join('');
+  const mc=document.getElementById('tMore');
+  mc.innerHTML=cF.length>cS?'<button class="show-more-btn" onclick="cS+=20;renderTable()">Show more ('+(cF.length-cS)+' remaining)</button>':'';
+}
+renderTable();
+
+// SF tab
+let sfS=10,sfK='n',sfDir=1;
+function sortSF(k){if(sfK===k)sfDir*=-1;else{sfK=k;sfDir=1}renderSF();}
+function renderSF(){
+  const sfD=D.filter(r=>r.ao&&r.ao!=='').sort((a,b)=>(a[sfK]||'').localeCompare(b[sfK]||'')*sfDir);
+  document.getElementById('sf-tbody').innerHTML=sfD.slice(0,sfS).map(r=>
+    '<tr><td style="padding:7px 10px"><span style="display:inline-flex;align-items:center">'+fav(r.w)+(r.w?'<a href="'+r.w+'" target="_blank" style="color:var(--primary)">'+r.n+'</a>':r.n)+'</span></td>'
+    +'<td style="padding:7px 10px;font-size:.78rem;color:var(--muted-fg)">'+r.co+'</td>'
+    +'<td style="padding:7px 10px;font-size:.78rem">'+r.ao+'</td>'
+    +'<td style="padding:7px 10px">'+crmPill(r.cs)+'</td>'
+    +'<td style="padding:7px 10px;font-size:.75rem;color:var(--muted-fg)">'+r.abs+'</td>'
+    +'<td style="padding:7px 10px;font-family:monospace;font-size:.72rem;color:var(--primary)">'+r.sfid+'</td>'
+    +'</tr>'
+  ).join('');
+  document.getElementById('sf-more').innerHTML=sfS<sfD.length
+    ?'<button class="show-more-btn" onclick="sfS+=20;renderSF()">Show more ('+(sfD.length-sfS)+' remaining)</button>':'';
+}
+
+// Warning list
+function renderNC(){
+  const q=document.getElementById('nc-q').value.toLowerCase();
+  const f=q?N.filter(r=>(r.n+' '+r.co).toLowerCase().includes(q)):N;
+  document.getElementById('nc-cnt').textContent=f.length+' entities';
+  document.getElementById('nc-tbody').innerHTML=f.slice(0,25).map((r,i)=>
+    '<tr><td style="padding:6px 10px;color:var(--muted-fg)">'+(i+1)+'</td>'
+    +'<td style="padding:6px 10px;font-size:.8rem"><strong>'+r.n+'</strong></td>'
+    +'<td style="padding:6px 10px;font-size:.75rem">'+r.co+'</td>'
+    +'<td style="padding:6px 10px;font-size:.72rem;color:var(--muted-fg)">'+r.ca+'</td></tr>'
+  ).join('');
+}
+renderNC();
+
+// Target cards
+(function(){
+  const targets=D.filter(r=>r.cs==='Not in Salesforce'||r.cs==='Churned Customer');
+  document.getElementById('lbl-targets').textContent=targets.length;
+  document.getElementById('target-cards').innerHTML=targets.slice(0,30).map(r=>
+    '<div class="opp-card"><div class="flex items-center justify-between flex-wrap gap-2">'
+    +'<div><span class="font-medium text-sm">'+(r.cn||r.n)+'</span><span class="text-xs text-muted"> · '+r.co+'</span></div>'
+    +crmPill(r.cs)+'</div>'
+    +'<div class="text-xs text-muted" style="margin-top:3px">'+r.et+(r.w?' · <a href="'+r.w+'" target="_blank" style="color:var(--primary)">website ↗</a>':'')+'</div>'
+    +'</div>'
+  ).join('')+(targets.length>30?'<p class="text-xs text-muted" style="padding:.5rem;text-align:center">+'+(targets.length-30)+' more</p>':'');
+})();
+
+// Prospect priority
+(function(){
+  function score(r){return Math.min(r.pc/30,1)*40+Math.min(r.sl.length/9,1)*30+(r.cs==='Prospect'?15:r.cs==='In Salesforce (no type)'?10:0)+(r.mj>1?5:0);}
+  let pS=15;
+  const prospects=D.filter(r=>r.cs!=='Customer'&&!r.wd).map(r=>({...r,_s:Math.round(score(r))})).sort((a,b)=>b._s-a._s);
+  function renderP(){
+    document.getElementById('prospect-tbody').innerHTML=prospects.slice(0,pS).map((r,i)=>{
+      const col=r._s>=60?'#22c55e':r._s>=40?'#f59e0b':'#ef4444';
+      return '<tr><td style="padding:6px 8px;color:var(--muted-fg)">'+(i+1)+'</td>'
+        +'<td style="padding:6px 8px"><span class="font-medium">'+(r.cn||r.n)+'</span></td>'
+        +'<td style="padding:6px 8px;font-size:.75rem">'+r.co+'</td>'
+        +'<td style="padding:6px 8px"><span style="background:'+col+'18;color:'+col+';padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600">'+r._s+'</span></td>'
+        +'<td style="padding:6px 8px;text-align:center;font-size:.8rem">'+r.pc+'</td>'
+        +'<td style="padding:6px 8px;text-align:center;font-size:.8rem">'+r.sl.length+'</td>'
+        +'<td style="padding:6px 8px">'+crmPill(r.cs)+'</td>'
+        +'<td style="padding:6px 8px;font-size:.75rem">'+(r.ao||'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    const mc=document.getElementById('prospect-more');
+    mc.innerHTML=pS<prospects.length?'<button class="show-more-btn" onclick="pS+=20;renderP()">Show more ('+(prospects.length-pS)+' remaining)</button>':'';
+  }
+  renderP();
+})();
+
+// Territory
+(function(){
+  const cs2={};D.forEach(r=>{if(!cs2[r.co])cs2[r.co]={t:0,c:0,p:0,ns:0};cs2[r.co].t++;
+    if(r.cs==='Customer')cs2[r.co].c++;else if(r.cs==='Prospect')cs2[r.co].p++;else cs2[r.co].ns++;});
+  const ws=Object.entries(cs2).sort((a,b)=>b[1].t-a[1].t).filter(([,v])=>v.t>=2);
+  document.getElementById('territory-bars').innerHTML=ws.map(([co,v])=>{
+    const cW=v.c/v.t*100,pW=v.p/v.t*100,nW=v.ns/v.t*100;
+    return '<div class="flex items-center gap-2" style="margin-bottom:3px">'
+      +'<span class="text-xs font-medium" style="width:120px;text-align:right">'+co+'</span>'
+      +'<span class="text-xs text-muted" style="width:24px;text-align:right">'+v.t+'</span>'
+      +'<div style="flex:1;height:18px;border-radius:3px;overflow:hidden;background:var(--muted);display:flex">'
+      +(v.c?'<div style="width:'+cW+'%;background:#22c55e" title="'+v.c+' Customer"></div>':'')
+      +(v.p?'<div style="width:'+pW+'%;background:#f59e0b" title="'+v.p+' Prospect"></div>':'')
+      +(v.ns?'<div style="width:'+nW+'%;background:#ef444466"></div>':'')
+      +'</div><span class="text-xs" style="color:'+(v.c/v.t>0.2?'var(--success)':'var(--muted-fg)')+';width:32px">'+Math.round(v.c/v.t*100)+'%</span>'
+      +'</div>';
+  }).join('')+'<div class="flex gap-3 text-xs text-muted" style="margin-top:6px"><span style="color:#22c55e">■ Customer</span><span style="color:#f59e0b">■ Prospect</span><span style="color:#ef4444">■ Not in SF</span></div>';
+})();
+
+// Charts
+(function(){
+  const cs2=getComputedStyle(document.documentElement);
+  const c1=cs2.getPropertyValue('--chart-1').trim()||'#ea580c';
+  const c2=cs2.getPropertyValue('--chart-2').trim()||'#0d9488';
+  const c3=cs2.getPropertyValue('--chart-3').trim()||'#164e63';
+  const c4=cs2.getPropertyValue('--chart-4').trim()||'#fbbf24';
+  const c5=cs2.getPropertyValue('--chart-5').trim()||'#f59e0b';
+  const mfg=cs2.getPropertyValue('--muted-fg').trim()||'#71717a';
+  Chart.defaults.color=mfg;Chart.defaults.font.family='system-ui,sans-serif';
+
+  const csMap={};D.filter(r=>!r.wd).forEach(r=>{const s=r.cs||'Not in Salesforce';csMap[s]=(csMap[s]||0)+1;});
+  const csColors={'Customer':'#22c55e','Prospect':'#f59e0b','Not in Salesforce':'#ef4444','Churned Customer':'#ef444488','In Salesforce (no type)':mfg,'Partner':c1};
+  const csE=Object.entries(csMap).sort((a,b)=>b[1]-a[1]);
+  new Chart(document.getElementById('crm-chart'),{type:'doughnut',
+    data:{labels:csE.map(e=>e[0].replace('In Salesforce (no type)','Unclassified')),
+    datasets:[{data:csE.map(e=>e[1]),backgroundColor:csE.map(e=>csColors[e[0]]||mfg),borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}}});
+
+  const etMap={};D.filter(r=>!r.wd).forEach(r=>etMap[r.et]=(etMap[r.et]||0)+1);
+  const etE=Object.entries(etMap).sort((a,b)=>b[1]-a[1]);
+  new Chart(document.getElementById('type-chart'),{type:'doughnut',
+    data:{labels:etE.map(e=>e[0]),datasets:[{data:etE.map(e=>e[1]),backgroundColor:[c1,c2,c3,c4,c5,mfg+'88'],borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}}});
+
+  const qMap={};D.forEach(c=>{const q=getQ(c.sk);if(!q)return;if(!qMap[q.l])qMap[q.l]={l:q.l,s:q.s,cs:{},t:0};qMap[q.l].cs[c.co]=(qMap[q.l].cs[c.co]||0)+1;qMap[q.l].t++;});
+  const qSorted=Object.values(qMap).sort((a,b)=>a.s.localeCompare(b.s));
+  const allCC={};Object.values(qMap).forEach(q=>Object.entries(q.cs).forEach(([co,n])=>allCC[co]=(allCC[co]||0)+n));
+  const topC=Object.entries(allCC).sort((a,b)=>b[1]-a[1]).slice(0,8).map(e=>e[0]);
+  const qColors=[c1,c2,c3,c4,c5,c1+'99',c2+'99',c3+'99'];
+  new Chart(document.getElementById('q-chart'),{type:'bar',
+    data:{labels:qSorted.map(q=>q.l),
+      datasets:topC.map((co,i)=>({label:co,data:qSorted.map(q=>q.cs[co]||0),backgroundColor:qColors[i],borderRadius:2,borderSkipped:false}))},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}},
+      scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{display:false}}}}});
+
+  const sv={};D.filter(r=>!r.wd).forEach(c=>c.sl.forEach(s=>sv[s]=(sv[s]||0)+1));
+  const ss=Object.entries(sv).sort((a,b)=>b[1]-a[1]);
+  new Chart(document.getElementById('svc-chart'),{type:'bar',
+    data:{labels:ss.map(s=>s[0]),datasets:[{data:ss.map(s=>s[1]),backgroundColor:c2,borderRadius:4,borderSkipped:false}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}}});
+
+  const bc={};D.forEach(r=>{if(r.bc&&r.bc!==r.co)bc[r.bc]=(bc[r.bc]||0)+1;});
+  const top=Object.entries(bc).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  new Chart(document.getElementById('hq-chart'),{type:'bar',
+    data:{labels:top.map(b=>b[0]),datasets:[{data:top.map(b=>b[1]),backgroundColor:c3+'B3',borderRadius:4,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw} firms billing from ${c.label}`}}},
+      scales:{y:{beginAtZero:true,grid:{display:false}},x:{grid:{display:false}}}}});
+})();
+
+function exportCSV(){
+  const rows=[['Entity','Commercial Name','Country','Auth Date','Register Type','Services','Passporting','LEI','Website','CRM Status','Owner','SF Account ID']];
+  cF.forEach(r=>rows.push([r.n,r.cn,r.co,r.d,r.rt,r.sl.join('; '),r.pc,r.lei,r.w,r.cs,r.ao,r.sfid]));
+  const csv=rows.map(r=>r.map(v=>'"'+(v||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='mica-register.csv';a.click();
+}
+</script>
+</body>
+</html>
