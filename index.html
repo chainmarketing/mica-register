@@ -566,7 +566,7 @@ if(cS<cF.length){const r=cF.length-cS;mc.innerHTML=`<button class="show-more-btn
 else mc.innerHTML=cF.length>25?`<button class="show-more-btn" onclick="cS=10;rCR()">Collapse</button>`:''}
 function fC(){const q=document.getElementById('cs').value.toLowerCase(),co=document.getElementById('ccf').value,sv=document.getElementById('csf').value;
 cF=D.filter(c=>{if(q&&!c.n.toLowerCase().includes(q)&&!c.co.toLowerCase().includes(q)&&!c.sl.join(' ').toLowerCase().includes(q)&&!(c.cn||'').toLowerCase().includes(q))return false;
-if(co&&c.co!==co)return false;if(sv&&!c.sl.includes(sv))return false;const cf=document.getElementById('crmf').value;if(cf&&c.cs!==cf)return false;return true}).sort((a,b)=>{const av=a[cK]||'',bv=b[cK]||'';return typeof av==='number'?(av-bv)*cD:av.localeCompare(bv)*cD});cS=10;rCR()}
+if(co&&c.co!==co)return false;if(sv&&!c.sl.includes(sv))return false;const _crmf=document.getElementById('crmf');const cf=_crmf?_crmf.value:'';if(cf&&c.cs!==cf)return false;return true}).sort((a,b)=>{const av=a[cK]||'',bv=b[cK]||'';return typeof av==='number'?(av-bv)*cD:av.localeCompare(bv)*cD});cS=10;rCR()}
 function sC(k){if(cK===k)cD*=-1;else{cK=k;cD=k==='sk'?-1:1}fC()}
 
 // NC table
