@@ -347,26 +347,25 @@ function renderSF(){
 }
 
 // Warning list
-let ncS=25;
+let ncS=25, ncFiltered=N;
 function renderNC(){
   const q=document.getElementById('nc-q').value.toLowerCase();
-  const f=q?N.filter(r=>(r.n+' '+r.co).toLowerCase().includes(q)):N;
+  ncFiltered=q?N.filter(r=>(r.n+' '+r.co).toLowerCase().includes(q)):N;
   ncS=25;
-  document.getElementById('nc-cnt').textContent=f.length+' entities';
-  function doRenderNC(){
-    document.getElementById('nc-tbody').innerHTML=f.slice(0,ncS).map((r,i)=>
-      '<tr><td style="padding:6px 10px;color:var(--muted-fg)">'+(i+1)+'</td>'
-      +'<td style="padding:6px 10px;font-size:.8rem"><strong>'+r.n+'</strong></td>'
-      +'<td style="padding:6px 10px;font-size:.75rem">'+r.co+'</td>'
-      +'<td style="padding:6px 10px;font-size:.72rem;color:var(--muted-fg)">'+r.ca+'</td></tr>'
-    ).join('');
-    const mc=document.getElementById('nc-more');
-    if(mc) mc.innerHTML=ncS<f.length
-      ?'<button class="show-more-btn" onclick="ncS+=50;doRenderNC()">Show more ('+(f.length-ncS)+' remaining)</button>':'';
-  }
   doRenderNC();
 }
-renderNC();
+function doRenderNC(){
+  document.getElementById('nc-cnt').textContent=ncFiltered.length+' entities';
+  document.getElementById('nc-tbody').innerHTML=ncFiltered.slice(0,ncS).map((r,i)=>
+    '<tr><td style="padding:6px 10px;color:var(--muted-fg)">'+(i+1)+'</td>'
+    +'<td style="padding:6px 10px;font-size:.8rem"><strong>'+r.n+'</strong></td>'
+    +'<td style="padding:6px 10px;font-size:.75rem">'+r.co+'</td>'
+    +'<td style="padding:6px 10px;font-size:.72rem;color:var(--muted-fg)">'+r.ca+'</td></tr>'
+  ).join('');
+  const mc=document.getElementById('nc-more');
+  if(mc) mc.innerHTML=ncS<ncFiltered.length
+    ?'<button class="show-more-btn" onclick="ncS+=50;doRenderNC()">Show more ('+(ncFiltered.length-ncS)+' remaining)</button>':'';
+}
 
 // Target cards
 (function(){
