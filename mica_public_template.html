@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU/EEA MiCA Register</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#fff;--fg:#0a0a0a;--card:#fff;--muted:#f4f4f5;--muted-fg:#71717a;
+--primary:#2563eb;--destructive:#ef4444;--success:#22c55e;--warning:#f59e0b;
+--border:#e4e4e7;--chart-1:#ea580c;--chart-2:#0d9488;--chart-3:#164e63;--chart-4:#fbbf24;--chart-5:#f59e0b}
+@media(prefers-color-scheme:dark){:root{--bg:#09090b;--fg:#fafafa;--card:#0a0a0a;--muted:#27272a;
+--muted-fg:#a1a1aa;--primary:#3b82f6;--border:#27272a;--chart-1:#1d4ed8;--chart-2:#10b981;--chart-3:#f59e0b}}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.6;background:var(--bg);color:var(--fg);min-height:100vh}
+.wrap{max-width:72rem;margin:0 auto;padding:2rem 1rem}.wrap>*+*{margin-top:1.25rem}
+.grid{display:grid;gap:.75rem}.g2{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:768px){.g4,.g2{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:.75rem;padding:1rem;box-shadow:0 0 0 1px color-mix(in srgb,var(--fg) 10%,transparent)}
+.kpi{display:flex;flex-direction:column}
+.flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}
+.flex-wrap{flex-wrap:wrap}.flex-1{flex:1}.gap-2{gap:.5rem}
+.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-2xl{font-size:1.5rem}
+.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}
+.tracking-tight{letter-spacing:-.025em}.text-muted{color:var(--muted-fg)}.mt-1{margin-top:.25rem}
+.overflow-x{overflow-x:auto}
+.zone-label{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;color:var(--fg);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
+.zone-label::after{content:'';flex:1;height:2px;background:var(--border);border-radius:1px}
+.top-nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:.5rem 1rem;display:flex;gap:1.5rem;align-items:center;font-size:.78rem;font-weight:500}
+.top-nav a{color:var(--muted-fg);text-decoration:none}.top-nav a:hover{color:var(--fg)}
+.ctx-section{border-radius:.75rem;border:1px solid var(--border);background:var(--card);overflow:hidden}
+.ctx-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;cursor:pointer;user-select:none}
+.ctx-header:hover{background:var(--muted)}.ctx-body{border-top:1px solid var(--border);padding:1rem;display:none}
+.ctx-section.open .ctx-body{display:block}
+.ctx-chevron{font-size:.75rem;color:var(--muted-fg);transition:transform .2s}.ctx-section.open .ctx-chevron{transform:rotate(180deg)}
+.ctx-title{font-weight:600;font-size:.875rem}.ctx-sub{font-size:.75rem;color:var(--muted-fg)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:.75rem;max-height:65vh;overflow-y:auto}
+table.main-tbl{width:100%;border-collapse:collapse;font-size:.8rem}
+.main-tbl thead{position:sticky;top:0;z-index:5;background:var(--card)}
+.main-tbl th{padding:8px 10px;text-align:left;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-fg);border-bottom:2px solid var(--border);cursor:pointer;white-space:nowrap}
+.main-tbl th:hover{color:var(--fg)}.main-tbl td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+.main-tbl tr:hover td{background:var(--muted)}
+.search-box{height:2rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);padding:0 .625rem;font-size:.875rem;outline:none}
+.search-box:focus{border-color:var(--primary)}
+.pill{display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:500}
+.pill-muted{background:var(--muted);color:var(--muted-fg)}
+.pill-blue{background:color-mix(in srgb,var(--primary) 10%,transparent);color:var(--primary)}
+.tab-btn{padding:6px 14px;border-radius:.4rem;border:none;background:none;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted-fg);transition:all .15s}
+.tab-btn.active{background:var(--primary);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+.svc-badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:11px;font-weight:500;margin:1px 2px;white-space:nowrap;background:color-mix(in srgb,var(--primary) 10%,transparent);color:var(--primary)}
+.show-more-btn{display:block;width:100%;padding:.5rem;text-align:center;font-size:.8rem;color:var(--primary);cursor:pointer;border:none;background:none;border-top:1px solid var(--border)}
+.show-more-btn:hover{background:var(--muted)}
+</style>
+</head>
+<body>
+<div class="top-nav">
+  <span style="font-weight:700">🇪🇺 EU/EEA MiCA Register</span>
+  <a href="#zone-table">Find a firm</a>
+  <a href="#zone-context">EU context</a>
+  <span style="flex:1"></span>
+  <a href="global.html" style="font-size:.72rem;color:var(--primary)">→ All registers</a>
+  <span class="text-muted" style="font-size:.72rem">Updated <!-- TODAY --> · Source: ESMA</span>
+</div>
+<div class="wrap">
+
+<div>
+  <div class="flex justify-between items-center flex-wrap gap-2">
+    <div>
+      <h1 style="font-size:1.5rem;font-weight:700;letter-spacing:-.025em">EU/EEA MiCA Register</h1>
+      <p class="text-xs text-muted mt-1">ESMA Interim MiCA Register · <!-- ENTITIES --> entities · <!-- COUNTRIES --> EEA countries · led by <!-- TOP3 --></p>
+    </div>
+    <button onclick="exportCSV()" style="height:2rem;padding:0 .75rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:.8rem;cursor:pointer">↓ Export CSV</button>
+  </div>
+</div>
+
+<div class="grid g4">
+  <div class="card kpi"><span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">Registered Firms</span>
+    <span class="text-2xl font-bold mt-1"><!-- ENTITIES --></span>
+    <span class="text-xs text-muted"><!-- AUTHORISED --> authorised · <!-- WITHDRAWN --> withdrawn</span></div>
+  <div class="card kpi"><span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">CASP Licences</span>
+    <span class="text-2xl font-bold mt-1"><!-- CASPS --></span>
+    <span class="text-xs text-muted"><!-- EMT --> EMT issuers · <!-- DUAL --> dual-registered</span></div>
+  <div class="card kpi"><span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">EEA Countries</span>
+    <span class="text-2xl font-bold mt-1"><!-- COUNTRIES --></span>
+    <span class="text-xs text-muted">of 30 EEA states</span></div>
+  <div class="card kpi"><span class="text-xs font-medium text-muted" style="text-transform:uppercase;letter-spacing:.05em">Multi-Jurisdiction</span>
+    <span class="text-2xl font-bold mt-1" style="color:#8b5cf6"><!-- MULTI --></span>
+    <span class="text-xs text-muted">firms in 2+ registers globally</span></div>
+</div>
+
+<div id="zone-table">
+  <div class="zone-label"><span>Find a firm</span></div>
+  <div class="flex gap-2 flex-wrap items-center" style="margin-bottom:.75rem">
+    <button class="tab-btn active" onclick="showTab('register',this)">Register (<!-- ENTITIES -->)</button>
+    <button class="tab-btn" onclick="showTab('nc',this)">⚠️ ESMA Warning List (<!-- NC -->)</button>
+    <span style="flex:1"></span>
+    <button onclick="exportCSV()" style="height:2rem;padding:0 .75rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:.8rem;cursor:pointer">↓ CSV</button>
+  </div>
+
+  <div class="tab-content active" id="tab-register">
+    <div class="flex flex-wrap gap-2" style="margin-bottom:.75rem">
+      <input id="qs" class="search-box flex-1" style="min-width:200px" placeholder="Search firm, country, service…" oninput="renderTable()">
+      <select id="fcountry" class="search-box" onchange="renderTable()"><option value="">All countries</option></select>
+      <select id="fservice" class="search-box" onchange="renderTable()"><option value="">All services</option></select>
+      <select id="ftype" class="search-box" onchange="renderTable()">
+        <option value="">All types</option>
+        <option value="Exchange">Exchange</option>
+        <option value="Bank">Bank</option>
+        <option value="Custodian">Custodian</option>
+        <option value="Custodian / Trust">Custodian / Trust</option>
+        <option value="Payment Institution">Payment Institution</option>
+        <option value="Broker / Securities">Broker / Securities</option>
+      </select>
+    </div>
+    <p class="text-xs text-muted" id="cnt" style="margin-bottom:.5rem"></p>
+    <div class="tbl-wrap">
+      <table class="main-tbl">
+        <thead><tr>
+          <th onclick="sort('n')">Entity ⇅</th>
+          <th onclick="sort('co')">Country ⇅</th>
+          <th onclick="sort('rt')">Type ⇅</th>
+          <th onclick="sort('d')">Auth Date ⇅</th>
+          <th>Services</th>
+          <th onclick="sort('pc')">Passporting ⇅</th>
+          <th onclick="sort('et')">Entity Type ⇅</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div id="tMore"></div>
+  </div>
+
+  <div class="tab-content" id="tab-nc">
+    <p class="text-xs text-muted" style="margin-bottom:.5rem">Entities flagged as non-compliant by EU/EEA national regulators under MiCA.</p>
+    <input id="nc-q" class="search-box" style="width:100%;margin-bottom:.5rem" placeholder="Search warning list…" oninput="renderNC()">
+    <p class="text-xs text-muted" id="nc-cnt" style="margin-bottom:.5rem"></p>
+    <div class="tbl-wrap" style="max-height:50vh">
+      <table class="main-tbl"><thead><tr><th>#</th><th>Entity</th><th>Country</th><th>Regulator</th></tr></thead>
+      <tbody id="nc-tbody"></tbody></table>
+    </div>
+    <div id="nc-more"></div>
+  </div>
+</div>
+
+<div id="zone-context">
+  <div class="zone-label"><span>EU context</span></div>
+  <div style="display:flex;flex-direction:column;gap:.5rem">
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">📅 Approvals by Quarter &amp; Country</div>
+        <div class="ctx-sub">Which countries are licensing the most CASPs each quarter.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div style="height:320px"><canvas id="q-chart"></canvas></div></div>
+    </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">⚙️ Service Authorisations</div>
+        <div class="ctx-sub">Which of the 10 MiCA services are most commonly licensed.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div style="height:280px"><canvas id="svc-chart"></canvas></div></div>
+    </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">🏢 Entity Type Breakdown</div>
+        <div class="ctx-sub">What kinds of businesses hold MiCA licences.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div style="height:260px"><canvas id="type-chart"></canvas></div></div>
+    </div>
+    <div class="ctx-section"><div class="ctx-header" onclick="this.parentElement.classList.toggle('open')">
+      <div><div class="ctx-title">🌐 Global HQ Intelligence</div>
+        <div class="ctx-sub">Firms registered in one EU country but operating globally.</div></div>
+      <span class="ctx-chevron">▼</span></div>
+      <div class="ctx-body"><div style="height:220px"><canvas id="hq-chart"></canvas></div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+const D=[];
+const N=[];
+
+function badge(sl) {
+  if(!sl||!sl.length) return '';
+  return sl.slice(0,3).map(s=>'<span class="svc-badge">'+s+'</span>').join('')+(sl.length>3?'<span class="svc-badge">+'+(sl.length-3)+'</span>':'');
+}
+function fav(w) {
+  if(!w) return '';
+  const d=w.replace(/^https?:\/\//,'').replace(/\/.*/,'');
+  return d?'<img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" width="14" height="14" style="border-radius:2px;margin-right:5px;vertical-align:middle" onerror="this.style.display=\'none\'">':'';
+}
+function getQ(sk) {
+  if(!sk||sk==='9999-99-99') return null;
+  const [y,m]=sk.split('-');
+  return {l:'Q'+Math.ceil(parseInt(m)/3)+' '+y,s:y+'-'+String(Math.ceil(parseInt(m)/3)).padStart(2,'0')};
+}
+function showTab(t,btn) {
+  document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(t==='nc') renderNC();
+}
+
+[...new Set(D.map(r=>r.co))].sort().forEach(co=>{
+  const o=document.createElement('option');o.value=co;
+  o.textContent=co+' ('+D.filter(r=>r.co===co&&!r.wd).length+')';
+  document.getElementById('fcountry').appendChild(o);
+});
+[...new Set(D.flatMap(r=>r.sl))].sort().forEach(s=>{
+  const o=document.createElement('option');o.value=s;o.textContent=s;
+  document.getElementById('fservice').appendChild(o);
+});
+
+let cF=D.filter(r=>!r.wd), cS=10, cK='sk', cDir=-1;
+function sort(k){if(cK===k)cDir*=-1;else{cK=k;cDir=k==='sk'?-1:1}renderTable();}
+function renderTable(){
+  const q=document.getElementById('qs').value.toLowerCase();
+  const co=document.getElementById('fcountry').value;
+  const sv=document.getElementById('fservice').value;
+  const et=document.getElementById('ftype').value;
+  cF=D.filter(r=>{
+    if(r.wd)return false;
+    if(co&&r.co!==co)return false;
+    if(sv&&!r.sl.includes(sv))return false;
+    if(et&&r.et!==et)return false;
+    if(q&&!(r.n+' '+(r.cn||'')+' '+r.co).toLowerCase().includes(q))return false;
+    return true;
+  }).sort((a,b)=>{
+    const av=a[cK]||'',bv=b[cK]||'';
+    return typeof av==='number'?(av-bv)*cDir:av.localeCompare(bv)*cDir;
+  });
+  document.getElementById('cnt').textContent=cF.length+' of '+D.filter(r=>!r.wd).length+' firms';
+  document.getElementById('tbody').innerHTML=cF.slice(0,cS).map(r=>{
+    const name=r.w?'<span style="display:inline-flex;align-items:center">'+fav(r.w)+'<a href="'+r.w+'" target="_blank" style="color:var(--primary)">'+r.n+'</a></span>':r.n;
+    const cn=r.cn&&r.cn!==r.n?' <span class="text-xs text-muted">('+r.cn+')</span>':'';
+    return '<tr><td style="padding:7px 10px">'+name+cn+'</td>'
+      +'<td style="padding:7px 10px;font-size:.78rem;color:var(--muted-fg)">'+r.co+'</td>'
+      +'<td style="padding:7px 10px"><span class="pill pill-blue" style="font-size:10px">'+r.rt+'</span></td>'
+      +'<td style="padding:7px 10px;font-size:.75rem;color:var(--muted-fg)">'+(r.d?r.d.slice(0,7):'')+'</td>'
+      +'<td style="padding:7px 10px">'+badge(r.sl)+'</td>'
+      +'<td style="padding:7px 10px;text-align:center;font-size:.8rem">'+r.pc+'</td>'
+      +'<td style="padding:7px 10px"><span class="pill pill-muted" style="font-size:10px">'+r.et+'</span></td>'
+      +'</tr>';
+  }).join('');
+  const mc=document.getElementById('tMore');
+  mc.innerHTML=cF.length>cS?'<button class="show-more-btn" onclick="cS+=20;renderTable()">Show more ('+(cF.length-cS)+' remaining)</button>':'';
+}
+renderTable();
+
+let ncS=25, ncFiltered=N;
+function renderNC(){
+  const q=document.getElementById('nc-q').value.toLowerCase();
+  ncFiltered=q?N.filter(r=>(r.n+' '+r.co).toLowerCase().includes(q)):N;
+  ncS=25; doRenderNC();
+}
+function doRenderNC(){
+  document.getElementById('nc-cnt').textContent=ncFiltered.length+' entities';
+  document.getElementById('nc-tbody').innerHTML=ncFiltered.slice(0,ncS).map((r,i)=>
+    '<tr><td style="padding:6px 10px;color:var(--muted-fg)">'+(i+1)+'</td>'
+    +'<td style="padding:6px 10px;font-size:.8rem"><strong>'+r.n+'</strong></td>'
+    +'<td style="padding:6px 10px;font-size:.75rem">'+r.co+'</td>'
+    +'<td style="padding:6px 10px;font-size:.72rem;color:var(--muted-fg)">'+r.ca+'</td></tr>'
+  ).join('');
+  const mc=document.getElementById('nc-more');
+  if(mc) mc.innerHTML=ncS<ncFiltered.length
+    ?'<button class="show-more-btn" onclick="ncS+=50;doRenderNC()">Show more ('+(ncFiltered.length-ncS)+' remaining)</button>':'';
+}
+renderNC();
+
+(function(){
+  const _charts={};
+  function init(id, fn){if(_charts[id])return;const el=document.getElementById(id);if(el)_charts[id]=fn(el);}
+
+  document.querySelectorAll('.ctx-header').forEach(h=>{
+    h.addEventListener('click',()=>setTimeout(()=>{
+      const cs2=getComputedStyle(document.documentElement);
+      const c1=cs2.getPropertyValue('--chart-1').trim()||'#ea580c';
+      const c2=cs2.getPropertyValue('--chart-2').trim()||'#0d9488';
+      const c3=cs2.getPropertyValue('--chart-3').trim()||'#164e63';
+      const c4=cs2.getPropertyValue('--chart-4').trim()||'#fbbf24';
+      const c5=cs2.getPropertyValue('--chart-5').trim()||'#f59e0b';
+      const mfg=cs2.getPropertyValue('--muted-fg').trim()||'#71717a';
+      Chart.defaults.color=mfg; Chart.defaults.font.family='system-ui,sans-serif';
+
+      init('q-chart',el=>{
+        const qMap={};D.forEach(c=>{const q=getQ(c.sk);if(!q)return;if(!qMap[q.l])qMap[q.l]={l:q.l,s:q.s,cs:{}};qMap[q.l].cs[c.co]=(qMap[q.l].cs[c.co]||0)+1;});
+        const qS=Object.values(qMap).sort((a,b)=>a.s.localeCompare(b.s));
+        const allCC={};Object.values(qMap).forEach(q=>Object.entries(q.cs).forEach(([co,n])=>allCC[co]=(allCC[co]||0)+n));
+        const topC=Object.entries(allCC).sort((a,b)=>b[1]-a[1]).slice(0,8).map(e=>e[0]);
+        const qColors=[c1,c2,c3,c4,c5,c1+'99',c2+'99',c3+'99'];
+        return new Chart(el,{type:'bar',data:{labels:qS.map(q=>q.l),
+          datasets:topC.map((co,i)=>({label:co,data:qS.map(q=>q.cs[co]||0),backgroundColor:qColors[i],borderRadius:2,borderSkipped:false}))},
+          options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}},
+            scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{display:false}}}}});
+      });
+
+      init('svc-chart',el=>{
+        const sv={};D.filter(r=>!r.wd).forEach(c=>c.sl.forEach(s=>sv[s]=(sv[s]||0)+1));
+        const ss=Object.entries(sv).sort((a,b)=>b[1]-a[1]);
+        return new Chart(el,{type:'bar',data:{labels:ss.map(s=>s[0]),datasets:[{data:ss.map(s=>s[1]),backgroundColor:c2,borderRadius:4,borderSkipped:false}]},
+          options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+            scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}}});
+      });
+
+      init('type-chart',el=>{
+        const etMap={};D.filter(r=>!r.wd).forEach(r=>etMap[r.et]=(etMap[r.et]||0)+1);
+        const etE=Object.entries(etMap).sort((a,b)=>b[1]-a[1]);
+        return new Chart(el,{type:'doughnut',data:{labels:etE.map(e=>e[0]),
+          datasets:[{data:etE.map(e=>e[1]),backgroundColor:[c1,c2,c3,c4,c5,mfg+'88'],borderWidth:0}]},
+          options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+            plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}}}}});
+      });
+
+      init('hq-chart',el=>{
+        const bc={};D.forEach(r=>{if(r.bc&&r.bc!==r.co)bc[r.bc]=(bc[r.bc]||0)+1;});
+        const top=Object.entries(bc).sort((a,b)=>b[1]-a[1]).slice(0,12);
+        return new Chart(el,{type:'bar',data:{labels:top.map(b=>b[0]),
+          datasets:[{data:top.map(b=>b[1]),backgroundColor:c3+'B3',borderRadius:4,borderSkipped:false}]},
+          options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+            tooltip:{callbacks:{label:c=>`${c.raw} firms billing from ${c.label}`}}},
+            scales:{y:{beginAtZero:true,grid:{display:false}},x:{grid:{display:false}}}}});
+      });
+    },50));
+  });
+})();
+
+function exportCSV(){
+  const rows=[['Entity','Commercial Name','Country','Home State','Regulator','Register Type','Auth Date','Services','Passporting Count','LEI','Website','Town','Entity Type','Multi-Jurisdiction Count']];
+  cF.forEach(r=>rows.push([r.n,r.cn,r.co,r.cc,r.ca,r.rt,r.d,r.sl.join('; '),r.pc,r.lei,r.w,r.tw,r.et,r.mj]));
+  const csv=rows.map(r=>r.map(v=>'"'+(v||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='mica-register-public.csv';a.click();
+}
+</script>
+</body>
+</html>
